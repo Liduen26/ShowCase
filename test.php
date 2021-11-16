@@ -11,5 +11,7 @@
 <table border="1" cellpadding="10px">
     <tr><td>test</td><td>test2</td></tr>
     </table>
+
+    Raphael
 </body>
 </html>
