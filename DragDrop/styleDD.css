@@ -12,3 +12,35 @@
     cursor: move;
 }
 
+.resizer {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: orange;
+    z-index: 2;
+}
+
+.resizer.nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.resizer.ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.resizer.sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.resizer.se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
