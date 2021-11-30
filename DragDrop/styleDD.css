@@ -9,7 +9,14 @@
 }
 .item:hover {
     outline: 3px solid #357df9;
+}
+
+.selected {
+    outline: 3px solid red;
     cursor: move;
+}
+.selected:hover {
+    outline: 3px solid red;
 }
 
 .resizer {
@@ -17,7 +24,8 @@
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: orange;
+    background-color: whitesmoke;
+    outline: 1px solid black;
     z-index: 2;
 }
 
