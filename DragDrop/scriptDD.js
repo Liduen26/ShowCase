@@ -1,53 +1,36 @@
-const elem = document.querySelectorAll(".depl");
+/*///////////////////////////////////////////////////////////////////////
+D'après ce tuto : https://www.youtube.com/watch?v=NyZSIhzz5Do
 
-const resizer = document.querySelectorAll(".resizer");
+Bienvenue à toi qui viens utiliser ce scipt ! Il permet de déplacer une
+div où on veut sur la page, et de la redimmensionner comme on veut. 
+Pour cela il suffit d'ajouter la class "movable" à la div que vous souhaitez
+déplacer. 
+
+Insérer le script dans votre body avec : 
+<script src="scriptDD.js"></script>
+
+Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head : 
+<link rel="stylesheet" href="styleDD.css">
+///////////////////////////////////////////////////////////////////////*/
+const movable = document.querySelectorAll(".movable");
+
 let currentResizer;
 let isResizing = false;
 
-const movable = document.querySelectorAll(".movable");
 
-const cont = document.querySelector(".container");
-
-
-//Déplacement -------------------------------------------------------------
-// elem.forEach((item) => {
-//     item.addEventListener("mousedown", (e) => {
-//         console.log(e.target.parentNode);
-//         const targP = e.target.parentNode;
-
-//         window.addEventListener("mousemove", mousemove);
-//         window.addEventListener("mouseup", mouseup);
-    
-//         let prevX = e.clientX;
-//         let prevY = e.clientY;
-        
-//         function mousemove(e) {
-//             // ------ mousedown de Drag and Drop ------
-//             if(!isResizing) {
-//                 let newX = prevX - e.clientX;
-//                 let newY = prevY - e.clientY;
-    
-//                 const rect = targP.getBoundingClientRect();
-    
-//                 targP.style.left = rect.left - newX + 'px';
-//                 targP.style.top = rect.top - newY + 'px';
-    
-//                 prevX = e.clientX;
-//                 prevY = e.clientY;
-//             }
-            
-//         }
-    
-//         function mouseup() {
-//             window.removeEventListener("mousemove", mousemove);
-//             window.removeEventListener("mouseup", mouseup);
-//         }
-//     });
-// });
-
-cont.addEventListener("mousedown", (e) => {
+// Ecoute pour le déplacement --------------------------------------------------
+document.body.addEventListener("mousedown", (e) => {
     console.log(e.target.parentNode);
-    const targP = e.target.parentNode;
+    
+    let targP = e.target;
+    do {
+        if(targP.classList.contains("movable")) {
+            //c'est bon
+        } else {
+            targP = targP.parentNode;
+        }
+    } while(!targP.classList.contains("movable"));
+
     if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
         
         window.addEventListener("mousemove", mousemove);
@@ -82,70 +65,19 @@ cont.addEventListener("mousedown", (e) => {
     
 });
 
-
-//Resizing -------------------------------------------------------------
-// resizer.forEach((item) => {
-//     item.addEventListener("mousedown", mousedown);
-
-//     function mousedown(e) {
-//         // ------ mousedown de Resizer ------
-//         currentResizer = e.target;
-//         isResizing = true;
-
-//         let prevX = e.clientX;
-//         let prevY = e.clientY;
-
-//         // console.log(e.target.parentNode);
-//         const targP = e.target.parentNode;
-
-//         window.addEventListener("mousemove", mousemove);
-//         window.addEventListener("mouseup", mouseup);
-
-//         function mousemove(e) {
-            
-//             const rect = targP.getBoundingClientRect();
-
-//             if(currentResizer.classList.contains("se")) {
-//                 //curs bas droite
-//                 targP.style.width = rect.width - (prevX - e.clientX) + "px";
-//                 targP.style.height = rect.height - (prevY - e.clientY) + "px";
-
-//             } else if(currentResizer.classList.contains("sw")) {
-//                 //curs bas gauche
-//                 targP.style.width = rect.width + (prevX - e.clientX) + "px";
-//                 targP.style.height = rect.height - (prevY - e.clientY) + "px";
-
-//                 targP.style.left = rect.left - (prevX - e.clientX) + "px";
-//             } else if(currentResizer.classList.contains("ne")) {
-//                 //curs haut droite
-//                 targP.style.width = rect.width - (prevX - e.clientX) + "px";
-//                 targP.style.height = rect.height + (prevY - e.clientY) + "px";
-
-//                 targP.style.top = rect.top - (prevY - e.clientY) + "px";
-//             } else if(currentResizer.classList.contains("nw")) {
-//                 //curs haut gauche
-//                 targP.style.width = rect.width + (prevX - e.clientX) + "px";
-//                 targP.style.height = rect.height + (prevY - e.clientY) + "px";
-
-//                 targP.style.top = rect.top - (prevY - e.clientY) + "px";
-//                 targP.style.left = rect.left - (prevX - e.clientX) + "px";
-//             }
-
-//             prevX = e.clientX;
-//             prevY = e.clientY;
-//         }
-        
-//         function mouseup() {
-//             window.removeEventListener("mousemove", mousemove);
-//             window.removeEventListener("mouseup", mouseup);
-//             isResizing = false;
-//         }
-//     }
-// });
-
-cont.addEventListener("mousedown", (e) => {
+// Ecoute pour le resize --------------------------------------------------
+document.body.addEventListener("mousedown", (e) => {
     console.log(e.target.parentNode);
-    const targP = e.target.parentNode;
+    
+    let targP = e.target;
+    do {
+        if(targP.classList.contains("movable")) {
+            //c'est bon
+        } else {
+            targP = targP.parentNode;
+        }
+    } while(!targP.classList.contains("movable"));
+
     if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
         // ------ mousedown de Resizer ------
         currentResizer = e.target;
@@ -202,14 +134,24 @@ cont.addEventListener("mousedown", (e) => {
 //sélection de la div --------------------------------------------------------
 movable.forEach((item) => {
     item.addEventListener("click", (e) => {
-        // console.log(e);
-        // console.log(e.target.parentNode);
-        targP = e.target.parentNode;
-
+        let targP = e.target;
+        do {
+            if(targP.classList.contains("movable")) {
+                //c'est bon
+            } else {
+                targP = targP.parentNode;
+            }
+        } while(!targP.classList.contains("movable"));
+        
         if(!targP.classList.contains("selected")) {
+            //on retire les autres sélections
+            remClass("selected");
+            remClass("depl");
+            remSelectedBtns(document.body);
+
+            //On met la sélection sur ce qui nous intéresse
             targP.classList.add("selected", "depl");
             addSelectedBtns(targP);
-            console.log(elem);
 
         } else {
             targP.classList.remove("selected", "depl");
@@ -217,6 +159,7 @@ movable.forEach((item) => {
         }
         
         function addSelectedBtns(parent) {
+            //ajoute les btns de resize à la div movable
             const newNe = document.createElement("div");
             newNe.classList.add("resizer", "ne");
 
@@ -234,15 +177,27 @@ movable.forEach((item) => {
             parent.appendChild(newNw);
             parent.appendChild(newSw);
             parent.appendChild(newSe);
-
         }
 
         function remSelectedBtns(parent) {
+            //retire les btns de resize
             const resi = parent.querySelectorAll(".resizer");
-            console.log(resi);
             resi.forEach((item) => { 
                 item.remove();
             });
+        }
+
+        function remClass(classToRem) {
+            const cl = document.body.querySelectorAll("."+classToRem);
+            cl.forEach((item) => {
+                item.classList.remove(classToRem);
+            })
+
+            // elements = document.body.getElementsByClassName('selected');
+
+            // for(element of elements){
+            //     element.classList.remove('selected');
+            // }
         }
     })
 })
