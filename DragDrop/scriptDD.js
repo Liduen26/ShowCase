@@ -1,4 +1,4 @@
-/*///////////////////////////////////////////////////////////////////////
+/*///////////////////////////////////////////////////////////////////////////
 D'après ce tuto : https://www.youtube.com/watch?v=NyZSIhzz5Do
 
 Bienvenue à toi qui viens utiliser ce scipt ! Il permet de déplacer une
@@ -11,7 +11,7 @@ Insérer le script dans votre body avec :
 
 Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head : 
 <link rel="stylesheet" href="styleDD.css">
-///////////////////////////////////////////////////////////////////////*/
+///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
 let currentResizer;
@@ -53,10 +53,10 @@ document.body.addEventListener("mousedown", (e) => {
                 prevX = e.clientX;
                 prevY = e.clientY;
             }
-            
         }
 
         function mouseup() {
+            //annulation de tout les eventListener de la souris
             window.removeEventListener("mousemove", mousemove);
             window.removeEventListener("mouseup", mouseup);
             isResizing = false;
@@ -124,6 +124,7 @@ document.body.addEventListener("mousedown", (e) => {
         }
         
         function mouseup() {
+            //annulation de tout les eventListener de la souris
             window.removeEventListener("mousemove", mousemove);
             window.removeEventListener("mouseup", mouseup);
             isResizing = false;
@@ -172,7 +173,6 @@ movable.forEach((item) => {
             const newSe = document.createElement("div");
             newSe.classList.add("resizer", "se");
 
-
             parent.appendChild(newNe);
             parent.appendChild(newNw);
             parent.appendChild(newSw);
@@ -191,13 +191,7 @@ movable.forEach((item) => {
             const cl = document.body.querySelectorAll("."+classToRem);
             cl.forEach((item) => {
                 item.classList.remove(classToRem);
-            })
-
-            // elements = document.body.getElementsByClassName('selected');
-
-            // for(element of elements){
-            //     element.classList.remove('selected');
-            // }
+            });
         }
     })
 })
