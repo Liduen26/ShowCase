@@ -1,7 +1,7 @@
 /*///////////////////////////////////////////////////////////////////////////
 D'après ce tuto : https://www.youtube.com/watch?v=NyZSIhzz5Do
 
-Bienvenue à toi qui viens utiliser ce scipt ! Il permet de déplacer une
+Bienvenue à toi qui vient utiliser ce scipt ! Il permet de déplacer une
 div où on veut sur la page, et de la redimmensionner comme on veut. 
 Pour cela il suffit d'ajouter la class "movable" à la div que vous souhaitez
 déplacer. 
@@ -11,6 +11,9 @@ Insérer le script dans votre body avec :
 
 Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head : 
 <link rel="stylesheet" href="styleDD.css">
+
+Problèmes : 
+- L'utilisation du css border peut provoquer un bug visuel avec les btn de resize
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
@@ -36,6 +39,7 @@ document.body.addEventListener("mousedown", (e) => {
         window.addEventListener("mousemove", mousemove);
         window.addEventListener("mouseup", mouseup);
 
+        //recup des coo intiales de la souris
         let prevX = e.clientX;
         let prevY = e.clientY;
         
@@ -50,6 +54,7 @@ document.body.addEventListener("mousedown", (e) => {
                 targP.style.left = rect.left - newX + 'px';
                 targP.style.top = rect.top - newY + 'px';
 
+                //maj des coo de la souris
                 prevX = e.clientX;
                 prevY = e.clientY;
             }
@@ -83,6 +88,7 @@ document.body.addEventListener("mousedown", (e) => {
         currentResizer = e.target;
         isResizing = true;
 
+        //recup des coo intiales de la souris
         let prevX = e.clientX;
         let prevY = e.clientY;
 
@@ -119,6 +125,7 @@ document.body.addEventListener("mousedown", (e) => {
                 targP.style.left = rect.left - (prevX - e.clientX) + "px";
             }
 
+            //maj des coo de la souris
             prevX = e.clientX;
             prevY = e.clientY;
         }
