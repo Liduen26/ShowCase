@@ -14,13 +14,16 @@ Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head :
 
 Problèmes : 
 - L'utilisation du css border peut provoquer un bug visuel avec les btn de resize
+=> utiliser outline ?
+
+-
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
 let currentResizer;
 let isResizing = false;
 
-
+tGrid = "50";
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
     console.log(e.target.parentNode);
@@ -34,7 +37,7 @@ document.body.addEventListener("mousedown", (e) => {
         }
     } while(!targP.classList.contains("movable"));
 
-    if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
+    if(e.target.classList.contains("movable") || targP.classList.contains("movable")) {
         
         window.addEventListener("mousemove", mousemove);
         window.addEventListener("mouseup", mouseup);
@@ -162,7 +165,7 @@ movable.forEach((item) => {
             addSelectedBtns(targP);
 
         } else {
-            targP.classList.remove("selected", "depl");
+            targP.classList.remove("selected");
             remSelectedBtns(targP);
         }
         
@@ -203,3 +206,20 @@ movable.forEach((item) => {
     })
 })
 
+
+document.onload = function() {
+    for(i = 0;i < 10;i++) {
+        loading();
+    }
+}
+
+function loading() {
+    const p = document.querySelector("container");
+
+    const newGrid = document.createElement("div");
+    newGrid.style.width = tGrid + "px";
+    newGrid.style.height = tGrid + "px";
+    newGrid.classList.add("grid");
+    // console.log(document.body);
+    document.body.appendChild(newGrid);
+}

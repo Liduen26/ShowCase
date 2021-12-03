@@ -15,11 +15,11 @@
 
 .resizer {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
     background-color: whitesmoke;
-    outline: 1px solid black;
+    outline: 1px solid red;
     z-index: 2;
 }
 
@@ -45,4 +45,9 @@
     bottom: -5px;
     right: -5px;
     cursor: se-resize;
+}
+
+
+.grid {
+    outline: 1px solid black;
 }
