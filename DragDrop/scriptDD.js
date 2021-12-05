@@ -75,8 +75,6 @@ document.body.addEventListener("mousedown", (e) => {
 
 // Ecoute pour le resize --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
-    console.log(e.target.parentNode);
-    
     let targP = e.target;
     do {
         if(targP.classList.contains("movable")) {
@@ -99,7 +97,6 @@ document.body.addEventListener("mousedown", (e) => {
         window.addEventListener("mouseup", mouseup);
 
         function mousemove(e) {
-            
             const rect = targP.getBoundingClientRect();
 
             if(currentResizer.classList.contains("se")) {
@@ -157,16 +154,24 @@ movable.forEach((item) => {
         if(!targP.classList.contains("selected")) {
             //on retire les autres sélections
             remClass("selected");
-            remClass("depl");
             remSelectedBtns(document.body);
 
             //On met la sélection sur ce qui nous intéresse
-            targP.classList.add("selected", "depl");
+            targP.classList.add("selected");
             addSelectedBtns(targP);
 
+            const grid = document.body.querySelectorAll("grid");
+            console.log(grid);
+            grid.forEach((item) => {
+                item.style.visibility = "visible";
+                console.log(item);
+            });
+
         } else {
+            //si la div contient déjà selected, on l'enlève
             targP.classList.remove("selected");
             remSelectedBtns(targP);
+
         }
         
         function addSelectedBtns(parent) {
@@ -207,19 +212,21 @@ movable.forEach((item) => {
 })
 
 
-document.onload = function() {
-    for(i = 0;i < 10;i++) {
-        loading();
-    }
-}
+document.onload = loading();
 
 function loading() {
-    const p = document.querySelector("container");
-
-    const newGrid = document.createElement("div");
-    newGrid.style.width = tGrid + "px";
-    newGrid.style.height = tGrid + "px";
-    newGrid.classList.add("grid");
-    // console.log(document.body);
-    document.body.appendChild(newGrid);
+    const newCont = document.createElement("div");
+    newCont.classList.add("gridCont");
+    document.body.appendChild(newCont);
+    
+    const container = document.querySelector(".gridCont");
+    console.log(container);
+    for(let i = 0;i < 400;i++) {
+        const newGrid = document.createElement("div");
+        newGrid.style.width = tGrid + "px";
+        newGrid.style.height = tGrid + "px";
+        newGrid.classList.add("grid");
+        container.appendChild(newGrid);
+    }
+    
 }

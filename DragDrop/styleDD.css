@@ -47,6 +47,15 @@
     cursor: se-resize;
 }
 
+.gridCont {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    display: flex;
+    flex-wrap: wrap;
+    visibility: hidden;
+}
 
 .grid {
     outline: 1px solid black;
