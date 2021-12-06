@@ -54,9 +54,29 @@
     z-index: -100;
     display: flex;
     flex-wrap: wrap;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .grid {
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.gridInt {
+    background-color: rgba(0, 0, 0, 0.08);
+    width: 70%;
+    height: 70%;
+}
+
+.zoneSelect {
+    position: absolute;
+    outline: 3px solid #357df9;
+    z-index: -9;
+}
+
+.inMove {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.2);
 }

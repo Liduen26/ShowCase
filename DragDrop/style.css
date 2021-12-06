@@ -12,9 +12,13 @@
 
 .item2 {
     display: flex;
-    width: 200px;
+    width: 40vw;
     height: 200px;
     background-color: orange;
     position: absolute;
     bottom: 0;
+}
+
+.textetest {
+    width: 30vw;
 }
