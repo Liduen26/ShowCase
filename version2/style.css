@@ -10,15 +10,15 @@ header {
     flex-direction: row;
     /* justify-content: space-around; */
     font-family: Roboto;
-    background-color: darkslategrey;
+    background-color: rgb(40, 59, 59);
     padding: 10px 10px 10px 0;
-    border: 1px solid gray;
+    border: 2px solid #18c9ae;
 }
 
 #account_icon {
     color: #fff;
     cursor: pointer;
-    padding: 15px 15px;
+    padding: 14px 14px;
     border-radius: 1rem;
     transition: .3s ease;
 
@@ -30,16 +30,19 @@ header {
 
 
 .top_menu {
-    position: relative;
-    margin-top: 2rem;
+    position: absolute;
+    margin-top: 52px;
     /* top: 0%; */
     display: none;
-    background-color: darkslategrey;
+    background-color: rgb(40, 59, 59);
     border-radius: 0rem 1rem 1rem 0rem;
 }
 
 #div_account_icon :hover {
-    background-color: #383838;
+    background-color: gray;
+}
+
+#div_account_icon:hover .top_menu{
     display: initial;
 }
 
@@ -52,22 +55,18 @@ header {
     position: sticky;
     height: 100vh;
     width: 3rem;
-    background-color: rgb(40, 59, 59);
+    background-color: darkslategrey;
 }
 
 .side_li{
     position: relative;
     display: flex;
     color: #fff;
-    padding: 15px 15px;
+    padding: 14px 14px;
     margin: auto;
     transition: .3s ease;
     border-radius: 1rem;
     cursor: pointer;
-}
-
-.side_li :hover {
-    background-color: #383838;
 }
 
 .side_li:hover ul {
@@ -86,23 +85,22 @@ header {
 
 .side_menu {
     position: absolute;
-    margin-left: 1rem;
+    margin-left: 1.9rem;
     top: 0%;
     display: none;
-    background-color: rgb(40, 59, 59);
-    border-radius: 0rem 1rem 1rem 0rem;
+    background-color: darkslategrey;
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
 }
 
-.side_menu :hover {
-    background-color: #383838;
+.titre_side_menu {
+    margin: 10px;
 }
 
 .sous_li {
     display: flex;
     color: #fff;
     padding: 10px 10px;
-    margin-left: 1rem;
     height: auto;
     transition: .3s ease;
-    border-radius: 2rem; 
+    border-radius: 0.5rem; 
 }
