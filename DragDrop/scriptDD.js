@@ -31,11 +31,8 @@ let yGrid;
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
-    console.log(e.target.parentNode);
-    
     let targP = e.target;
     do {
-        console.log("iciii");
         if(targP.classList.contains("movable")) {
             //c'est bon
         } else {
@@ -43,7 +40,6 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         if(targP === document.body) {
-            console.log("oui et +");
             remClass("selected");
             remClass("depl");
 
@@ -57,9 +53,8 @@ document.body.addEventListener("mousedown", (e) => {
             break;
             
         }
-        console.log(targP);
     } while(!targP.classList.contains("movable") || targP == document.body);
-
+    console.log(targP);
     if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
         const zoneVisu = document.querySelector(".zoneSelect");
         let newRleft;
@@ -153,7 +148,7 @@ document.body.addEventListener("mousedown", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
-
+    console.log(targP);
     if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
         // ------ mousedown de Resizer ------
         currentResizer = e.target;
@@ -304,7 +299,6 @@ movable.forEach((item) => {
             if(targP == document.body) {
                 
             }
-            console.log(targP);
         } while(!targP.classList.contains("movable"));
         
         if(!targP.classList.contains("selected")) {
@@ -385,7 +379,6 @@ function remClass(classToRem) {
 
 function remDivDepl() {
     const div = document.querySelectorAll(".zoneSelect");
-    console.log(div);
     div.forEach((item) => {
         item.remove();
     });
