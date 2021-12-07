@@ -12,13 +12,16 @@ Insérer le script dans votre body avec :
 Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head : 
 <link rel="stylesheet" href="styleDD.css">
 
-/!\ EN cas de déplacemnt d'image, ajouter imgDD à la classe de l'image
+/!\ En cas de déplacemnt d'image, ajouter draggable="false" au HTML de l'image
+/!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur un élément contenant l'élément
 
 Problèmes : 
 - L'utilisation du css border peut provoquer un bug visuel avec les btn de resize
 => utiliser outline ?
 
 -
+
+A faire : px en vw
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
@@ -110,6 +113,8 @@ document.body.addEventListener("mousedown", (e) => {
 
                 zoneVisu.style.left = newRleft + "px";
                 zoneVisu.style.top = newRtop + "px";
+
+                console.log("X = " + newRleft + "px, Y = " + newRtop + "px");
 
                 //maj des coo de la souris
                 prevX = e.clientX;
