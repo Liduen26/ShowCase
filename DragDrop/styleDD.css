@@ -1,8 +1,11 @@
 .movable {
     position: absolute;
+    z-index: 2;
+    user-select: none;
 }
 .movable:hover {
     outline: 3px solid #357df9;
+    z-index: 100;
 }
 
 .selected {
@@ -48,10 +51,7 @@
 }
 
 .gridCont {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -100;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     visibility: hidden;
@@ -62,6 +62,7 @@
     display: flex;
     justify-content: center;
     align-items: center; 
+    /* z-index: 1; */
 }
 
 .gridInt {
@@ -73,10 +74,15 @@
 .zoneSelect {
     position: absolute;
     outline: 3px solid #357df9;
-    z-index: -9;
+    z-index: 1;
 }
 
 .inMove {
     outline: none;
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.img {
+    width: 20vw;
+    height: 20vh;
 }

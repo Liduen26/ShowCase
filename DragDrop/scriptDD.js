@@ -14,7 +14,7 @@ Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head :
 
 Les deux fichiers doivent pour cela être dans votre dossier
 
-/!\ En cas de déplacement d'image, ajouter draggable="false" au HTML de l'image
+/!\ En cas de déplacement d'image, ajouter la classe "img" au HTML de l'image
 /!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur une div contenant l'élément
 
 Problèmes : 
@@ -30,10 +30,15 @@ const movable = document.querySelectorAll(".movable");
 let currentResizer;
 let isResizing = false;
 
-let tGrid = "5";
+const tGrid = "5"; //taille de la grille en vw et vh
 let xGrid;
 let yGrid;
-console.log(document.documentElement.clientWidth);
+
+const img = document.querySelectorAll(".img");
+img.forEach(item => {
+    item.draggable = false;
+})
+
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
     let targP = e.target;
@@ -59,6 +64,7 @@ document.body.addEventListener("mousedown", (e) => {
             
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
+
     if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
         const zoneVisu = document.querySelector(".zoneSelect");
         let newRleft;
@@ -88,11 +94,10 @@ document.body.addEventListener("mousedown", (e) => {
                 xGrid = rectGrid.width;
                 yGrid = rectGrid.height;
 
-                const rect = targP.getBoundingClientRect();
+                const rect = getRect(targP);
 
                 targP.style.left = rect.left - newX + 'px';
                 targP.style.top = rect.top - newY + 'px';
-                
                 let resteLeft = rect.left % xGrid;
                 
                 if(resteLeft > (xGrid / 2)) {
@@ -115,7 +120,7 @@ document.body.addEventListener("mousedown", (e) => {
                 zoneVisu.style.left = newRleft + "px";
                 zoneVisu.style.top = newRtop + "px";
 
-                console.log("X = " + newRleft + "px, Y = " + newRtop + "px");
+                console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
 
                 //maj des coo de la souris
                 prevX = e.clientX;
@@ -157,6 +162,7 @@ document.body.addEventListener("mousedown", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
+
     if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
         // ------ mousedown de Resizer ------
         currentResizer = e.target;
@@ -187,7 +193,7 @@ document.body.addEventListener("mousedown", (e) => {
         window.addEventListener("mouseup", mouseup);
 
         function mousemove(e) {
-            const rect = targP.getBoundingClientRect();
+            const rect = getRect(targP);
 
             let resteLeft = rect.left % xGrid;
             if(resteLeft > (xGrid / 2)) {
@@ -225,9 +231,7 @@ document.body.addEventListener("mousedown", (e) => {
                 newRheight = rect.height - resteHeight;
             }
 
-            console.log(e.target);
             if(currentResizer.classList.contains("se")) {
-                console.log();
                 //curs bas droite
                 targP.style.width = rect.width - (prevX - e.clientX) + "px";
                 targP.style.height = rect.height - (prevY - e.clientY) + "px";
@@ -278,18 +282,13 @@ document.body.addEventListener("mousedown", (e) => {
         function mouseup() {
             let vwDiff2 = newRleft / xGrid;
             let vhDiff2 = newRtop / yGrid;
-
             targP.style.left = (vwDiff2 * tGrid) + 'vw';
             targP.style.top = (vhDiff2 * tGrid) + 'vh';
             
-            vwDiff2 = newRwidth / xGrid;
-            vhDiff2 = newRtop / yGrid;
-
-            targP.style.width = (vwDiff2 * tGrid) + 'vw';
-            targP.style.height = (vhDiff2 * tGrid) + 'vh';
-            // targP.style.width = newRwidth + "px";
-            // targP.style.height = newRheight + "px";
-
+            let vwDiff3 = newRwidth / xGrid;
+            let vhDiff3 = newRheight / yGrid;
+            targP.style.width = (vwDiff3 * tGrid) + 'vw';
+            targP.style.height = (vhDiff3 * tGrid) + 'vh';
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
@@ -331,7 +330,8 @@ movable.forEach((item) => {
             addSelectedBtns(targP);
 
             remDivDepl();
-            const rect = targP.getBoundingClientRect();
+            const rect = getRect(targP);
+
             const parentTarg = targP.parentNode;
             createDivDepl(parentTarg, rect);
 
@@ -403,12 +403,27 @@ function remDivDepl() {
     });
 }
 
+function getRect(targP) {
+    const page = document.querySelector(".page");
+    let offset = [];
+
+    let bodyRect = page.getBoundingClientRect();
+    let elemRect = targP.getBoundingClientRect();
+    offset.left = elemRect.left - bodyRect.left;
+    offset.top = elemRect.top - bodyRect.top;
+    offset.width = elemRect.width;
+    offset.height = elemRect.height;
+
+    console.log('Element is ' + offset.top + ' vertical pixels from .page');
+    return offset;
+}
 
 document.onload = loading();
 function loading() {
+    const page = document.querySelector(".page");
     const newCont = document.createElement("div");
     newCont.classList.add("gridCont");
-    document.body.appendChild(newCont);
+    page.appendChild(newCont);
     
     const container = document.querySelector(".gridCont");
     for(let i = 0;i < 300;i++) {
