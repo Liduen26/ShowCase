@@ -12,8 +12,10 @@ Insérer le script dans votre body avec :
 Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head : 
 <link rel="stylesheet" href="styleDD.css">
 
-/!\ En cas de déplacemnt d'image, ajouter draggable="false" au HTML de l'image
-/!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur un élément contenant l'élément
+Les deux fichiers doivent pour cela être dans votre dossier
+
+/!\ En cas de déplacement d'image, ajouter draggable="false" au HTML de l'image
+/!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur une div contenant l'élément
 
 Problèmes : 
 - L'utilisation du css border peut provoquer un bug visuel avec les btn de resize
@@ -21,7 +23,7 @@ Problèmes :
 
 -
 
-A faire : px en vw
+A faire : 
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
@@ -31,7 +33,7 @@ let isResizing = false;
 let tGrid = "5";
 let xGrid;
 let yGrid;
-
+console.log(document.documentElement.clientWidth);
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
     let targP = e.target;
@@ -57,7 +59,6 @@ document.body.addEventListener("mousedown", (e) => {
             
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
-    console.log(targP);
     if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
         const zoneVisu = document.querySelector(".zoneSelect");
         let newRleft;
@@ -123,8 +124,11 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         function mouseup() {
-            targP.style.left = newRleft + 'px';
-            targP.style.top = newRtop + 'px';
+            let vwDiff = newRleft / xGrid;
+            let vhDiff = newRtop / yGrid;
+
+            targP.style.left = (vwDiff * tGrid) + 'vw';
+            targP.style.top = (vhDiff * tGrid) + 'vh';
 
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
@@ -153,7 +157,6 @@ document.body.addEventListener("mousedown", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
-    console.log(targP);
     if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
         // ------ mousedown de Resizer ------
         currentResizer = e.target;
@@ -222,8 +225,9 @@ document.body.addEventListener("mousedown", (e) => {
                 newRheight = rect.height - resteHeight;
             }
 
-
+            console.log(e.target);
             if(currentResizer.classList.contains("se")) {
+                console.log();
                 //curs bas droite
                 targP.style.width = rect.width - (prevX - e.clientX) + "px";
                 targP.style.height = rect.height - (prevY - e.clientY) + "px";
@@ -272,10 +276,20 @@ document.body.addEventListener("mousedown", (e) => {
         }
         
         function mouseup() {
-            targP.style.width = newRwidth + "px";
-            targP.style.height = newRheight + "px";
-            targP.style.left = newRleft + "px";
-            targP.style.top = newRtop + "px";
+            let vwDiff2 = newRleft / xGrid;
+            let vhDiff2 = newRtop / yGrid;
+
+            targP.style.left = (vwDiff2 * tGrid) + 'vw';
+            targP.style.top = (vhDiff2 * tGrid) + 'vh';
+            
+            vwDiff2 = newRwidth / xGrid;
+            vhDiff2 = newRtop / yGrid;
+
+            targP.style.width = (vwDiff2 * tGrid) + 'vw';
+            targP.style.height = (vhDiff2 * tGrid) + 'vh';
+            // targP.style.width = newRwidth + "px";
+            // targP.style.height = newRheight + "px";
+
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");

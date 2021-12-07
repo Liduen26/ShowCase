@@ -1,12 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .item {
-    width: 50%;
-    position: absolute;
-    right: 10px;
+    width: 30vw;
+    /* position: absolute;
+    right: 15vw;
+    top: 20vh; */
 }
 
 .img {
     display: flex;
     width: 100%;
+    
 }
 
 
@@ -16,7 +23,7 @@
     height: 200px;
     background-color: orange;
     position: absolute;
-    bottom: 0;
+    /* bottom: 200px; */
 }
 
 .textetest {
