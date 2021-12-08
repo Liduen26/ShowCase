@@ -37,7 +37,9 @@ let yGrid;
 const img = document.querySelectorAll(".img");
 img.forEach(item => {
     item.draggable = false;
-})
+});
+
+const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
@@ -54,10 +56,9 @@ document.body.addEventListener("mousedown", (e) => {
             remClass("depl");
 
             //désaffichage de la grille
-            const grid = document.body.querySelectorAll(".grid");
-            grid.forEach((item) => {
-                item.style.visibility = "hidden";
-            });
+            const gridContainer = document.body.querySelector(".gridCont");
+            gridContainer.style.visibility = "hidden";
+            
             remSelectedBtns(document.body);
             remDivDepl();
             break;
@@ -304,20 +305,21 @@ document.body.addEventListener("mousedown", (e) => {
 });
 
 //sélection de la div --------------------------------------------------------
-movable.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        let targP = e.target;
-        do {
-            if(targP.classList.contains("movable")) {
-                //c'est bon
-            } else {
-                targP = targP.parentNode;
-            }
+document.body.addEventListener("click", (e) => {
+    let targP = e.target;
+    do {
+        if(targP.classList.contains("movable")) {
+            //c'est bon
+        } else {
+            targP = targP.parentNode;
+        }
 
-            if(targP == document.body) {
-                
-            }
-        } while(!targP.classList.contains("movable"));
+        if(targP == document.body) {
+            break;
+        }
+    } while(!targP.classList.contains("movable"));
+    
+    if(targP.classList.contains("movable")) {
         
         if(!targP.classList.contains("selected")) {
             //on retire les autres sélections
@@ -342,43 +344,63 @@ movable.forEach((item) => {
             remSelectedBtns(targP);
             remDivDepl();
         }
+    }
         
-        function addSelectedBtns(parent) {
-            //ajoute les btns de resize à la div movable
-            const newNe = document.createElement("div");
-            newNe.classList.add("resizer", "ne");
+    function addSelectedBtns(parent) {
+        //ajoute les btns de resize à la div movable
+        const newNe = document.createElement("div");
+        newNe.classList.add("resizer", "ne");
 
-            const newNw = document.createElement("div");
-            newNw.classList.add("resizer", "nw");
+        const newNw = document.createElement("div");
+        newNw.classList.add("resizer", "nw");
 
-            const newSw = document.createElement("div");
-            newSw.classList.add("resizer", "sw");
+        const newSw = document.createElement("div");
+        newSw.classList.add("resizer", "sw");
 
-            const newSe = document.createElement("div");
-            newSe.classList.add("resizer", "se");
+        const newSe = document.createElement("div");
+        newSe.classList.add("resizer", "se");
 
-            parent.appendChild(newNe);
-            parent.appendChild(newNw);
-            parent.appendChild(newSw);
-            parent.appendChild(newSe);
-        }
+        parent.appendChild(newNe);
+        parent.appendChild(newNw);
+        parent.appendChild(newSw);
+        parent.appendChild(newSe);
+    }
 
+    
+    function createDivDepl(parent, rect) {
+        const newDivDepl = document.createElement("div");
+        newDivDepl.classList.add("zoneSelect");
+        parent.appendChild(newDivDepl);
         
-        function createDivDepl(parent, rect) {
-            const newDivDepl = document.createElement("div");
-            newDivDepl.classList.add("zoneSelect");
-            parent.appendChild(newDivDepl);
-            
-            const div = document.querySelector(".zoneSelect");
-            div.style.left = rect.left + "px";
-            div.style.width = rect.width + "px";
-            div.style.top = rect.top + "px";
-            div.style.height = rect.height + "px";
-        }
+        const div = document.querySelector(".zoneSelect");
+        div.style.left = rect.left + "px";
+        div.style.width = rect.width + "px";
+        div.style.top = rect.top + "px";
+        div.style.height = rect.height + "px";
+    }
         
-    });
 });
 
+document.body.addEventListener("click", (e) => {
+    if(!e.target.classList.contains("movable")) {
+        //si la div contient déjà selected, on l'enlève
+        remClass("selected");
+        remClass("depl");
+        remSelectedBtns(document.body);
+        remDivDepl();
+
+    }
+});
+
+btn.addEventListener("click", (e) => {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("movable", "textetest");
+    const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
+    newDiv.appendChild(textDiv);
+
+    const page = document.querySelector(".page");
+    page.appendChild(newDiv);
+});
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
@@ -406,11 +428,13 @@ function remDivDepl() {
 function getRect(targP) {
     const page = document.querySelector(".page");
     let offset = [];
+    console.log(page.scrollTop);
 
     let bodyRect = page.getBoundingClientRect();
+    console.log(bodyRect);
     let elemRect = targP.getBoundingClientRect();
-    offset.left = elemRect.left - bodyRect.left;
-    offset.top = elemRect.top - bodyRect.top;
+    offset.left = (elemRect.left - bodyRect.left) + page.scrollLeft;
+    offset.top = (elemRect.top - bodyRect.top) + page.scrollTop;
     offset.width = elemRect.width;
     offset.height = elemRect.height;
 
