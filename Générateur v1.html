@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'image</title>
+    <link rel="icon" href="./res/server-icon.png" />
+    <link rel="stylesheet" href="./res/style.css">
+    <link rel="stylesheet" href="./res/print.css" media="print">
+</head>
+<body>
+<div class="full-heigth">
+    <div class="upbar">
+        <div id="c-logo">
+            <img id="logo" src="./res/server-icon.png" alt="logo_oos">
+        </div>
+    </div>
+    
+    <div class="page">
+        <div class="side-left">
+            <div class="content-img" style="background: url(./res/fond_defaut.png) center/cover;">
+
+                <img id="img-fond" src="./res/fond_defaut.png" alt="imgFond">
+
+                <div id="dark-back">
+                    <div id="titre-cont">
+                        <label id="titre-txt"> Event : Chasse aux UMR</label>
+                    </div>
+
+                    <div id="particip-cont">
+                        <label id="particip-txt">OOS - UMR</label>
+                    </div>
+
+                    <div id="content">
+                        <div id="content-left">
+                            <div id="date">
+                                <label id="jour-mois">Jeudi <br> Novembre</label>
+                                <label id="jour-nbr">15</label>
+                            </div>
+
+                            <div id="horaire">
+                                <img id="h-img" src="./res/lhorloge-white.png" alt="horloge-blanc">
+                                <label id="h-txt">--:--</label>
+                            </div>
+
+                            <div id="cs">
+                                <img id="cs-img" src="./res/crimestat.png" alt="">
+                                <img id="check" class="selectable selected1" src="./res/check-white.png" alt="">
+                                <img id="c-c" class="selectable selected" src="./res/check-cross-white.png" alt="">
+                                <img id="cross" class="selectable" src="./res/annuler-white.png" alt="">
+                                
+                            </div>
+                        </div>
+
+                        <div id="content-right">
+                            <div id="local">
+                                <img id="loc-img" src="./res/pin-white.png" alt="pin">
+                                <label id="loc-txt">Daymar Shubin Mining</label>
+                            </div>
+
+                            <div id="decol">
+                                <img id="decol-img" src="./res/rocket-white.png" alt="pin">
+                                <label id="lanc-txt">--:--</label>
+                            </div>
+
+                            <div id="type-mission">
+                                <img class="type-img selectable selected" id="vaisseau-mission" src="./res/vaisseau-spatial-white.png" alt="vaisseau">
+                                <img class="type-img selectable" id="arme-mission" src="./res/arme-a-feu-white.png" alt="fps">
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="side-right">
+            <div id="head-right-panel">Zone de selection</div>
+
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Titre : 
+                </label>
+                <div class="z-line" id="z-titre">
+                    <input type="checkbox" class="check-acc">
+                    <input type="text" class="z-texte" placeholder="Entrez votre titre ici">
+                    <button class="btn-add-line">+</button>
+                </div>
+            </div>
+            
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Participants : 
+                </label>
+                <div class="z-line" id="z-particip">
+                    <input type="checkbox" class="check-acc">
+                    <input type="text" class="z-texte" placeholder="Entrez votre titre ici">
+                    <button class="btn-add-line">+</button>
+                </div>
+            </div>
+            
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Date : 
+                </label>
+                <div class="z-line" id="z-date">
+                    <input type="date" class="z-texte" placeholder="Entrez votre date ici">
+                </div>
+            </div>
+
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Localisation : 
+                </label>
+                <div class="z-line" id="z-loc">
+                    <input type="checkbox" class="check-acc">
+                    <input type="text" class="z-texte" placeholder="Entrez votre titre ici">
+                    <button class="btn-add-line">+</button>
+                </div>
+            </div>
+            
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Regroupement : 
+                </label>
+                <div class="z-line" id="z-h">
+                    <input type="checkbox" class="check-acc">
+                    <input type="time" class="z-texte" placeholder="Entrez votre titre ici">
+                    <button class="btn-add-line">+</button>
+                </div>
+            </div>
+
+            <div class="cont-z-txt">
+                <label id="label-z-txt">
+                    Lancement : 
+                </label>
+                <div class="z-line" id="z-lanc">
+                    <input type="checkbox" class="check-acc">
+                    <input type="time" class="z-texte" placeholder="Entrez votre titre ici">
+                    <button class="btn-add-line">+</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script src="./res/script.js"></script>
+</body>
+</html>

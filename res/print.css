@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+:root {
+    --color-nml: white;
+    --color-acc: #ff914d;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+}
+
+/* *{
+    border : 1px solid white;
+} */
+
+.full-heigth {
+    display: flex;
+    flex-direction: column;
+    background-color:aliceblue;
+    height: 100%;
+}
+
+.upbar {
+    height: 60px;
+    background-color: white;
+    display: flex;
+    justify-content:center;
+}
+
+#c-logo {
+    text-align: center;
+}
+
+#logo {
+	height: 100%;
+}
+
+.page {
+    display: flex;
+    height: 100%;
+    background-color:#003554;
+}
+
+/* Gauche -------------------------------------*/
+.side-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+}
+
+.content-img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    border: solid 5px black;
+    box-shadow: 3px 2px 5px rgba(0,0,0,0.7);
+}
+
+#img-fond {
+    visibility: hidden;
+    width: 100%;
+}
+
+#dark-back {
+    position: absolute;
+    background-color: rgba(0,0,0,0.62);
+    width: 90%;
+    height: 90%;
+    border-bottom: 2px solid var(--color-acc);
+}
+
+/* Titre -------------------------------------*/
+#titre-cont {
+    text-align: center;
+    margin: 1%;
+}
+
+#titre-txt {
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3.5vw;
+}
+
+/* Participants -------------------------------------*/
+#particip-cont {
+    text-align: center;
+    margin: 2%;
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2vw;
+}
+
+/* Centenu -------------------------------------*/
+#content {
+    display: flex;
+    justify-content: space-around;
+    height: 72%;
+}
+
+/* Cont gauche -------------------------------------*/
+#content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 40%;
+}
+
+/* Date -------------------------------------*/
+#date {
+    display: flex;
+    padding: 1vw;
+}
+
+#jour-mois {
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.2vw;
+    text-align: right;
+}
+
+#jour-nbr {
+    color: var(--color-acc);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 6.2vw;
+    margin-top: -5%;
+    margin-left: 6%;
+}
+
+/* Horaire -------------------------------------*/
+#horaire {
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+}
+
+#h-img {
+    width: 5vw
+}
+
+#h-txt {
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3.3vw;
+    margin-left: 6%;    
+}
+
+/* CrimeStat -------------------------------------*/
+#cs {
+    display: flex;
+    padding: 1vw;
+    width: 20vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cs-img {
+    width: 5.5vw;
+}
+
+#check {
+    width: 3.6vw;
+    
+}
+#c-c {
+    width: 5vw;
+    
+}
+#cross {
+    width: 2.5vw;
+    padding: 0.9vw;
+}
+
+/* cont droite -------------------------------------*/
+#content-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    /* width: 40%; */
+
+}
+
+/* Localisation -------------------------------------*/
+#local {
+    display: flex;
+    padding: 1vw;
+    align-items: center;
+}
+
+#loc-img {
+    width: 5vw;
+    margin-right: 6%;
+}
+
+#loc-txt {
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.3vw;
+    width: 22vw;
+}
+
+/* Decollage -------------------------------------*/
+#decol {
+    display: flex;
+    padding: 1vw;
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3vw;
+    align-items: center;
+}
+
+#decol-img {
+    width: 5vw;
+    margin-right: 6%;
+}
+
+/* Type de mission -------------------------------------*/
+#type-mission {
+    display: flex;
+    justify-content: space-around;
+    padding: 1vw;
+}
+
+.type-img {
+    width: 5vw;
+}
+
+/* ----------------------------------------------*/
+            /* Panel de droite */
+/* ----------------------------------------------*/
+
+.side-right {
+    position: relative;
+    top: 00px;
+    right: 0px;
+    width: 400px;
+    background-color: #618985;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#head-right-panel {
+    text-align: center;
+    margin: 8%;
+
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2vw;
+}
+
+
+/* Titre Zone -------------------------------------*/
+.cont-z-txt {
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    margin: 2%;
+
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2vw;
+
+    border-radius: 5px 30px;
+    background-color: #641C12;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.label-z-txt {
+    display: flex;
+    flex-direction: column;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); 
+}
+
+.z-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1%;
+    position: relative;
+    left: -0.5vw;
+    width: 101%;
+}
+
+.z-texte {
+    background: none;
+    border: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.384);
+
+    color: var(--color-nml);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.6em;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+
+    width: 100%;
+}
+.z-texte:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.384);
+}
+.z-texte:focus {
+    outline: none;
+    border-bottom: 2px solid white;
+}
+
+
+.shadow-test {
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 1px 1px black;
+}
+
+.selectable {
+    padding: 0.3vw;
+    margin: 0.1vw;
+}
+
+.selected {
+    border: 3px solid var(--color-acc);
+}
+
+/******* print la partie intéressante ******/
+
+@media print{
+    body * {
+        visibility: hidden;
+    }
+    .content-img, .content-img *{
+        visibility: visible;   
+    }
+    .content-img{
+        
+        width: max-content;
+    }
+
+}
