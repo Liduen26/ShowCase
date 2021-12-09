@@ -14,16 +14,16 @@ Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head :
 
 Les deux fichiers doivent pour cela être dans votre dossier
 
-/!\ En cas de déplacement d'image, ajouter la classe "img" au HTML de l'image
+/!\ En cas de déplacement d'image, ajouter la classe "img" au HTML de la div et mettre l'image en background d'une div avec : style="background: url(VotreImg.png) center/cover;"
 /!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur une div contenant l'élément
+/!\ Fonctionne dans une div "page"
 
 Problèmes : 
 - L'utilisation du css border peut provoquer un bug visuel avec les btn de resize
-=> utiliser outline ?
+=> utiliser outline 
 
--
 
-A faire : 
+A faire : Grille dynamique
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
 
@@ -188,6 +188,8 @@ document.body.addEventListener("mousedown", (e) => {
         const grid = document.body.querySelectorAll(".grid");
         const rectGrid = grid[0].getBoundingClientRect();
         xGrid = rectGrid.width;
+        console.log("x = " + xGrid);
+        console.log("W = " + document.body.clientWidth);
         yGrid = rectGrid.height;
 
         window.addEventListener("mousemove", mousemove);
@@ -381,6 +383,7 @@ document.body.addEventListener("click", (e) => {
         
 });
 
+//pour enlever la zone de sélection
 document.body.addEventListener("click", (e) => {
     if(!e.target.classList.contains("movable")) {
         //si la div contient déjà selected, on l'enlève
@@ -392,6 +395,7 @@ document.body.addEventListener("click", (e) => {
     }
 });
 
+//test à virer
 btn.addEventListener("click", (e) => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("movable", "textetest");
@@ -428,13 +432,11 @@ function remDivDepl() {
 function getRect(targP) {
     const page = document.querySelector(".page");
     let offset = [];
-    console.log(page.scrollTop);
 
-    let bodyRect = page.getBoundingClientRect();
-    console.log(bodyRect);
+    let divRect = page.getBoundingClientRect();
     let elemRect = targP.getBoundingClientRect();
-    offset.left = (elemRect.left - bodyRect.left) + page.scrollLeft;
-    offset.top = (elemRect.top - bodyRect.top) + page.scrollTop;
+    offset.left = (elemRect.left - divRect.left) + page.scrollLeft;
+    offset.top = (elemRect.top - divRect.top) + page.scrollTop;
     offset.width = elemRect.width;
     offset.height = elemRect.height;
 
@@ -450,17 +452,52 @@ function loading() {
     page.appendChild(newCont);
     
     const container = document.querySelector(".gridCont");
-    for(let i = 0;i < 300;i++) {
-        const newGrid = document.createElement("div");
-        newGrid.style.width = tGrid + "vw";
-        newGrid.style.height = tGrid + "vh";
-        newGrid.classList.add("grid");
+    let yPage = page.offsetHeight;
+    let xPage = page.offsetWidth;
 
-        const newGridInt = document.createElement("div");
-        newGridInt.classList.add("gridInt");
-        newGrid.appendChild(newGridInt);
+    
+    // do {
+        const newLine = document.createElement("div");
+        newLine.classList.add("gridLine");
+        container.appendChild(newLine);
+        do {
+            const newGrid = document.createElement("div");
+            newGrid.style.width = tGrid + "vw";
+            newGrid.style.height = tGrid + "vh";
+            newGrid.classList.add("grid");
+    
+            const newGridInt = document.createElement("div");
+            newGridInt.classList.add("gridInt");
+            newGrid.appendChild(newGridInt);
+    
+            newLine.appendChild(newGrid);
+        } while(xPage > newLine.offsetWidth);
+    // } while(yPage > container.offsetHeight);
 
-        container.appendChild(newGrid);
-    }
+    // let grid = document.body.querySelectorAll(".grid");
+    // const t0 = grid[0].clientWidth;
+    // do {
+    //     const newGrid = document.createElement("div");
+    //     newGrid.style.width = tGrid + "vw";
+    //     newGrid.style.height = tGrid + "vh";
+    //     newGrid.classList.add("grid");
+
+    //     const newGridInt = document.createElement("div");
+    //     newGridInt.classList.add("gridInt");
+    //     newGrid.appendChild(newGridInt);
+
+    //     container.appendChild(newGrid);
+
+    //     let grid = document.body.querySelectorAll(".grid");
+        
+    // } while(grid[grid.length - 1].clientX < t0)
     
 }
+
+const textetest = document.querySelectorAll(".textetest");
+textetest.forEach(item => {
+    item.addEventListener("input", (e) => {
+        console.log('oui');
+        console.log(e.target.selectionStart);
+    })
+})
