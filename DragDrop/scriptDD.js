@@ -452,27 +452,47 @@ function loading() {
     page.appendChild(newCont);
     
     const container = document.querySelector(".gridCont");
-    let yPage = page.offsetHeight;
-    let xPage = page.offsetWidth;
+    const yPage = page.clientHeight;
+    const xPage = page.clientWidth;
+    console.log(xPage);
+    
+    const newLine = document.createElement("div");
+    newLine.classList.add("gridLine");
+    container.appendChild(newLine);
+    
+    do {
+        const newGrid = document.createElement("div");
+        newGrid.style.width = tGrid + "vw";
+        newGrid.style.height = tGrid + "vh";
+        newGrid.classList.add("grid");
+        
+        const newGridInt = document.createElement("div");
+        newGridInt.classList.add("gridInt");
+        newGrid.appendChild(newGridInt);
+        
+        newLine.appendChild(newGrid);
+    }while(yPage + 900 > newLine.clientHeight)
+
 
     
+    // container.appendChild(newLine);
+    // const line = document.querySelector(".gridLine");
     // do {
-        const newLine = document.createElement("div");
-        newLine.classList.add("gridLine");
-        container.appendChild(newLine);
-        do {
-            const newGrid = document.createElement("div");
-            newGrid.style.width = tGrid + "vw";
-            newGrid.style.height = tGrid + "vh";
-            newGrid.classList.add("grid");
+    //     const newGrid = document.createElement("div");
+    //     newGrid.style.width = tGrid + "vw";
+    //     newGrid.style.height = tGrid + "vh";
+    //     newGrid.classList.add("grid");
+        
+    //     const newGridInt = document.createElement("div");
+    //     newGridInt.classList.add("gridInt");
+    //     newGrid.appendChild(newGridInt);
+        
+    //     // const line = document.querySelector(".gridLine");
+    //     line.appendChild(newGrid);
+
+    // } while(line.clientWidth < xPage);
+    // console.log(line);
     
-            const newGridInt = document.createElement("div");
-            newGridInt.classList.add("gridInt");
-            newGrid.appendChild(newGridInt);
-    
-            newLine.appendChild(newGrid);
-        } while(xPage > newLine.offsetWidth);
-    // } while(yPage > container.offsetHeight);
 
     // let grid = document.body.querySelectorAll(".grid");
     // const t0 = grid[0].clientWidth;
@@ -494,10 +514,10 @@ function loading() {
     
 }
 
-const textetest = document.querySelectorAll(".textetest");
-textetest.forEach(item => {
-    item.addEventListener("input", (e) => {
-        console.log('oui');
-        console.log(e.target.selectionStart);
-    })
-})
+// const textetest = document.querySelectorAll(".textetest");
+// textetest.forEach(item => {
+//     item.addEventListener("input", (e) => {
+//         console.log('oui');
+//         console.log(e.target.selectionStart);
+//     })
+// })
