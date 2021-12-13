@@ -107,3 +107,10 @@ header {
     border-radius: 0.5rem;
     text-align: center;
 }
+
+iframe{
+    margin-left: 5vw;
+    width: 90vmax;
+    height: 100vh;
+    
+}
