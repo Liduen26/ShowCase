@@ -39,7 +39,7 @@ img.forEach(item => {
     item.draggable = false;
 });
 
-const btn = document.querySelector(".btn");
+// const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
@@ -309,6 +309,7 @@ document.body.addEventListener("mousedown", (e) => {
 //sélection de la div --------------------------------------------------------
 document.body.addEventListener("click", (e) => {
     let targP = e.target;
+    console.log(e.target);
     do {
         if(targP.classList.contains("movable")) {
             //c'est bon
@@ -320,16 +321,18 @@ document.body.addEventListener("click", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
-    
-    if(targP.classList.contains("movable")) {
-        
+    console.log(targP);
+    if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
+        console.log("oui");
         if(!targP.classList.contains("selected")) {
+            console.log("reoui");
             //on retire les autres sélections
             remClass("selected");
             remClass("depl");
             remSelectedBtns(document.body);
 
             //On met la sélection sur ce qui nous intéresse
+            console.log(targP);
             targP.classList.add("selected", "depl");
             addSelectedBtns(targP);
 
@@ -340,11 +343,11 @@ document.body.addEventListener("click", (e) => {
             createDivDepl(parentTarg, rect);
 
         } else {
-            //si la div contient déjà selected, on l'enlève
-            targP.classList.remove("selected");
-            targP.classList.remove("depl");
-            remSelectedBtns(targP);
-            remDivDepl();
+            // //si la div contient déjà selected, on l'enlève
+            // targP.classList.remove("selected");
+            // targP.classList.remove("depl");
+            // // remSelectedBtns(targP);
+            // remDivDepl();
         }
     }
         
@@ -385,26 +388,40 @@ document.body.addEventListener("click", (e) => {
 
 //pour enlever la zone de sélection
 document.body.addEventListener("click", (e) => {
-    if(!e.target.classList.contains("movable")) {
+    let targP = e.target;
+    do {
+        console.log(targP);
+        if(targP.classList.contains("movable")) {
+            //c'est bon
+        } else {
+            targP = targP.parentNode;
+        }
+
+        if(targP == document.body) {
+            break;
+        }
+    } while(!targP.classList.contains("movable"));
+    console.log(targP);
+    if(!targP.classList.contains("movable")) {
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
         remClass("depl");
         remSelectedBtns(document.body);
         remDivDepl();
-
+        console.log("non");
     }
 });
 
 //test à virer
-btn.addEventListener("click", (e) => {
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("movable", "textetest");
-    const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
-    newDiv.appendChild(textDiv);
+// btn.addEventListener("click", (e) => {
+//     const newDiv = document.createElement("div");
+//     newDiv.classList.add("movable", "textetest");
+//     const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
+//     newDiv.appendChild(textDiv);
 
-    const page = document.querySelector(".page");
-    page.appendChild(newDiv);
-});
+//     const page = document.querySelector(".page");
+//     page.appendChild(newDiv);
+// });
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
