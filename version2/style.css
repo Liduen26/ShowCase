@@ -89,7 +89,7 @@ header {
 }
 .side_menu {
     position: absolute;
-    margin-left: 1.9rem;
+    margin-left: 1.8rem;
     top: 0%;
     display: none;
     background-color: darkslategrey;
@@ -104,5 +104,6 @@ header {
     padding: 10px 10px;
     height: auto;
     transition: .3s ease;
-    border-radius: 0.5rem; 
+    border-radius: 0.5rem;
+    text-align: center;
 }
