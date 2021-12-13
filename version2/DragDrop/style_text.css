@@ -10,8 +10,16 @@
     position: absolute;
     top: 10vh;
     left: 25vw;
+    
 }
 
 .intText {
+
     overflow: hidden;
 }
+
+/* .btn{
+
+    position: absolute;
+    left : 40%;
+} */

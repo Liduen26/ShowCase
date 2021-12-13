@@ -6,8 +6,7 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./DragDrop/styleDD.css">
-    
-
+    <link rel="stylesheet" href="./DragDrop/style_text.css">
 
 </head>
 <body>
@@ -30,7 +29,13 @@
                         <i id="elements-icon" class='bx bx-grid-alt'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Elements</h4>
-                            <li class="sous_li"><a href="#"><i class='bx bx-text'></i><br>Texte</a></li>
+                            <li class="sous_li addText">
+                                <a href="#">
+                                    <i class='bx bx-text'></i>
+                                    <br>
+                                    Texte
+                                </a>
+                            </li>
                             <li class="sous_li"><a href="#"><i class='bx bx-image' ></i><br>Image</a></li>
                             <li class="sous_li"><a href="#"><i class='bx bx-checkbox'></i><br>bouton</a></li>
                             <li class="sous_li"><a href="#"><i class='bx bx-clipboard'></i><br>formulaire</a></li>
@@ -59,10 +64,12 @@
                 </ul>
             </div>
             <div class="page">
-                <iframe  src="corps_texte_milieu_image_coté.html" ></iframe>
+                <?php include("corps_texte_milieu_image_coté.html") ?>
             </div>
         </div>
     </div>
+
     <script src="./DragDrop/scriptDD.js"></script>
+    <script src="./DragDrop/script_text.js"></script>
 </body>
 </html>
