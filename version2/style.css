@@ -43,6 +43,10 @@ header {
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
     margin-right: 20px;
 }
+.titre_top_menu {
+    margin: 10px;
+    color: #fff;
+}
 #account_icon:hover {
     background-color: gray;
 }
