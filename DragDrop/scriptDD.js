@@ -188,8 +188,6 @@ document.body.addEventListener("mousedown", (e) => {
         const grid = document.body.querySelectorAll(".grid");
         const rectGrid = grid[0].getBoundingClientRect();
         xGrid = rectGrid.width;
-        console.log("x = " + xGrid);
-        console.log("W = " + document.body.clientWidth);
         yGrid = rectGrid.height;
 
         window.addEventListener("mousemove", mousemove);
@@ -309,7 +307,6 @@ document.body.addEventListener("mousedown", (e) => {
 //sélection de la div --------------------------------------------------------
 document.body.addEventListener("click", (e) => {
     let targP = e.target;
-    console.log(e.target);
     do {
         if(targP.classList.contains("movable")) {
             //c'est bon
@@ -321,18 +318,14 @@ document.body.addEventListener("click", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
-    console.log(targP);
     if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
-        console.log("oui");
         if(!targP.classList.contains("selected")) {
-            console.log("reoui");
             //on retire les autres sélections
             remClass("selected");
             remClass("depl");
             remSelectedBtns(document.body);
 
             //On met la sélection sur ce qui nous intéresse
-            console.log(targP);
             targP.classList.add("selected", "depl");
             addSelectedBtns(targP);
 
@@ -390,7 +383,6 @@ document.body.addEventListener("click", (e) => {
 document.body.addEventListener("click", (e) => {
     let targP = e.target;
     do {
-        console.log(targP);
         if(targP.classList.contains("movable")) {
             //c'est bon
         } else {
@@ -401,7 +393,7 @@ document.body.addEventListener("click", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
-    console.log(targP);
+    // console.log(targP);
     if(!targP.classList.contains("movable")) {
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
@@ -463,6 +455,7 @@ function getRect(targP) {
 
 document.onload = loading();
 function loading() {
+    //construction de la grille au chargement 
     const page = document.querySelector(".page");
     const newCont = document.createElement("div");
     newCont.classList.add("gridCont");
@@ -471,7 +464,6 @@ function loading() {
     const container = document.querySelector(".gridCont");
     const yPage = page.clientHeight;
     const xPage = page.clientWidth;
-    console.log(xPage);
     
     const newLine = document.createElement("div");
     newLine.classList.add("gridLine");

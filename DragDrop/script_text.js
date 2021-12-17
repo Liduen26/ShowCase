@@ -32,22 +32,25 @@ btn.addEventListener('click', () => {
 
 
 document.body.addEventListener('click',(e) =>{
-	console.log("click");
 	let targP = e.target;
+	let i = 0;
 	do {
-		if(targP.classList.contains("movable")) {
+		if(targP.classList.contains("movable") || targP.classList.contains("divEdit")) {
 			//c'est bon
 		} else {
 			targP = targP.parentNode;
 		}
 
-		if(targP == document.body) {
+		if(targP === document.body) {
 			break;
 		}
-	} while(!targP.classList.contains("movable"));
+		console.log(targP);
+		i++;
+	} while(!targP.classList.contains("movable") || !targP.classList.contains("divEdit") || i === 6);
+	console.log("ici : ");
 	console.log(targP);
-	if(!targP.classList.contains("text")){
-		console.log("clicktext");
+	if(!targP.classList.contains("text") && !targP.classList.contains("divEdit")){
+		console.log("should not pass");
 		const texts = document.querySelectorAll('[contenteditable]');
 
 		texts.forEach (item => {
@@ -57,13 +60,12 @@ document.body.addEventListener('click',(e) =>{
 		remEdit();
 
 	}
-	console.log(e.target);
 	
 	function remEdit() {
 		const div = document.querySelectorAll(".divEdit");
 		div.forEach((item) => {
 			item.remove();
-		});	
+		});
 	}
 });
 
@@ -82,7 +84,7 @@ document.body.addEventListener('dblclick',(e) =>{
 			break;
 		}
 	} while(!targP.classList.contains("movable"));
-	console.log(targP);
+	// console.log(targP);
 	if(targP.classList.contains("text")){
 		//entrée en mode texte
 		targP.setAttribute("contentEditable","true");
@@ -94,7 +96,7 @@ document.body.addEventListener('dblclick',(e) =>{
 		remDivDepl();
 		remSelectedBtns(document.body);
 
-		// spawnEdit(targP);
+		spawnEdit(targP);
 
 	} else {
 		//sortie du mode texte
