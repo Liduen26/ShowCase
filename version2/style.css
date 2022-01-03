@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", cursive;
+}
+#outil {
+    display: flex;
+    flex-direction: column;
+}
+#sidebar_contenu {
+    display: flex;
+    flex-direction: row;
+}
+a {
+    color: #fff;
+}
+header {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    font-family: Roboto;
+    background-color: rgb(40, 59, 59);
+    padding: 10px 10px 10px 0;
+    /* border: 2px solid #18c9ae; */
+}
+#account_icon {
+    color: #fff;
+    cursor: pointer;
+    padding: 14px 14px;
+    border-radius: 1rem;
+    transition: .3s ease;
+
+}
+#div_account_menu {
+    margin: auto 20px auto auto;
+}
+.top_menu {
+    position: absolute;
+    display: none;
+    background-color: rgb(40, 59, 59);
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin-right: 20px;
+}
+#account_icon:hover {
+    background-color: gray;
+}
+#div_account_menu:hover .top_menu{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+#div_account_menu li:hover {
+    background-color: gray;
+}
+.logo {
+    margin-left: 1rem;
+    cursor: pointer;
+    /* width: 100%; */
+}
+#sidebar {
+    position: sticky;
+    height: 100vh;
+    width: 3rem;
+    background-color: darkslategrey;
+    top: 0%;
+}
+.side_li{
+    position: relative;
+    display: flex;
+    color: #fff;
+    padding: 14px 14px;
+    margin: auto;
+    transition: .3s ease;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.side_li:hover ul {
+    display: initial;
+}
+#sidebar ul li:hover {
+    background-color: #383838;
+}
+#side_list {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+}
+.side_menu {
+    position: absolute;
+    margin-left: 1.8rem;
+    top: 0%;
+    display: none;
+    background-color: darkslategrey;
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+}
+.titre_side_menu {
+    margin: 10px;
+}
+.sous_li {
+    display: flex;
+    color: #fff;
+    padding: 10px 10px;
+    height: auto;
+    transition: .3s ease;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+iframe{
+    margin-left: 5vw;
+    width: 90vmax;
+    height: 100vh;
+    
+}
