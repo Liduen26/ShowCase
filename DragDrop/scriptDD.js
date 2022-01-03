@@ -39,6 +39,8 @@ img.forEach(item => {
     item.draggable = false;
 });
 
+const page = document.querySelector(".page");
+
 // const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
@@ -52,14 +54,14 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         if(targP === document.body) {
-            remClass("selected");
-            remClass("depl");
+            // remClass("selected");
+            // remClass("depl");
+            // remSelectedBtns(document.body);
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
             
-            remSelectedBtns(document.body);
             remDivDepl();
             break;
             
@@ -305,7 +307,7 @@ document.body.addEventListener("mousedown", (e) => {
 });
 
 //sélection de la div --------------------------------------------------------
-document.body.addEventListener("click", (e) => {
+page.addEventListener("click", (e) => {
     let targP = e.target;
     do {
         if(targP.classList.contains("movable")) {
@@ -318,6 +320,7 @@ document.body.addEventListener("click", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
+    console.log(targP);
     if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
         if(!targP.classList.contains("selected")) {
             //on retire les autres sélections
@@ -335,13 +338,11 @@ document.body.addEventListener("click", (e) => {
             const parentTarg = targP.parentNode;
             createDivDepl(parentTarg, rect);
 
-        } else {
-            // //si la div contient déjà selected, on l'enlève
-            // targP.classList.remove("selected");
-            // targP.classList.remove("depl");
-            // // remSelectedBtns(targP);
-            // remDivDepl();
-        }
+            // if(targP.classList.contains("movable")) {
+                elemApp("moreEdit");
+            // } 
+
+        } 
     }
         
     function addSelectedBtns(parent) {
@@ -383,37 +384,46 @@ document.body.addEventListener("click", (e) => {
 document.body.addEventListener("click", (e) => {
     let targP = e.target;
     do {
-        if(targP.classList.contains("movable")) {
-            //c'est bon
-        } else {
-            targP = targP.parentNode;
-        }
+		if(targP.classList.contains("toolbar")) {
+			break;
+		}
 
-        if(targP == document.body) {
-            break;
-        }
-    } while(!targP.classList.contains("movable"));
+		if(targP.classList.contains("movable")) {
+			//c'est bon
+		} else {
+			targP = targP.parentNode;
+		}
+
+		if(targP === document.body) {
+			break;
+		}
+	} while(!targP.classList.contains("movable") );
     // console.log(targP);
-    if(!targP.classList.contains("movable")) {
+    if(targP.classList.contains("toolbar")) {
+        //rien
+
+    } else if(!targP.classList.contains("movable")) {
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
         remClass("depl");
         remSelectedBtns(document.body);
         remDivDepl();
-        console.log("non");
+
+        elemDisp("moreEdit");
     }
+    
+    if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
+		const texts = document.querySelectorAll('[contenteditable]');
+
+		texts.forEach (item => {
+			item.setAttribute("contentEditable","false");
+			remClass('editable');
+		});
+		elemDisp("textEdit");
+
+	}
 });
 
-//test à virer
-// btn.addEventListener("click", (e) => {
-//     const newDiv = document.createElement("div");
-//     newDiv.classList.add("movable", "textetest");
-//     const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
-//     newDiv.appendChild(textDiv);
-
-//     const page = document.querySelector(".page");
-//     page.appendChild(newDiv);
-// });
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
