@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="style_insert.css">
-  <link rel="stylesheet" href="styleDD.css">  
+  <link rel="stylesheet" href="styleDD.css">
 
   <title>InsertZT</title>
 
@@ -21,20 +21,19 @@
       <button class="btn4" id="btn_d">bouton !</button>
     </div>
   </div>
-  <button onclick="recup_texte(1)">Try it</button>
+  <button id='sauvegarder_texte'>sauvegarder le texte</button>
   <script type="text/javascript">
-    let texte;
     function recup_texte (id){
-      // texte = document.getElementById(id);
-      texte = document.getElementById(id);
-      console.log(texte);
+      propriete = document.getElementById(id);
+      console.log(propriete);
+      let texte = [id, propriete];
       return texte;
     }
+    let bouton_sauvegarder = document.getElementById("sauvegarder_texte");
+    bouton_sauvegarder.onclick = texte = recup_texte(1);
+    console.log(texte);
+    
   </script>
-  <?php
-  $variable_php = '<script type="text/javascript">document.write(recup_texte(1);</script>';
-  echo $variable_php;
-  ?>
   <script src="./script_insert.js" type="text/javascript" ></script>
   <script src="scriptDD.js"></script>
 </body>
