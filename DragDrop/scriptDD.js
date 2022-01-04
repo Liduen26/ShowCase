@@ -30,7 +30,7 @@ const movable = document.querySelectorAll(".movable");
 let currentResizer;
 let isResizing = false;
 
-const tGrid = "5"; //taille de la grille en vw et vh
+const tGrid = "10"; //taille de la grille en vw et vh
 let xGrid;
 let yGrid;
 
@@ -482,7 +482,7 @@ function loading() {
     do {
         const newGrid = document.createElement("div");
         newGrid.style.width = tGrid + "vw";
-        newGrid.style.height = tGrid + "vh";
+        newGrid.style.height = 50 + "px";
         newGrid.classList.add("grid");
         
         const newGridInt = document.createElement("div");
