@@ -54,17 +54,12 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         if(targP === document.body) {
-            // remClass("selected");
-            // remClass("depl");
-            // remSelectedBtns(document.body);
-
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
             
             remDivDepl();
-            break;
-            
+            break;           
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
 
@@ -135,8 +130,12 @@ document.body.addEventListener("mousedown", (e) => {
             let vwDiff = newRleft / xGrid;
             let vhDiff = newRtop / yGrid;
 
-            targP.style.left = (vwDiff * tGrid) + 'vw';
-            targP.style.top = (vhDiff * tGrid) + 'vh';
+            console.log(newRleft);
+            console.log(xGrid);
+            console.log(vwDiff);
+
+            targP.style.left = (vwDiff * tGrid) + '%';
+            targP.style.top = (vhDiff * yGrid) + 'px';
 
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
@@ -285,13 +284,13 @@ document.body.addEventListener("mousedown", (e) => {
         function mouseup() {
             let vwDiff2 = newRleft / xGrid;
             let vhDiff2 = newRtop / yGrid;
-            targP.style.left = (vwDiff2 * tGrid) + 'vw';
-            targP.style.top = (vhDiff2 * tGrid) + 'vh';
+            targP.style.left = (vwDiff2 * tGrid) + '%';
+            targP.style.top = (vhDiff2 * yGrid) + 'px';
             
             let vwDiff3 = newRwidth / xGrid;
             let vhDiff3 = newRheight / yGrid;
-            targP.style.width = (vwDiff3 * tGrid) + 'vw';
-            targP.style.height = (vhDiff3 * tGrid) + 'vh';
+            targP.style.width = (vwDiff3 * tGrid) + '%';
+            targP.style.height = (vhDiff3 * yGrid) + 'px';
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
@@ -474,14 +473,12 @@ function loading() {
     const container = document.querySelector(".gridCont");
     const yPage = page.clientHeight;
     const xPage = page.clientWidth;
-    
-    const newLine = document.createElement("div");
-    newLine.classList.add("gridLine");
-    container.appendChild(newLine);
+    let i = 0;
+
     
     do {
         const newGrid = document.createElement("div");
-        newGrid.style.width = tGrid + "vw";
+        newGrid.style.width = tGrid + "%";
         newGrid.style.height = 50 + "px";
         newGrid.classList.add("grid");
         
@@ -489,7 +486,10 @@ function loading() {
         newGridInt.classList.add("gridInt");
         newGrid.appendChild(newGridInt);
         
-        newLine.appendChild(newGrid);
-    }while(yPage + 900 > newLine.clientHeight)
-
+        container.appendChild(newGrid);
+        i++;
+        console.log(yPage);
+        console.log(container.clientHeight);
+    } while(yPage + 900 > container.clientHeight);
+    //  ||
 }

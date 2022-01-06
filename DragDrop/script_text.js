@@ -29,7 +29,7 @@ const forwardBtn = document.querySelector(".forward-btn");
 const backwardBtn = document.querySelector(".backward-btn");
 const deleteBtn = document.querySelector(".delete-btn");
 
-//boutton permettant d'ajouter une zone de texte, voué à être rennomé
+//bouton permettant d'ajouter une zone de texte, voué à être rennomé
 btn.addEventListener('click', () => {
 
 	const new_d = document.createElement('div');
