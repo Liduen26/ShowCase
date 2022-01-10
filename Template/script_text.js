@@ -48,7 +48,6 @@ document.body.addEventListener('dblclick',(e) =>{
 	if(targP.classList.contains("text")){
 		//entrée en mode texte
 		targP.setAttribute("contentEditable","true");
-		targP.style.height = "auto";
 		targP.style.height = "fit-content";
 
 		// remClass("selected");

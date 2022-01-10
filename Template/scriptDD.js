@@ -58,8 +58,6 @@ document.body.addEventListener("mousedown", (e) => {
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
             
-        console.log("here");
-
             break;           
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
@@ -127,6 +125,18 @@ document.body.addEventListener("mousedown", (e) => {
 
                 zoneVisu.style.left = newRleft + "px";
                 zoneVisu.style.top = newRtop + "px";
+
+                //est-ce que l'elem dépasse de sa section ?
+                let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
+                console.log(bottomElem);
+                
+                let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                console.log(heightSection);
+                
+                if(bottomElem > heightSection) {
+                    console.log("yep");
+                    addLine(zoneVisu.parentNode);
+                }
 
                 console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
 
