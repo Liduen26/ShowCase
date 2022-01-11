@@ -108,9 +108,19 @@ header {
     text-align: center;
 }
 
-iframe{
-    margin-left: 5vw;
-    width: 90vmax;
-    height: 100vh;
-    
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.page {
+    position: relative;
+    z-index: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
 }
