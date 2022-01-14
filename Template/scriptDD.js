@@ -30,7 +30,7 @@ const movable = document.querySelectorAll(".movable");
 let currentResizer;
 let isResizing = false;
 
-const tGrid = "5"; //taille de la grille en vw et vh
+const tGrid = "10"; //taille de la grille en vw et vh
 let xGrid;
 let yGrid;
 
@@ -38,6 +38,8 @@ const img = document.querySelectorAll(".img");
 img.forEach(item => {
     item.draggable = false;
 });
+
+const page = document.querySelector(".page");
 
 // const btn = document.querySelector(".btn");
 
@@ -52,17 +54,11 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         if(targP === document.body) {
-            remClass("selected");
-            remClass("depl");
-
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
             
-            remSelectedBtns(document.body);
-            remDivDepl();
-            break;
-            
+            break;           
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
 
@@ -94,8 +90,17 @@ document.body.addEventListener("mousedown", (e) => {
                 const rectGrid = grid[0].getBoundingClientRect();
                 xGrid = rectGrid.width;
                 yGrid = rectGrid.height;
+                console.log(targP);
 
-                const rect = getRect(targP);
+                let sectionP = e.target;
+                do {
+                    if(sectionP.classList.contains("section")) {
+                        //c'est bon
+                    } else {
+                        sectionP = targP.parentNode;
+                    }
+                } while(!sectionP.classList.contains("section"));
+                const rect = getRect(targP, sectionP);
 
                 targP.style.left = rect.left - newX + 'px';
                 targP.style.top = rect.top - newY + 'px';
@@ -121,11 +126,24 @@ document.body.addEventListener("mousedown", (e) => {
                 zoneVisu.style.left = newRleft + "px";
                 zoneVisu.style.top = newRtop + "px";
 
+                //est-ce que l'elem dépasse de sa section ?
+                let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
+                console.log(bottomElem);
+                
+                let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                console.log(heightSection);
+                
+                if(bottomElem > heightSection) {
+                    console.log("yep");
+                    addLine(zoneVisu.parentNode);
+                }
+
                 console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
 
                 //maj des coo de la souris
                 prevX = e.clientX;
                 prevY = e.clientY;
+                console.log(e.target.parentNode);
             }
         }
 
@@ -133,8 +151,12 @@ document.body.addEventListener("mousedown", (e) => {
             let vwDiff = newRleft / xGrid;
             let vhDiff = newRtop / yGrid;
 
-            targP.style.left = (vwDiff * tGrid) + 'vw';
-            targP.style.top = (vhDiff * tGrid) + 'vh';
+            console.log(newRleft);
+            console.log(xGrid);
+            console.log(vwDiff);
+
+            targP.style.left = (vwDiff * tGrid) + '%';
+            targP.style.top = (vhDiff * yGrid) + 'px';
 
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
@@ -188,15 +210,21 @@ document.body.addEventListener("mousedown", (e) => {
         const grid = document.body.querySelectorAll(".grid");
         const rectGrid = grid[0].getBoundingClientRect();
         xGrid = rectGrid.width;
-        console.log("x = " + xGrid);
-        console.log("W = " + document.body.clientWidth);
         yGrid = rectGrid.height;
 
         window.addEventListener("mousemove", mousemove);
         window.addEventListener("mouseup", mouseup);
 
         function mousemove(e) {
-            const rect = getRect(targP);
+            let sectionP = e.target;
+            do {
+                if(sectionP.classList.contains("section")) {
+                    //c'est bon
+                } else {
+                    sectionP = targP.parentNode;
+                }
+            } while(!sectionP.classList.contains("section"));
+            const rect = getRect(targP, sectionP);
 
             let resteLeft = rect.left % xGrid;
             if(resteLeft > (xGrid / 2)) {
@@ -285,13 +313,13 @@ document.body.addEventListener("mousedown", (e) => {
         function mouseup() {
             let vwDiff2 = newRleft / xGrid;
             let vhDiff2 = newRtop / yGrid;
-            targP.style.left = (vwDiff2 * tGrid) + 'vw';
-            targP.style.top = (vhDiff2 * tGrid) + 'vh';
+            targP.style.left = (vwDiff2 * tGrid) + '%';
+            targP.style.top = (vhDiff2 * yGrid) + 'px';
             
             let vwDiff3 = newRwidth / xGrid;
             let vhDiff3 = newRheight / yGrid;
-            targP.style.width = (vwDiff3 * tGrid) + 'vw';
-            targP.style.height = (vhDiff3 * tGrid) + 'vh';
+            targP.style.width = (vwDiff3 * tGrid) + '%';
+            targP.style.height = (vhDiff3 * yGrid) + 'px';
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
@@ -307,9 +335,8 @@ document.body.addEventListener("mousedown", (e) => {
 });
 
 //sélection de la div --------------------------------------------------------
-document.body.addEventListener("click", (e) => {
+page.addEventListener("click", (e) => {
     let targP = e.target;
-    console.log(e.target);
     do {
         if(targP.classList.contains("movable")) {
             //c'est bon
@@ -323,32 +350,35 @@ document.body.addEventListener("click", (e) => {
     } while(!targP.classList.contains("movable"));
     console.log(targP);
     if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
-        console.log("oui");
         if(!targP.classList.contains("selected")) {
-            console.log("reoui");
             //on retire les autres sélections
             remClass("selected");
             remClass("depl");
             remSelectedBtns(document.body);
 
             //On met la sélection sur ce qui nous intéresse
-            console.log(targP);
             targP.classList.add("selected", "depl");
             addSelectedBtns(targP);
 
             remDivDepl();
-            const rect = getRect(targP);
+            let sectionP = e.target;
+            do {
+                if(sectionP.classList.contains("section")) {
+                    //c'est bon
+                } else {
+                    sectionP = targP.parentNode;
+                }
+            } while(!sectionP.classList.contains("section"));
+            const rect = getRect(targP, sectionP);
 
             const parentTarg = targP.parentNode;
             createDivDepl(parentTarg, rect);
 
-        } else {
-            // //si la div contient déjà selected, on l'enlève
-            // targP.classList.remove("selected");
-            // targP.classList.remove("depl");
-            // // remSelectedBtns(targP);
-            // remDivDepl();
-        }
+            // if(targP.classList.contains("movable")) {
+                elemApp("moreEdit");
+            // } 
+
+        } 
     }
         
     function addSelectedBtns(parent) {
@@ -386,42 +416,50 @@ document.body.addEventListener("click", (e) => {
         
 });
 
-//pour enlever la zone de sélection
+//pour enlever la zone de sélection -----------------------------------------
 document.body.addEventListener("click", (e) => {
     let targP = e.target;
     do {
-        console.log(targP);
-        if(targP.classList.contains("movable")) {
-            //c'est bon
-        } else {
-            targP = targP.parentNode;
-        }
+		if(targP.classList.contains("toolbar")) {
+			break;
+		}
 
-        if(targP == document.body) {
-            break;
-        }
-    } while(!targP.classList.contains("movable"));
-    console.log(targP);
-    if(!targP.classList.contains("movable")) {
+		if(targP.classList.contains("movable")) {
+			//c'est bon
+		} else {
+			targP = targP.parentNode;
+		}
+
+		if(targP === document.body) {
+			break;
+		}
+	} while(!targP.classList.contains("movable") );
+    // console.log(targP);
+    if(targP.classList.contains("toolbar")) {
+        //rien
+
+    } else if(!targP.classList.contains("movable")) {
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
         remClass("depl");
         remSelectedBtns(document.body);
         remDivDepl();
-        console.log("non");
+
+        elemDisp("moreEdit");
     }
+    
+    if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
+		const texts = document.querySelectorAll('[contenteditable]');
+
+		texts.forEach (item => {
+			item.setAttribute("contentEditable","false");
+			remClass('editable');
+		});
+		elemDisp("textEdit");
+
+	}
 });
 
-//test à virer
-// btn.addEventListener("click", (e) => {
-//     const newDiv = document.createElement("div");
-//     newDiv.classList.add("movable", "textetest");
-//     const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
-//     newDiv.appendChild(textDiv);
-
-//     const page = document.querySelector(".page");
-//     page.appendChild(newDiv);
-// });
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
@@ -446,14 +484,13 @@ function remDivDepl() {
     });
 }
 
-function getRect(targP) {
-    const page = document.querySelector(".page");
+function getRect(targP, section) {
     let offset = [];
 
-    let divRect = page.getBoundingClientRect();
+    let divRect = section.getBoundingClientRect();
     let elemRect = targP.getBoundingClientRect();
-    offset.left = (elemRect.left - divRect.left) + page.scrollLeft;
-    offset.top = (elemRect.top - divRect.top) + page.scrollTop;
+    offset.left = (elemRect.left - divRect.left) + section.scrollLeft;
+    offset.top = (elemRect.top - divRect.top) + section.scrollTop;
     offset.width = elemRect.width;
     offset.height = elemRect.height;
 
@@ -461,33 +498,45 @@ function getRect(targP) {
     return offset;
 }
 
+// Génération de la grille ----------------------------------------------------
 document.onload = loading();
 function loading() {
-    const page = document.querySelector(".page");
-    const newCont = document.createElement("div");
-    newCont.classList.add("gridCont");
-    page.appendChild(newCont);
+    //construction de la grille au chargement 
     
-    const container = document.querySelector(".gridCont");
-    const yPage = page.clientHeight;
-    const xPage = page.clientWidth;
-    console.log(xPage);
-    
-    const newLine = document.createElement("div");
-    newLine.classList.add("gridLine");
-    container.appendChild(newLine);
-    
-    do {
-        const newGrid = document.createElement("div");
-        newGrid.style.width = tGrid + "vw";
-        newGrid.style.height = tGrid + "vh";
-        newGrid.classList.add("grid");
-        
-        const newGridInt = document.createElement("div");
-        newGridInt.classList.add("gridInt");
-        newGrid.appendChild(newGridInt);
-        
-        newLine.appendChild(newGrid);
-    }while(yPage + 900 > newLine.clientHeight)
+    const sects = document.querySelectorAll(".section");
 
+    sects.forEach(item => {
+        const newCont = document.createElement("div");
+        newCont.classList.add("gridCont");
+        item.appendChild(newCont);
+
+        const ySect = item.clientHeight;
+        
+        do {
+            const newGrid = document.createElement("div");
+            newGrid.style.width = tGrid + "%";
+            newGrid.style.height = 50 + "px";
+            newGrid.classList.add("grid");
+            
+            const newGridInt = document.createElement("div");
+            newGridInt.classList.add("gridInt");
+            newGrid.appendChild(newGridInt);
+            
+            newCont.appendChild(newGrid);
+        } while(ySect > newCont.clientHeight);
+        let i = 0;
+        do {
+            const newGrid = document.createElement("div");
+            newGrid.style.width = tGrid + "%";
+            newGrid.style.height = 50 + "px";
+            newGrid.classList.add("grid");
+            
+            const newGridInt = document.createElement("div");
+            newGridInt.classList.add("gridInt");
+            newGrid.appendChild(newGridInt);
+            
+            newCont.appendChild(newGrid);
+            i++;
+        } while(i < 9);
+    });
 }

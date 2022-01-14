@@ -1,4 +1,7 @@
-const btn = document.querySelector('#btn');
+const btn1 = document.querySelector('#btn_a');
+const btn2 = document.querySelector('#btn_b');
+const btn3 = document.querySelector('#btn_c');
+const btn4 = document.querySelector('#btn_d');
 const list = document.getElementById('list');
 const form = document.querySelector('form');
 const item = document.getElementById('item');
@@ -11,7 +14,7 @@ console.log(nbr_id);
 
 // // zone texte //
 
-btn.addEventListener('click', () => {
+btn1.addEventListener('click', () => {
 
   const new_dt = document.createElement('div');
   new_dt.setAttribute("class","text movable");
@@ -23,7 +26,7 @@ btn.addEventListener('click', () => {
   div1_parent.appendChild(new_dt);
   nbr_id = nbr_id + 1;
   for (let i = 0; i < 100; i++) {
-    new_df.setAttribute("id", nbr_id); 
+    new_dt.setAttribute("id", nbr_id); 
     
   }
 });
@@ -31,15 +34,15 @@ btn.addEventListener('click', () => {
 // //zone image //
 
 
-btn.addEventListener('click', () => {
+btn2.addEventListener('click', () => {
 
   const new_di = document.createElement('div');
   new_di.setAttribute("class","image movable");
-  new_di.setAttribute("style",'background: url("laure exo.jpg") center/cover; position: absolute; left: 50vw; top: 50vh; width: 40vw; height: 25vh;');
+  new_di.setAttribute("style",'background: url("Dream.jpg") center/cover; position: absolute; left: -10vw; top: 10vh; width: 100vw; height: 100vh;');
   div1_parent.appendChild(new_di);
   nbr_id = nbr_id + 1;
   for (let i = 0; i < 100; i++) {
-    new_df.setAttribute("id", nbr_id); 
+    new_di.setAttribute("id", nbr_id); 
     
   }
 });
@@ -47,7 +50,7 @@ btn.addEventListener('click', () => {
 
 // zone formes //
 
-btn.addEventListener('click', () => {
+btn3.addEventListener('click', () => {
 
   const new_df = document.createElement('div');
   new_df.setAttribute("class"," forme exemple movable");
@@ -61,9 +64,9 @@ btn.addEventListener('click', () => {
 });
 
 
-boutton //
+//boutton //
 
-btn.addEventListener('click', () => {
+btn4.addEventListener('click', () => {
 console.log("click");
   const new_dd = document.createElement('div');
   new_dd.setAttribute("class"," movable");

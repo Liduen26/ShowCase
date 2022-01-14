@@ -30,7 +30,7 @@ const movable = document.querySelectorAll(".movable");
 let currentResizer;
 let isResizing = false;
 
-const tGrid = "5"; //taille de la grille en vw et vh
+const tGrid = "10"; //taille de la grille en vw et vh
 let xGrid;
 let yGrid;
 
@@ -39,9 +39,13 @@ img.forEach(item => {
     item.draggable = false;
 });
 
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+const btn = document.querySelector(".btn");
+=======
 const page = document.querySelector(".page");
 
 // const btn = document.querySelector(".btn");
+>>>>>>> main:DragDrop old/scriptDD.js
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
@@ -54,17 +58,12 @@ document.body.addEventListener("mousedown", (e) => {
         }
 
         if(targP === document.body) {
-            // remClass("selected");
-            // remClass("depl");
-            // remSelectedBtns(document.body);
-
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
             
             remDivDepl();
-            break;
-            
+            break;           
         }
     } while(!targP.classList.contains("movable") || targP == document.body);
 
@@ -135,8 +134,12 @@ document.body.addEventListener("mousedown", (e) => {
             let vwDiff = newRleft / xGrid;
             let vhDiff = newRtop / yGrid;
 
-            targP.style.left = (vwDiff * tGrid) + 'vw';
-            targP.style.top = (vhDiff * tGrid) + 'vh';
+            console.log(newRleft);
+            console.log(xGrid);
+            console.log(vwDiff);
+
+            targP.style.left = (vwDiff * tGrid) + '%';
+            targP.style.top = (vhDiff * yGrid) + 'px';
 
             const gridContainer = document.body.querySelector(".gridCont");
             gridContainer.style.visibility = "hidden";
@@ -285,13 +288,13 @@ document.body.addEventListener("mousedown", (e) => {
         function mouseup() {
             let vwDiff2 = newRleft / xGrid;
             let vhDiff2 = newRtop / yGrid;
-            targP.style.left = (vwDiff2 * tGrid) + 'vw';
-            targP.style.top = (vhDiff2 * tGrid) + 'vh';
+            targP.style.left = (vwDiff2 * tGrid) + '%';
+            targP.style.top = (vhDiff2 * yGrid) + 'px';
             
             let vwDiff3 = newRwidth / xGrid;
             let vhDiff3 = newRheight / yGrid;
-            targP.style.width = (vwDiff3 * tGrid) + 'vw';
-            targP.style.height = (vhDiff3 * tGrid) + 'vh';
+            targP.style.width = (vwDiff3 * tGrid) + '%';
+            targP.style.height = (vhDiff3 * yGrid) + 'px';
 
             //désaffichage de la grille
             const gridContainer = document.body.querySelector(".gridCont");
@@ -320,8 +323,14 @@ page.addEventListener("click", (e) => {
             break;
         }
     } while(!targP.classList.contains("movable"));
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+    
+    if(targP.classList.contains("movable")) {
+        
+=======
     console.log(targP);
     if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
+>>>>>>> main:DragDrop old/scriptDD.js
         if(!targP.classList.contains("selected")) {
             //on retire les autres sélections
             remClass("selected");
@@ -338,11 +347,21 @@ page.addEventListener("click", (e) => {
             const parentTarg = targP.parentNode;
             createDivDepl(parentTarg, rect);
 
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+        } else {
+            //si la div contient déjà selected, on l'enlève
+            targP.classList.remove("selected");
+            targP.classList.remove("depl");
+            remSelectedBtns(targP);
+            remDivDepl();
+        }
+=======
             // if(targP.classList.contains("movable")) {
                 elemApp("moreEdit");
             // } 
 
         } 
+>>>>>>> main:DragDrop old/scriptDD.js
     }
         
     function addSelectedBtns(parent) {
@@ -382,6 +401,9 @@ page.addEventListener("click", (e) => {
 
 //pour enlever la zone de sélection
 document.body.addEventListener("click", (e) => {
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+    if(!e.target.classList.contains("movable")) {
+=======
     let targP = e.target;
     do {
 		if(targP.classList.contains("toolbar")) {
@@ -403,18 +425,34 @@ document.body.addEventListener("click", (e) => {
         //rien
 
     } else if(!targP.classList.contains("movable")) {
+>>>>>>> main:DragDrop old/scriptDD.js
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
         remClass("depl");
         remSelectedBtns(document.body);
         remDivDepl();
 
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+=======
         elemDisp("moreEdit");
+>>>>>>> main:DragDrop old/scriptDD.js
     }
     
     if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
 		const texts = document.querySelectorAll('[contenteditable]');
 
+<<<<<<< HEAD:IT2/ZT recup/scriptDD.js
+//test à virer
+btn.addEventListener("click", (e) => {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("movable", "textetest");
+    const textDiv = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt beatae temporibus alias. Necessitatibus quisquam aut similique consequatur esse voluptatum porro tenetur recusandae voluptas harum! Iste commodi eligendi mollitia voluptatum sapiente.");
+    newDiv.appendChild(textDiv);
+
+    const page = document.querySelector(".page");
+    page.appendChild(newDiv);
+});
+=======
 		texts.forEach (item => {
 			item.setAttribute("contentEditable","false");
 			remClass('editable');
@@ -424,6 +462,7 @@ document.body.addEventListener("click", (e) => {
 	}
 });
 
+>>>>>>> main:DragDrop old/scriptDD.js
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
@@ -474,22 +513,23 @@ function loading() {
     const container = document.querySelector(".gridCont");
     const yPage = page.clientHeight;
     const xPage = page.clientWidth;
-    
-    const newLine = document.createElement("div");
-    newLine.classList.add("gridLine");
-    container.appendChild(newLine);
+    let i = 0;
+
     
     do {
         const newGrid = document.createElement("div");
-        newGrid.style.width = tGrid + "vw";
-        newGrid.style.height = tGrid + "vh";
+        newGrid.style.width = tGrid + "%";
+        newGrid.style.height = 50 + "px";
         newGrid.classList.add("grid");
         
         const newGridInt = document.createElement("div");
         newGridInt.classList.add("gridInt");
         newGrid.appendChild(newGridInt);
         
-        newLine.appendChild(newGrid);
-    }while(yPage + 900 > newLine.clientHeight)
-
+        container.appendChild(newGrid);
+        i++;
+        console.log(yPage);
+        console.log(container.clientHeight);
+    } while(yPage + 900 > container.clientHeight);
+    //  ||
 }
