@@ -7,12 +7,14 @@
 
   <link rel="stylesheet" href="style_insert.css">
   <link rel="stylesheet" href="styleDD.css">
-
+  
   <title>InsertZT</title>
 
 </head>
 
 <body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
   <div class="page">
     <div class="clickEvent">
       <button class="btn1" id="btn_a">text !</button>
@@ -21,21 +23,19 @@
       <button class="btn4" id="btn_d">bouton !</button>
     </div>
   </div>
-  <button id='sauvegarder_texte'>sauvegarder le texte</button>
-  <script type="text/javascript">
-    function recup_texte (id){
-      propriete = document.getElementById(id);
-      console.log(propriete);
-      let texte = [id, propriete];
-      return texte;
-    }
-    let bouton_sauvegarder = document.getElementById("sauvegarder_texte");
-    bouton_sauvegarder.onclick = texte = recup_texte(1);
-    console.log(texte);
-    
-  </script>
+  <?php
+  
+  echo "<button id='bouton_save'>sauvegarder le texte</button>";
+  // if (isset($_POST['texte'])){
+  //   $Variable = $_POST['texte'];
+  //   echo $Variable;
+  var_dump($_POST['texte']);
+// }
+  
+  ?>
   <script src="./script_insert.js" type="text/javascript" ></script>
   <script src="scriptDD.js"></script>
+  <script type="text/javascript" src="enregistrer_ZT.js"></script>
 </body>
 </html>
 
