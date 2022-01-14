@@ -1,5 +1,6 @@
 const btn1 = document.querySelector('#btn_a');
 const btn2 = document.querySelector('#btn_b');
+const btn2_5 = document.querySelector('#btn_b_2');
 const btn3 = document.querySelector('#btn_c');
 const btn4 = document.querySelector('#btn_d');
 const list = document.getElementById('list');
@@ -34,17 +35,21 @@ btn1.addEventListener('click', () => {
 // //zone image //
 
 
-btn2.addEventListener('click', () => {
+btn2_5.addEventListener('click', () => {
+  
+  console.log("test btn2.5");
+  
+  var new_di = document.getElementById("image");
 
-  const new_di = document.createElement('div');
-  new_di.setAttribute("class","image movable");
-  new_di.setAttribute("style",'background: url("Dream.jpg") center/cover; position: absolute; left: -10vw; top: 10vh; width: 100vw; height: 100vh;');
-  div1_parent.appendChild(new_di);
-  nbr_id = nbr_id + 1;
-  for (let i = 0; i < 100; i++) {
-    new_di.setAttribute("id", nbr_id); 
+
+  // new_di.setAttribute("style",'center/cover; position: absolute; left: -10vw; top: 10vh; width: 50vw; height: 50vh;');
+  // new_di.setAttribute("class","image movable");
+
+  // nbr_id = nbr_id + 1;
+  // for (let i = 0; i < 100; i++) {
+  //   new_di.setAttribute("name", nbr_id); 
     
-  }
+  // }
 });
 
 
