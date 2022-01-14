@@ -57,11 +57,9 @@
     top: 0;
     z-index: 1;
     display: flex;
-    /* flex-wrap: wrap; */
-    align-items: flex-start;
-    flex-direction: column;
+    flex-wrap: wrap;
     overflow: hidden;
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
     visibility: hidden;
 }
@@ -102,21 +100,4 @@
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-}
-
-.content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    overflow: hidden;
-}
-
-.page {
-    position: relative;
-    z-index: 0;
-    overflow: auto;
-    height: 100%;
-    width: 100%;
 }
