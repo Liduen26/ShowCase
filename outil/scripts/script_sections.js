@@ -45,8 +45,9 @@ function addLine(arg) {
 
 
 // Ajout de Section -----------------------------------------------------------
-ajoutSection.forEach(item => {
-    item.addEventListener("click", (e) => {
+page.addEventListener("click", (e) => {
+    let targP = find("labelAddSection", e);
+    if(targP.classList.contains("labelAddSection")) {
         let sectionP = e.target;
         do {
             if(!sectionP.classList.contains("section")) {
@@ -76,23 +77,30 @@ ajoutSection.forEach(item => {
         idAct = Number(idAct[1]) + 1;
         
         //en attente du choix de section à ajouter
-        let file = "./templates/corps1.html";
+        let file = "./Templates/corps1.html";
         
         $(function() {
             $("#s" + idAct).load(file);
         });
-    });
+    }
 });
 
 // Delete de Section ----------------------------------------------------------
-delSection.forEach(item => {
-    item.addEventListener("click", (e) => {
+page.addEventListener("click", (e) => {
+    let targP = find("delSection", e);
+    if(targP.classList.contains("delSection")) {
         let sectionP = find("section", e);
-        validSuppr = true;
-        console.log("ui !");
         sectionP.remove();
 
-    });
+        //redéfinition des id de section
+        sections = document.querySelectorAll(".section");
+        let i = 0;
+        sections.forEach(sects => {
+            sects.id = "s" + i;
+            i++;
+            console.log(sects.id);
+        });
+    }
 });
 
 // Fonctions d'automatisation -------------------------------------------------

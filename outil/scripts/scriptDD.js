@@ -44,7 +44,7 @@ const page = document.querySelector(".page");
 // const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
-document.body.addEventListener("mousedown", (e) => {
+page.addEventListener("mousedown", (e) => {
     if(!e.target.classList.contains("delSection")) {
         let targP = find("movable", e);
     
@@ -109,11 +109,16 @@ document.body.addEventListener("mousedown", (e) => {
                     //est-ce que l'elem dépasse de sa section ?
                     let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
                     
-                    let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                    let heightSection = Number(delUnit(sectionP.style.height, 2));
                     
                     if(bottomElem > heightSection) {
-                        addLine(zoneVisu.parentNode);
+                        addLine(sectionP);
                     }
+
+                    if(delUnit(targP.style.top, 2) <= 0) {
+                        targP.style.top = 0 + "px";
+                    }
+
     
                     console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
     
@@ -149,7 +154,7 @@ document.body.addEventListener("mousedown", (e) => {
 });
 
 // Ecoute pour le resize --------------------------------------------------
-document.body.addEventListener("mousedown", (e) => {
+page.addEventListener("mousedown", (e) => {
     if(!e.target.classList.contains("delSection")) {
         let targP = find("movable", e);
     
@@ -186,6 +191,8 @@ document.body.addEventListener("mousedown", (e) => {
     
             function mousemove(e) {
                 const rect = getRect(targP, sectionP);
+
+                let prevHeight = targP.style.height;
     
                 let resteLeft = rect.left % xGrid;
                 if(resteLeft > (xGrid / 2)) {
@@ -265,7 +272,21 @@ document.body.addEventListener("mousedown", (e) => {
                     zoneVisu.style.left = newRleft + "px";
                     zoneVisu.style.top = newRtop + "px";
                 }
-    
+
+                //est-ce que l'elem dépasse de sa section ?
+                let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
+                
+                let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                
+                if(bottomElem > heightSection) {
+                    addLine(zoneVisu.parentNode);
+                }
+
+                if(delUnit(targP.style.top, 2) <= 0) {
+                    targP.style.top = 0 + "px";
+                    targP.style.height = prevHeight;
+                }
+
                 //maj des coo de la souris
                 prevX = e.clientX;
                 prevY = e.clientY;
@@ -435,6 +456,8 @@ function find(classF, e) {
         targ = targ.parentNode;
 
         if(targ === document.body) {break;}
+
+        if(targ.classList.contains("toolbar")) {break;}
     } 
     return targ;
 }
