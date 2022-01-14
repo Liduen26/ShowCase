@@ -2,36 +2,8 @@ let sections = document.querySelectorAll(".section");
 
 const sectionUp = document.querySelectorAll(".sectionUp");
 const sectionDown = document.querySelectorAll(".sectionDown");
-const ajoutSection = document.querySelectorAll(".addSection");
-
-
-// Affichage des boutons sur le mouseover des sections -----------------------
-page.addEventListener("mouseover", (e) => {
-    let targP = e.target;
-    do {
-        if(!targP.classList.contains("section")) {
-            targP = targP.parentNode;
-        } 
-
-        if(targP === document.body) {
-            break;
-        }
-    } while(!targP.classList.contains("section"));
-
-    if(targP.classList.contains("section")) {
-        elemDisp("btnSizeContainer");
-        elemDisp("addSection");
-
-        //la souris est sur une section, on lui affiche ses btns
-
-        const cont = targP.querySelector(".btnSizeContainer");
-        cont.style.visibility = "visible";
-
-        const addSect = targP.querySelector(".addSection");
-        addSect.style.visibility = "visible";
-
-    }
-});
+const ajoutSection = document.querySelectorAll(".labelAddSection");
+const delSection = document.querySelectorAll(".delSection");
 
 
 // Gestion des boutons de resize des sections ---------------------------------
@@ -72,17 +44,24 @@ function addLine(arg) {
 }
 
 
-//ajout de Section ------------------------------------------------------------
+// Ajout de Section -----------------------------------------------------------
 ajoutSection.forEach(item => {
     item.addEventListener("click", (e) => {
+        let sectionP = e.target;
+        do {
+            if(!sectionP.classList.contains("section")) {
+                sectionP = sectionP.parentNode;
+            }
+        } while(!sectionP.classList.contains("section"));
+
         //créatin de la nouvelle section et implémentation en dessous de la section actuelle
-        let idAct = item.parentNode.id;
+        let idAct = sectionP.id;
         let height = 1400;
         const newSect = document.createElement("div");
         newSect.classList.add("section");
         newSect.style.height = height + "px";
 
-        page.insertBefore(newSect, item.parentNode.nextSibling);
+        page.insertBefore(newSect, sectionP.nextSibling);
 
         //redéfinition des id de section
         sections = document.querySelectorAll(".section");
@@ -93,22 +72,30 @@ ajoutSection.forEach(item => {
             console.log(sects.id);
         });
         
-        //mise en place du contenu de la novuelle section
+        //mise en place du contenu de la nouvelle section
         idAct = Number(idAct[1]) + 1;
-
+        
+        //en attente du choix de section à ajouter
         let file = "./templates/corps1.html";
         
         $(function() {
             $("#s" + idAct).load(file);
         });
-        
-        // sections = document.querySelectorAll("section");
     });
 });
 
+// Delete de Section ----------------------------------------------------------
+delSection.forEach(item => {
+    item.addEventListener("click", (e) => {
+        let sectionP = find("section", e);
+        validSuppr = true;
+        console.log("ui !");
+        sectionP.remove();
+
+    });
+});
 
 // Fonctions d'automatisation -------------------------------------------------
-
 function gridLine(state, section) {
     const gridCont = section.querySelector(".gridCont");
     let i = 0;

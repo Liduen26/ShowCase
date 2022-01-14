@@ -21,6 +21,8 @@
 }
 
 .toolbar {
+    position: sticky;
+    top: 0;
     display: flex;
     min-height: 35px;
     width: 100%;
@@ -35,7 +37,6 @@
     visibility: collapse;
     width: 100%;
     height: 100%;
-    /* justify-content: space-between; */
 }
 
 .tools {
@@ -81,7 +82,6 @@
 }
 
 .selectAlignText option[value="a-left"] {
-    background-image: url(./srcs/poubelle.png);
     /* background-color:/ red; */
     width: 30px;
     height: 10px;

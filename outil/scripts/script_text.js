@@ -29,7 +29,7 @@ const forwardBtn = document.querySelector(".forward-btn");
 const backwardBtn = document.querySelector(".backward-btn");
 const deleteBtn = document.querySelector(".delete-btn");
 
-
+// Detection du double clic pour le mode edit de texte ------------------------
 document.body.addEventListener('dblclick',(e) =>{
   	console.log("doubleclick");
 	let targP = e.target;
@@ -66,6 +66,7 @@ document.body.addEventListener('dblclick',(e) =>{
 	
 }); 
 
+// Suppr un element -----------------------------------------------------------
 deleteBtn.addEventListener("click", () => {
 	console.log("slt");
 	const divToRem = document.querySelector(".selected");

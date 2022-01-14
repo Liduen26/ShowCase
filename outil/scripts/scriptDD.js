@@ -26,7 +26,7 @@ Problèmes :
 A faire : Grille dynamique
 ///////////////////////////////////////////////////////////////////////////*/
 const movable = document.querySelectorAll(".movable");
-
+let validSuppr = false;
 let currentResizer;
 let isResizing = false;
 
@@ -45,69 +45,149 @@ const page = document.querySelector(".page");
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
-    let targP = e.target;
-    do {
-        if(targP.classList.contains("movable")) {
-            //c'est bon
-        } else {
-            targP = targP.parentNode;
-        }
-
-        if(targP === document.body) {
-            //désaffichage de la grille
-            // const gridContainer = document.body.querySelector(".gridCont");
-            // gridContainer.style.visibility = "hidden";
+    if(!e.target.classList.contains("delSection")) {
+        let targP = find("movable", e);
+    
+        if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
+            const zoneVisu = document.querySelector(".zoneSelect");
+            let newRleft;
+            let newRtop;
+    
+            let sectionP = find("section", e);
+    
+            window.addEventListener("mousemove", mousemove);
+            window.addEventListener("mouseup", mouseup);
+    
+            //recup des coo intiales de la souris
+            let prevX = e.clientX;
+            let prevY = e.clientY;
             
-            break;           
-        }
-    } while(!targP.classList.contains("movable") || targP == document.body);
-
-    if(e.target.classList.contains("depl") || targP.classList.contains("depl")) {
-        const zoneVisu = document.querySelector(".zoneSelect");
-        let newRleft;
-        let newRtop;
-
-        let sectionP = e.target;
-        do {
-            if(sectionP.classList.contains("section")) {
-                //c'est bon
-            } else {
-                sectionP = targP.parentNode;
-            }
-        } while(!sectionP.classList.contains("section"));
-
-        window.addEventListener("mousemove", mousemove);
-        window.addEventListener("mouseup", mouseup);
-
-        //recup des coo intiales de la souris
-        let prevX = e.clientX;
-        let prevY = e.clientY;
-        
-        function mousemove(e) {
-            // ------ mousedown de Drag and Drop ------
-            if(!isResizing) {
-                let newX = prevX - e.clientX;
-                let newY = prevY - e.clientY;
-
-                //affichage de la grille
-                const gridContainer = sectionP.querySelector(".gridCont");
-                gridContainer.style.visibility = "visible";
-                remClass("inMove");
-                targP.classList.add("inMove");
+            function mousemove(e) {
+                // ------ mousedown de Drag and Drop ------
+                if(!isResizing) {
+                    let newX = prevX - e.clientX;
+                    let newY = prevY - e.clientY;
+    
+                    //affichage de la grille
+                    const gridContainer = sectionP.querySelector(".gridCont");
+                    gridContainer.style.visibility = "visible";
+                    remClass("inMove");
+                    targP.classList.add("inMove");
+                        
+                    //récup de la taille des cases de la grille
+                    const grid = document.body.querySelectorAll(".grid");
+                    const rectGrid = grid[0].getBoundingClientRect();
+                    xGrid = rectGrid.width;
+                    yGrid = rectGrid.height;
+    
+                    const rect = getRect(targP, sectionP);
+    
+                    targP.style.left = rect.left - newX + 'px';
+                    targP.style.top = rect.top - newY + 'px';
+                    let resteLeft = rect.left % xGrid;
                     
-                //récup de la taille des cases de la grille
-                const grid = document.body.querySelectorAll(".grid");
-                const rectGrid = grid[0].getBoundingClientRect();
-                xGrid = rectGrid.width;
-                yGrid = rectGrid.height;
-                console.log(targP);
+                    if(resteLeft > (xGrid / 2)) {
+                        let diff = xGrid - resteLeft;
+                        
+                        newRleft = rect.left + diff;
+                    } else {
+                        newRleft = rect.left - resteLeft;
+                    }
+                    
+                    let resteTop = rect.top % yGrid;
+                    if(resteTop > (yGrid / 2)) {
+                        let diff = yGrid - resteTop;
+    
+                        newRtop = rect.top + diff;
+                    } else {
+                        newRtop = rect.top - resteTop;
+                    }
+    
+                    zoneVisu.style.left = newRleft + "px";
+                    zoneVisu.style.top = newRtop + "px";
+    
+                    //est-ce que l'elem dépasse de sa section ?
+                    let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
+                    
+                    let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                    
+                    if(bottomElem > heightSection) {
+                        addLine(zoneVisu.parentNode);
+                    }
+    
+                    console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
+    
+                    //maj des coo de la souris
+                    prevX = e.clientX;
+                    prevY = e.clientY;
+                }
+            }
+    
+            function mouseup() {
+                let vwDiff = newRleft / xGrid;
+                let vhDiff = newRtop / yGrid;
+    
+                console.log(newRleft);
+                console.log(xGrid);
+                console.log(vwDiff);
+    
+                targP.style.left = (vwDiff * tGrid) + '%';
+                targP.style.top = (vhDiff * yGrid) + 'px';
+    
+                //désaffichage de la grille
+                const gridContainer = sectionP.querySelector(".gridCont");
+                gridContainer.style.visibility = "hidden";
+                remClass("inMove");
+    
+                //annulation de tout les eventListener de la souris
+                window.removeEventListener("mousemove", mousemove);
+                window.removeEventListener("mouseup", mouseup);
+                isResizing = false;
+            }
+        }
+    }
+});
 
+// Ecoute pour le resize --------------------------------------------------
+document.body.addEventListener("mousedown", (e) => {
+    if(!e.target.classList.contains("delSection")) {
+        let targP = find("movable", e);
+    
+        if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
+            // ------ mousedown de Resizer ------
+            currentResizer = e.target;
+            isResizing = true;
+    
+            let sectionP = find("section", e)
+    
+            const zoneVisu = document.querySelector(".zoneSelect");
+            let newRleft;
+            let newRtop;
+            let newRwidth;
+            let newRheight;
+    
+            //recup des coo intiales de la souris
+            let prevX = e.clientX;
+            let prevY = e.clientY;
+    
+            //affichage de la grille
+            const gridContainer = sectionP.querySelector(".gridCont");
+            gridContainer.style.visibility = "visible";
+            remClass("inMove");
+            targP.classList.add("inMove");
+    
+            const grid = document.body.querySelectorAll(".grid");
+            const rectGrid = grid[0].getBoundingClientRect();
+            xGrid = rectGrid.width;
+            yGrid = rectGrid.height;
+    
+            window.addEventListener("mousemove", mousemove);
+            window.addEventListener("mouseup", mouseup);
+    
+            function mousemove(e) {
                 const rect = getRect(targP, sectionP);
-
-                targP.style.left = rect.left - newX + 'px';
-                targP.style.top = rect.top - newY + 'px';
+    
                 let resteLeft = rect.left % xGrid;
-                
                 if(resteLeft > (xGrid / 2)) {
                     let diff = xGrid - resteLeft;
                     
@@ -119,349 +199,197 @@ document.body.addEventListener("mousedown", (e) => {
                 let resteTop = rect.top % yGrid;
                 if(resteTop > (yGrid / 2)) {
                     let diff = yGrid - resteTop;
-
+    
                     newRtop = rect.top + diff;
                 } else {
                     newRtop = rect.top - resteTop;
                 }
-
-                zoneVisu.style.left = newRleft + "px";
-                zoneVisu.style.top = newRtop + "px";
-
-                //est-ce que l'elem dépasse de sa section ?
-                let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
-                console.log(bottomElem);
-                
-                let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
-                console.log(heightSection);
-                
-                if(bottomElem > heightSection) {
-                    console.log("yep");
-                    addLine(zoneVisu.parentNode);
+    
+                let resteWidth = rect.width % xGrid;
+                if(resteWidth > (xGrid / 2)) {
+                    let diff = xGrid - resteWidth;
+                    
+                    newRwidth = rect.width + diff;
+                } else {
+                    newRwidth = rect.width - resteWidth;
                 }
-
-                console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
-
+                
+                let resteHeight = rect.height % yGrid;
+                if(resteHeight > (yGrid / 2)) {
+                    let diff = yGrid - resteHeight;
+    
+                    newRheight = rect.height + diff;
+                } else {
+                    newRheight = rect.height - resteHeight;
+                }
+    
+                if(currentResizer.classList.contains("se")) {
+                    //curs bas droite
+                    targP.style.width = rect.width - (prevX - e.clientX) + "px";
+                    targP.style.height = rect.height - (prevY - e.clientY) + "px";
+    
+                    //visuel
+                    zoneVisu.style.width = newRwidth + "px";
+                    zoneVisu.style.height = newRheight + "px";
+                } else if(currentResizer.classList.contains("sw")) {
+                    //curs bas gauche
+                    targP.style.width = rect.width + (prevX - e.clientX) + "px";
+                    targP.style.height = rect.height - (prevY - e.clientY) + "px";
+    
+                    targP.style.left = rect.left - (prevX - e.clientX) + "px";
+    
+                    //visuel
+                    zoneVisu.style.width = newRwidth + "px";
+                    zoneVisu.style.height = newRheight + "px";
+                    zoneVisu.style.left = newRleft + "px";
+                } else if(currentResizer.classList.contains("ne")) {
+                    //curs haut droite
+                    targP.style.width = rect.width - (prevX - e.clientX) + "px";
+                    targP.style.height = rect.height + (prevY - e.clientY) + "px";
+    
+                    targP.style.top = rect.top - (prevY - e.clientY) + "px";
+    
+                    zoneVisu.style.width = newRwidth + "px";
+                    zoneVisu.style.height = newRheight + "px";
+                    zoneVisu.style.top = newRtop + "px";
+                } else if(currentResizer.classList.contains("nw")) {
+                    //curs haut gauche
+                    targP.style.width = rect.width + (prevX - e.clientX) + "px";
+                    targP.style.height = rect.height + (prevY - e.clientY) + "px";
+    
+                    targP.style.top = rect.top - (prevY - e.clientY) + "px";
+                    targP.style.left = rect.left - (prevX - e.clientX) + "px";
+    
+                    zoneVisu.style.width = newRwidth + "px";
+                    zoneVisu.style.height = newRheight + "px";
+                    zoneVisu.style.left = newRleft + "px";
+                    zoneVisu.style.top = newRtop + "px";
+                }
+    
                 //maj des coo de la souris
                 prevX = e.clientX;
                 prevY = e.clientY;
-                console.log(e.target.parentNode);
             }
-        }
-
-        function mouseup() {
-            let vwDiff = newRleft / xGrid;
-            let vhDiff = newRtop / yGrid;
-
-            console.log(newRleft);
-            console.log(xGrid);
-            console.log(vwDiff);
-
-            targP.style.left = (vwDiff * tGrid) + '%';
-            targP.style.top = (vhDiff * yGrid) + 'px';
-
-            //désaffichage de la grille
-            const gridContainer = sectionP.querySelector(".gridCont");
-            gridContainer.style.visibility = "hidden";
-            remClass("inMove");
-
-            //annulation de tout les eventListener de la souris
-            window.removeEventListener("mousemove", mousemove);
-            window.removeEventListener("mouseup", mouseup);
-            isResizing = false;
-        }
-    }
+            
+            function mouseup() {
+                let vwDiff2 = newRleft / xGrid;
+                let vhDiff2 = newRtop / yGrid;
+                targP.style.left = (vwDiff2 * tGrid) + '%';
+                targP.style.top = (vhDiff2 * yGrid) + 'px';
+                
+                let vwDiff3 = newRwidth / xGrid;
+                let vhDiff3 = newRheight / yGrid;
+                targP.style.width = (vwDiff3 * tGrid) + '%';
+                targP.style.height = (vhDiff3 * yGrid) + 'px';
     
-});
-
-// Ecoute pour le resize --------------------------------------------------
-document.body.addEventListener("mousedown", (e) => {
-    let targP = e.target;
-    do {
-        if(targP.classList.contains("movable")) {
-            //c'est bon
-        } else {
-            targP = targP.parentNode;
-        }
-
-        if(targP === document.body) {
-            break;
-        }
-    } while(!targP.classList.contains("movable"));
-
-    if(e.target.classList.contains("resizer") || targP.classList.contains("resizer")) {
-        // ------ mousedown de Resizer ------
-        currentResizer = e.target;
-        isResizing = true;
-
-        let sectionP = e.target;
-        do {
-            if(sectionP.classList.contains("section")) {
-                //c'est bon
-            } else {
-                sectionP = targP.parentNode;
+                //désaffichage de la grille
+                const gridContainer = sectionP.querySelector(".gridCont");
+                gridContainer.style.visibility = "hidden";
+                remClass("inMove");
+    
+                //annulation de tout les eventListener de la souris
+                window.removeEventListener("mousemove", mousemove);
+                window.removeEventListener("mouseup", mouseup);
+                isResizing = false;
             }
-        } while(!sectionP.classList.contains("section"));
-
-        const zoneVisu = document.querySelector(".zoneSelect");
-        let newRleft;
-        let newRtop;
-        let newRwidth;
-        let newRheight;
-
-        //recup des coo intiales de la souris
-        let prevX = e.clientX;
-        let prevY = e.clientY;
-
-        //affichage de la grille
-        const gridContainer = sectionP.querySelector(".gridCont");
-        gridContainer.style.visibility = "visible";
-        remClass("inMove");
-        targP.classList.add("inMove");
-
-        const grid = document.body.querySelectorAll(".grid");
-        const rectGrid = grid[0].getBoundingClientRect();
-        xGrid = rectGrid.width;
-        yGrid = rectGrid.height;
-
-        window.addEventListener("mousemove", mousemove);
-        window.addEventListener("mouseup", mouseup);
-
-        function mousemove(e) {
-            const rect = getRect(targP, sectionP);
-
-            let resteLeft = rect.left % xGrid;
-            if(resteLeft > (xGrid / 2)) {
-                let diff = xGrid - resteLeft;
-                
-                newRleft = rect.left + diff;
-            } else {
-                newRleft = rect.left - resteLeft;
-            }
-            
-            let resteTop = rect.top % yGrid;
-            if(resteTop > (yGrid / 2)) {
-                let diff = yGrid - resteTop;
-
-                newRtop = rect.top + diff;
-            } else {
-                newRtop = rect.top - resteTop;
-            }
-
-            let resteWidth = rect.width % xGrid;
-            if(resteWidth > (xGrid / 2)) {
-                let diff = xGrid - resteWidth;
-                
-                newRwidth = rect.width + diff;
-            } else {
-                newRwidth = rect.width - resteWidth;
-            }
-            
-            let resteHeight = rect.height % yGrid;
-            if(resteHeight > (yGrid / 2)) {
-                let diff = yGrid - resteHeight;
-
-                newRheight = rect.height + diff;
-            } else {
-                newRheight = rect.height - resteHeight;
-            }
-
-            if(currentResizer.classList.contains("se")) {
-                //curs bas droite
-                targP.style.width = rect.width - (prevX - e.clientX) + "px";
-                targP.style.height = rect.height - (prevY - e.clientY) + "px";
-
-                //visuel
-                zoneVisu.style.width = newRwidth + "px";
-                zoneVisu.style.height = newRheight + "px";
-            } else if(currentResizer.classList.contains("sw")) {
-                //curs bas gauche
-                targP.style.width = rect.width + (prevX - e.clientX) + "px";
-                targP.style.height = rect.height - (prevY - e.clientY) + "px";
-
-                targP.style.left = rect.left - (prevX - e.clientX) + "px";
-
-                //visuel
-                zoneVisu.style.width = newRwidth + "px";
-                zoneVisu.style.height = newRheight + "px";
-                zoneVisu.style.left = newRleft + "px";
-            } else if(currentResizer.classList.contains("ne")) {
-                //curs haut droite
-                targP.style.width = rect.width - (prevX - e.clientX) + "px";
-                targP.style.height = rect.height + (prevY - e.clientY) + "px";
-
-                targP.style.top = rect.top - (prevY - e.clientY) + "px";
-
-                zoneVisu.style.width = newRwidth + "px";
-                zoneVisu.style.height = newRheight + "px";
-                zoneVisu.style.top = newRtop + "px";
-            } else if(currentResizer.classList.contains("nw")) {
-                //curs haut gauche
-                targP.style.width = rect.width + (prevX - e.clientX) + "px";
-                targP.style.height = rect.height + (prevY - e.clientY) + "px";
-
-                targP.style.top = rect.top - (prevY - e.clientY) + "px";
-                targP.style.left = rect.left - (prevX - e.clientX) + "px";
-
-                zoneVisu.style.width = newRwidth + "px";
-                zoneVisu.style.height = newRheight + "px";
-                zoneVisu.style.left = newRleft + "px";
-                zoneVisu.style.top = newRtop + "px";
-            }
-
-            //maj des coo de la souris
-            prevX = e.clientX;
-            prevY = e.clientY;
-        }
-        
-        function mouseup() {
-            let vwDiff2 = newRleft / xGrid;
-            let vhDiff2 = newRtop / yGrid;
-            targP.style.left = (vwDiff2 * tGrid) + '%';
-            targP.style.top = (vhDiff2 * yGrid) + 'px';
-            
-            let vwDiff3 = newRwidth / xGrid;
-            let vhDiff3 = newRheight / yGrid;
-            targP.style.width = (vwDiff3 * tGrid) + '%';
-            targP.style.height = (vhDiff3 * yGrid) + 'px';
-
-            //désaffichage de la grille
-            const gridContainer = sectionP.querySelector(".gridCont");
-            gridContainer.style.visibility = "hidden";
-            remClass("inMove");
-
-            //annulation de tout les eventListener de la souris
-            window.removeEventListener("mousemove", mousemove);
-            window.removeEventListener("mouseup", mouseup);
-            isResizing = false;
         }
     }
 });
 
 //sélection de la div --------------------------------------------------------
 page.addEventListener("click", (e) => {
-    let targP = e.target;
-    do {
-        if(targP.classList.contains("movable")) {
-            //c'est bon
-        } else {
-            targP = targP.parentNode;
-        }
-
-        if(targP == document.body) {
-            break;
-        }
-    } while(!targP.classList.contains("movable"));
-    console.log(targP);
-    if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
-        if(!targP.classList.contains("selected")) {
-            //on retire les autres sélections
-            remClass("selected");
-            remClass("depl");
-            remSelectedBtns(document.body);
-
-            //On met la sélection sur ce qui nous intéresse
-            targP.classList.add("selected", "depl");
-            addSelectedBtns(targP);
-
-            remDivDepl();
-            let sectionP = e.target;
-            do {
-                if(sectionP.classList.contains("section")) {
-                    //c'est bon
-                } else {
-                    sectionP = targP.parentNode;
-                }
-            } while(!sectionP.classList.contains("section"));
-            const rect = getRect(targP, sectionP);
-
-            const parentTarg = targP.parentNode;
-            createDivDepl(parentTarg, rect);
-
-            // if(targP.classList.contains("movable")) {
-                elemApp("moreEdit");
-            // } 
-
-        } 
-    }
-        
-    function addSelectedBtns(parent) {
-        //ajoute les btns de resize à la div movable
-        const newNe = document.createElement("div");
-        newNe.classList.add("resizer", "ne");
-
-        const newNw = document.createElement("div");
-        newNw.classList.add("resizer", "nw");
-
-        const newSw = document.createElement("div");
-        newSw.classList.add("resizer", "sw");
-
-        const newSe = document.createElement("div");
-        newSe.classList.add("resizer", "se");
-
-        parent.appendChild(newNe);
-        parent.appendChild(newNw);
-        parent.appendChild(newSw);
-        parent.appendChild(newSe);
-    }
-
+    if(!e.target.classList.contains("delSection")) {
+        let targP = find("movable", e);
+        if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
+            if(!targP.classList.contains("selected")) {
+                //on retire les autres sélections
+                remClass("selected");
+                remClass("depl");
+                remSelectedBtns(document.body);
     
-    function createDivDepl(parent, rect) {
-        const newDivDepl = document.createElement("div");
-        newDivDepl.classList.add("zoneSelect");
-        parent.appendChild(newDivDepl);
+                //On met la sélection sur ce qui nous intéresse
+                targP.classList.add("selected", "depl");
+                addSelectedBtns(targP);
+    
+                remDivDepl();
+                let sectionP = find("section", e)
+                const rect = getRect(targP, sectionP);
+    
+                const parentTarg = targP.parentNode;
+                createDivDepl(parentTarg, rect);
+    
+                // if(targP.classList.contains("movable")) {
+                    elemApp("moreEdit");
+                // } 
+    
+            } 
+        }
+            
+        function addSelectedBtns(parent) {
+            //ajoute les btns de resize à la div movable
+            const newNe = document.createElement("div");
+            newNe.classList.add("resizer", "ne");
+    
+            const newNw = document.createElement("div");
+            newNw.classList.add("resizer", "nw");
+    
+            const newSw = document.createElement("div");
+            newSw.classList.add("resizer", "sw");
+    
+            const newSe = document.createElement("div");
+            newSe.classList.add("resizer", "se");
+    
+            parent.appendChild(newNe);
+            parent.appendChild(newNw);
+            parent.appendChild(newSw);
+            parent.appendChild(newSe);
+        }
+    
         
-        const div = document.querySelector(".zoneSelect");
-        div.style.left = rect.left + "px";
-        div.style.width = rect.width + "px";
-        div.style.top = rect.top + "px";
-        div.style.height = rect.height + "px";
+        function createDivDepl(parent, rect) {
+            const newDivDepl = document.createElement("div");
+            newDivDepl.classList.add("zoneSelect");
+            parent.appendChild(newDivDepl);
+            
+            const div = document.querySelector(".zoneSelect");
+            div.style.left = rect.left + "px";
+            div.style.width = rect.width + "px";
+            div.style.top = rect.top + "px";
+            div.style.height = rect.height + "px";
+        }
+
     }
-        
+
 });
 
 //pour enlever la zone de sélection -----------------------------------------
 document.body.addEventListener("click", (e) => {
-    let targP = e.target;
-    do {
-		if(targP.classList.contains("toolbar")) {
-			break;
-		}
+    if(!e.target.classList.contains("delSection")) {
+        let targP = find("movable", e);
+        if(targP.classList.contains("toolbar")) {
+            //rien
 
-		if(targP.classList.contains("movable")) {
-			//c'est bon
-		} else {
-			targP = targP.parentNode;
-		}
+        } else if(!targP.classList.contains("movable")) {
+            //si la div contient déjà selected, on l'enlève
+            remClass("selected");
+            remClass("depl");
+            remSelectedBtns(document.body);
+            remDivDepl();
 
-		if(targP === document.body) {
-			break;
-		}
-	} while(!targP.classList.contains("movable") );
-    // console.log(targP);
-    if(targP.classList.contains("toolbar")) {
-        //rien
+            elemDisp("moreEdit");
+        }
+        
+        if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
+            const texts = document.querySelectorAll('[contenteditable]');
 
-    } else if(!targP.classList.contains("movable")) {
-        //si la div contient déjà selected, on l'enlève
-        remClass("selected");
-        remClass("depl");
-        remSelectedBtns(document.body);
-        remDivDepl();
+            texts.forEach (item => {
+                item.setAttribute("contentEditable","false");
+                remClass('editable');
+            });
+            elemDisp("textEdit");
 
-        elemDisp("moreEdit");
+        }
     }
-    
-    if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
-		const texts = document.querySelectorAll('[contenteditable]');
-
-		texts.forEach (item => {
-			item.setAttribute("contentEditable","false");
-			remClass('editable');
-		});
-		elemDisp("textEdit");
-
-	}
 });
 
 
@@ -498,8 +426,17 @@ function getRect(targP, section) {
     offset.width = elemRect.width;
     offset.height = elemRect.height;
 
-    console.log('Element is ' + offset.top + ' vertical pixels from .page');
     return offset;
+}
+
+function find(classF, e) {
+    let targ = e.target;
+    while(!targ.classList.contains(classF)) {
+        targ = targ.parentNode;
+
+        if(targ === document.body) {break;}
+    } 
+    return targ;
 }
 
 // Génération de la grille ----------------------------------------------------

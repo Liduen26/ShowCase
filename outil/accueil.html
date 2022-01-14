@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>ShowCase</title>
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/style_outil.css">
-    <link rel="stylesheet" href="./css/styleDD.css">
-    <link rel="stylesheet" href="./css/style_text.css">
-    <link rel="stylesheet" href="./css/style_section.css">
 
+    <!-- Icones -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./Css/style_outil.css">
+    <link rel="stylesheet" href="./Css/styleDD.css">
+    <link rel="stylesheet" href="./Css/style_text.css">
+    <link rel="stylesheet" href="./Css/style_section.css">
+
+    <!-- FavIcon -->
     <link rel="icon" href="./srcs/icontop.png">
     
     <!-- jQuery -->
@@ -18,7 +23,7 @@
 <body>
     <div id="outil">
         <header>
-            <img class="logo" src="./srcs/logo.svg" alt="logo" draggable="false">
+            <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
                 <ul class="top_menu">
@@ -34,35 +39,24 @@
                 <ul id="side_list">
 
                     <li class="side_li">
-                        <i id="elements-icon" class='bx bx-grid-alt'></i>
+                        <i class='bx bx-grid-alt elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Elements</h4>
                             <li class="sous_li"><a href="#"><i class='bx bx-text'></i><br>Texte</a></li>
                             <li class="sous_li"><a href="#"><i class='bx bx-image' ></i><br>Image</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-checkbox'></i><br>bouton</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-clipboard'></i><br>formulaire</a></li>
+                            <li class="sous_li"><a href="#"><i class='bx bx-checkbox'></i><br>Bouton</a></li>
+                            <li class="sous_li"><a href="#"><i class='bx bx-clipboard'></i><br>Formulaire</a></li>
                         </ul>
                     </li>
 
                     <li class="side_li">
-                        <i class='bx bx-paint'></i>
+                        <i class='bx bx-paint elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Style</h4>
-                            <li class="sous_li"><a href="#">couleurs</a></li>
-                            <li class="sous_li"><a href="#">photo</a></li>
-                            <li class="sous_li"><a href="#">bouton</a></li>
-                            <li class="sous_li"><a href="#">formulaire</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="side_li">
-                        <i class='bx bx-rectangle'></i>
-                        <ul class="side_menu">
-                            <h4 class="titre_side_menu">Sections</h4>
-                            <li class="sous_li"><a href="#">texte</a></li>
-                            <li class="sous_li"><a href="#">photo</a></li>
-                            <li class="sous_li"><a href="#">bouton</a></li>
-                            <li class="sous_li"><a href="#">formulaire</a></li>
+                            <li class="sous_li"><a href="#">Couleurs</a></li>
+                            <li class="sous_li"><a href="#">Photo</a></li>
+                            <li class="sous_li"><a href="#">Bouton</a></li>
+                            <li class="sous_li"><a href="#">Formulaire</a></li>
                         </ul>
                     </li>
 
@@ -130,29 +124,29 @@
                 
                 </div>
                 <div class="page">
-    
                     
                     <div class="section" id="s0" style="height: 1400px;">
                         <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 999;'> texte au milieu et images sur les côtés</div>
                     
-                        <div id="1" class="movable" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px; background-color: seashell; z-index: 998;'></div>
+                        <div id="1" class="movable" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px; background-color: seashell; '></div>
                         
-                        <div id="2" class="movable img" value="es1" style='background: crimson url("./image/reoz.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 0%; width: 20%;'></div>
+                        <div id="2" class="movable img" value="es1" style='background: crimson url("./Images/reoz.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 0%; width: 20%;'></div>
                         
-                        <div id="3" class="movable img" value="es1" style='background: royalblue url("./image/koku.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 80%; width: 20%;'></div>
+                        <div id="3" class="movable img" value="es1" style='background: royalblue url("./Images/koku.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 80%; width: 20%;'></div>
                         
-                        <div id="4" class="text movable textetest" value="es1" style='position: absolute; top: 450px; left: 30%; width: 40%; text-align: justify; font-size: 1rem; font-family: "texte", sans-serif; line-height: 1.5rem; color: rgb(140, 108, 145); min-width: 30rem; height: fit-content;'> 
+                        <div id="4" class="text movable textetest" value="es1" style='position: absolute; top: 450px; left: 30%; width: 40%; text-align: justify; font-size: 1rem; font-family: "texte", sans-serif; line-height: 1.5rem; color: rgb(140, 108, 145); height: fit-content;'> 
                             <p>
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, aliquam. Commodi, veniam? Sunt nam eligendi cum, aliquid exercitationem laboriosam dicta ducimus, sint quisquam ea voluptas veniam necessitatibus asperiores consequuntur incidunt eaque labore praesentium nihil illo perspiciatis aliquam provident. Officia odio aspernatur facere fugiat? Repellendus veniam ex tempora. Sed sapiente recusandae, labore velit eos veritatis dolorum rerum repudiandae adipisci tempore accusantium quia ea soluta quasi minus, temporibus voluptatum illum. Iusto excepturi vitae assumenda labore. Facere excepturi et in consectetur blanditiis fugit cumque dolor deleniti exercitationem dolore reiciendis, necessitatibus error minus illo eaque commodi modi laboriosam tenetur quisquam nisi voluptatum repellendus dolorem.
                             </p>
                         </div>
     
-                        <div class="addSection" style="visibility: collapse;">
+                        <div class="addSection">
                             <label class="labelAddSection">
-                                Ajouter une section
+                                + Ajouter une section
                             </label>
+                            <img src="./srcs/poubelle_white.png" class="delSection" alt="delSec">
                         </div>
-                        <div class="btnSizeContainer" style="visibility: collapse;">
+                        <div class="btnSizeContainer">
                             <img src="./srcs/arrow_up_white.png" class="arrowSection sectionUp" alt="up">
                             <img src="./srcs/arrow_down_white.png" class="arrowSection sectionDown" alt="down">
                         </div>
@@ -165,11 +159,11 @@
                         <div id="6" class="movable" value="es2" style='left: 0%; top: 50px; width: 100%; height: 250px; background-color: seashell; z-index: 998;'></div>
                         
                         
-                        <div id="7" class="movable img" value="es2" style='background: goldenrod url("./image/casu01.png") repeat scroll center center / cover; left: 10%; top: 400px; width: 20%; height: 350px;'></div>
+                        <div id="7" class="movable img" value="es2" style='background: goldenrod url("./Images/casu01.png") repeat scroll center center / cover; left: 10%; top: 400px; width: 20%; height: 350px;'></div>
                         
-                        <div id="8" class="movable img" value="es2" style='background: skyblue url("./image/marie.png") repeat scroll center center / cover; left: 40%; top: 400px; width: 20%; height: 350px;'></div>
+                        <div id="8" class="movable img" value="es2" style='background: skyblue url("./Images/marie.png") repeat scroll center center / cover; left: 40%; top: 400px; width: 20%; height: 350px;'></div>
                         
-                        <div id="9" class="movable img" value="es2" style='background: palevioletred url("./image/alexandar.png") repeat scroll center center / cover; left: 70%; top: 400px; width: 20%; height: 350px;'></div>
+                        <div id="9" class="movable img" value="es2" style='background: palevioletred url("./Images/alexandar.png") repeat scroll center center / cover; left: 70%; top: 400px; width: 20%; height: 350px;'></div>
                         
                                 
                         <div id="10" class="text movable" value="es2" style="top: 750px; left: 10%; width: 20%; height: fit-content; text-align: center; font-family: 'titre', sans-serif; color: #8c6c91;">Bowser</div>
@@ -178,16 +172,17 @@
                         
                         <div id="12" class="text movable" value="es2" style="top: 750px; left: 70%; width: 20%; height: fit-content; text-align: center; font-family: 'titre', sans-serif; color: #8c6c91;">Rondoudou</div>
     
-                        <div class="addSection" style="visibility: collapse;">
+                        <div class="addSection">
                             <label class="labelAddSection">
-                                Ajouter une section
+                                + Ajouter une section
                             </label>
+                            <img src="./srcs/poubelle_white.png" class="delSection" alt="delSec">
                         </div>
-                        <div class="btnSizeContainer" style="visibility: collapse;">
+                        <div class="btnSizeContainer">
                             <img src="./srcs/arrow_up_white.png" class="arrowSection sectionUp" alt="up">
                             <img src="./srcs/arrow_down_white.png" class="arrowSection sectionDown" alt="down">
                         </div>
-                    </div>
+                    </div> 
     
                     
                     <div class="section" id="s2" style="height: 150px;">
@@ -204,19 +199,20 @@
                         </div>
                         <div class="movable" style="background: rgb(34, 30, 30); position: absolute;top: 0px; left: 0%; width: 100%; height: 150px; z-index: 999;"></div>
     
-                        <div class="addSection" style="visibility: collapse;">
+                        <div class="addSection">
                             <label class="labelAddSection">
-                                Ajouter une section
+                                + Ajouter une section
                             </label>
+                            <img src="./srcs/poubelle_white.png" class="delSection" alt="delSec">
                         </div>
-                        <div class="btnSizeContainer" style="visibility: collapse;">
+                        <div class="btnSizeContainer">
                             <img src="./srcs/arrow_up_white.png" class="arrowSection sectionUp" alt="up">
                             <img src="./srcs/arrow_down_white.png" class="arrowSection sectionDown" alt="down">
                         </div>
                     </div>
     
                     <div class="endSection">
-                        
+                        Ceci est le bas de page de l'outil, il n'apparaitra pas sur le site réel
                     </div>
                 </div>
                 
@@ -224,8 +220,8 @@
 
         </div>
     </div>
-    <script src="./scripts/scriptDD.js"></script>
-    <script src="./scripts/script_text.js"></script>
-    <script src="./scripts/script_sections.js"></script>
+    <script src="./Scripts/scriptDD.js"></script>
+    <script src="./Scripts/script_text.js"></script>
+    <script src="./Scripts/script_sections.js"></script>
 </body>
 </html>
