@@ -135,7 +135,7 @@ function delUnit(numb, nbUnit) {
     numb = numb.split("");
     numb.splice((numb.length - nbUnit), nbUnit);
     numb = numb.join("");
-    return numb;
+    return Number(numb);
 }
 
 

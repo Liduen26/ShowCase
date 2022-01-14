@@ -67,6 +67,8 @@ page.addEventListener("mousedown", (e) => {
                 if(!isResizing) {
                     let newX = prevX - e.clientX;
                     let newY = prevY - e.clientY;
+
+                    let prevLeft = targP.style.left;
     
                     //affichage de la grille
                     const gridContainer = sectionP.querySelector(".gridCont");
@@ -107,16 +109,29 @@ page.addEventListener("mousedown", (e) => {
                     zoneVisu.style.top = newRtop + "px";
     
                     //est-ce que l'elem dépasse de sa section ?
-                    let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
-                    
-                    let heightSection = Number(delUnit(sectionP.style.height, 2));
+                    let bottomElem = delUnit(zoneVisu.style.top, 2) + delUnit(zoneVisu.style.height, 2);
+                    let heightSection = delUnit(sectionP.style.height, 2);
+                    let targLeft = delUnit(targP.style.left, 2);
+                    let targTop = delUnit(targP.style.top, 2);
+                    let targWidth = delUnit(targP.style.width, 2);
+                    let sectRect = sectionP.getBoundingClientRect();
+                    console.log(sectRect);
                     
                     if(bottomElem > heightSection) {
                         addLine(sectionP);
                     }
 
-                    if(delUnit(targP.style.top, 2) <= 0) {
+                    if(targTop <= 0) {
                         targP.style.top = 0 + "px";
+                    }
+                    if(targLeft <= 0) {
+                        targP.style.left = 0 + "px";
+                    }
+
+                    console.log(targLeft + targWidth);
+                    console.log(sectRect.width);
+                    if(targLeft + targWidth >= sectRect.width) {
+                        targP.style.left = prevLeft;
                     }
 
     
