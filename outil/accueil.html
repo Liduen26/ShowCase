@@ -24,13 +24,17 @@
     <div id="outil">
         <header>
             <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
-            <div id="div_account_menu">
-                <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
-                <ul class="top_menu">
-                    <li class="sous_li"><a href="#">Compte</a></li>
-                    <li class="sous_li"><a href="#">Sites</a></li>
-                    <li class="sous_li"><a href="#">Déconnexion</a></li>
-                </ul>
+            <div id="header_droite">
+                <button id="btn_save" class="bouton style_bouton1">sauvegarder</button>
+                <button id="btn_style" class="bouton style_bouton1">bouton</button>
+                <div id="div_account_menu">
+                    <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
+                    <ul class="top_menu">
+                        <li class="sous_li"><a href="#">Compte</a></li>
+                        <li class="sous_li"><a href="#">Sites</a></li>
+                        <li class="sous_li"><a href="#">log out</a></li>
+                    </ul>
+                </div>
             </div>
         </header>
 
@@ -53,9 +57,21 @@
                         <i class='bx bx-paint elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Style</h4>
-                            <li class="sous_li"><a href="#">Couleurs</a></li>
+                            <li class="sous_li" id="couleur_bouton"><a href="#">Couleurs</a>
+                                <ul class="sous_ul">
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_1">bouton</button></li>
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_2">bouton</button></li>
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_3">bouton</button></li>
+                                </ul>
+                            </li>
                             <li class="sous_li"><a href="#">Photo</a></li>
-                            <li class="sous_li"><a href="#">Bouton</a></li>
+                            <li class="sous_li" id="style_bouton"><a href="#">Bouton</a>
+                                <ul class="sous_ul">
+                                    <li class="li_3"><button class="style_bouton1" id="btn_style1">bouton</button></li>
+                                    <li class="li_3"><button class="style_bouton2" id="btn_style2">bouton</button></li>
+                                    <li class="li_3"><button class="style_bouton3" id="btn_style3">bouton</button></li>
+                                </ul>
+                            </li>
                             <li class="sous_li"><a href="#">Formulaire</a></li>
                         </ul>
                     </li>
@@ -128,7 +144,7 @@
                     <div class="section" id="s0" style="height: 1400px;">
                         <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 1000;'> texte au milieu et images sur les côtés</div>
                     
-                        <div id="1" class="movable" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px; background-color: seashell; z-index: 999;'></div>
+                        <div id="1" class="movable seashell" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px;'></div>
                         
                         <div id="2" class="movable img" value="es1" style='background: crimson url("./Images/reoz.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 0%; width: 20%;'></div>
                         
@@ -223,5 +239,7 @@
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
+    <script type="text/javascript" src="./Scripts/script_recup.js"></script>
+    <script type="text/javascript" src="./Scripts/script_style_bouton.js"></script>
 </body>
 </html>

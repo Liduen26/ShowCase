@@ -2,16 +2,15 @@
     position: absolute;
     z-index: 2;
     user-select: none;
-    transition: outline .1s;
 }
 .movable:hover {
     outline: 3px solid #357df9;
+    z-index: 100;
 }
 
 .selected {
     outline: 3px solid red;
     cursor: move;
-    transition: outline .1s;
 }
 .selected:hover {
     outline: 3px solid red;
@@ -57,9 +56,11 @@
     top: 0;
     z-index: 1;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    align-items: flex-start;
+    flex-direction: column;
     overflow: hidden;
-    /* height: 100%; */
+    height: 100%;
     width: 100%;
     visibility: visible;
 }
@@ -100,20 +101,4 @@
     height: auto;
     display: flex;
     flex-wrap: wrap;
-}
-
-.content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    overflow: hidden;
-}
-
-.page {
-    position: relative;
-    z-index: 0;
-    overflow: auto;
-    height: 100%;
-    width: 100%;
 }
