@@ -228,3 +228,11 @@ a {
 #style_bouton:hover ul {
     display: initial;
 }
+
+#couleur_bouton:hover ul {
+    display: initial;
+}
+
+.seashell {
+    background-color: seashell;
+}
