@@ -1,5 +1,5 @@
 'use strict'
-const boutons = document.getElementsByClassName("bouton");
+const boutons = document.getElementsByClassName("boutton");
 const bouton_style1 = document.getElementById("btn_style1");
 const bouton_style2 = document.getElementById("btn_style2");
 const bouton_style3 = document.getElementById("btn_style3");
