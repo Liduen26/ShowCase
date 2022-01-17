@@ -399,7 +399,7 @@ page.addEventListener("click", (e) => {
 });
 
 //pour enlever la zone de sélection -----------------------------------------
-page.addEventListener("click", (e) => {
+document.body.addEventListener("click", (e) => {
     if(!e.target.classList.contains("delSection")) {
         let targP = find("movable", e);
         if(targP.classList.contains("toolbar")) {
