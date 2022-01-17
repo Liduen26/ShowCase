@@ -44,7 +44,7 @@ const page = document.querySelector(".page");
 // const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
-document.body.addEventListener("mousedown", (e) => {
+page.addEventListener("mousedown", (e) => {
     if(!e.target.classList.contains("delSection")) {
         let targP = find("movable", e);
     
@@ -67,6 +67,8 @@ document.body.addEventListener("mousedown", (e) => {
                 if(!isResizing) {
                     let newX = prevX - e.clientX;
                     let newY = prevY - e.clientY;
+
+                    let prevLeft = targP.style.left;
     
                     //affichage de la grille
                     const gridContainer = sectionP.querySelector(".gridCont");
@@ -107,13 +109,31 @@ document.body.addEventListener("mousedown", (e) => {
                     zoneVisu.style.top = newRtop + "px";
     
                     //est-ce que l'elem dépasse de sa section ?
-                    let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
-                    
-                    let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                    let bottomElem = delUnit(zoneVisu.style.top, 2) + delUnit(zoneVisu.style.height, 2);
+                    let heightSection = delUnit(sectionP.style.height, 2);
+                    let targLeft = delUnit(targP.style.left, 2);
+                    let targTop = delUnit(targP.style.top, 2);
+                    let targWidth = delUnit(targP.style.width, 2);
+                    let sectRect = sectionP.getBoundingClientRect();
+                    console.log(sectRect);
                     
                     if(bottomElem > heightSection) {
-                        addLine(zoneVisu.parentNode);
+                        addLine(sectionP);
                     }
+
+                    if(targTop <= 0) {
+                        targP.style.top = 0 + "px";
+                    }
+                    if(targLeft <= 0) {
+                        targP.style.left = 0 + "px";
+                    }
+
+                    console.log(targLeft + targWidth);
+                    console.log(sectRect.width);
+                    if(targLeft + targWidth >= sectRect.width) {
+                        targP.style.left = prevLeft;
+                    }
+
     
                     console.log("X = " + newRleft + " px, Y = " + newRtop + " px");
     
@@ -149,7 +169,7 @@ document.body.addEventListener("mousedown", (e) => {
 });
 
 // Ecoute pour le resize --------------------------------------------------
-document.body.addEventListener("mousedown", (e) => {
+page.addEventListener("mousedown", (e) => {
     if(!e.target.classList.contains("delSection")) {
         let targP = find("movable", e);
     
@@ -186,6 +206,8 @@ document.body.addEventListener("mousedown", (e) => {
     
             function mousemove(e) {
                 const rect = getRect(targP, sectionP);
+
+                let prevHeight = targP.style.height;
     
                 let resteLeft = rect.left % xGrid;
                 if(resteLeft > (xGrid / 2)) {
@@ -265,7 +287,21 @@ document.body.addEventListener("mousedown", (e) => {
                     zoneVisu.style.left = newRleft + "px";
                     zoneVisu.style.top = newRtop + "px";
                 }
-    
+
+                //est-ce que l'elem dépasse de sa section ?
+                let bottomElem = (Number(delUnit(zoneVisu.style.top, 2)) + Number(delUnit(zoneVisu.style.height, 2)));
+                
+                let heightSection = Number(delUnit(zoneVisu.parentNode.style.height, 2));
+                
+                if(bottomElem > heightSection) {
+                    addLine(zoneVisu.parentNode);
+                }
+
+                if(delUnit(targP.style.top, 2) <= 0) {
+                    targP.style.top = 0 + "px";
+                    targP.style.height = prevHeight;
+                }
+
                 //maj des coo de la souris
                 prevX = e.clientX;
                 prevY = e.clientY;
@@ -435,6 +471,8 @@ function find(classF, e) {
         targ = targ.parentNode;
 
         if(targ === document.body) {break;}
+
+        if(targ.classList.contains("toolbar")) {break;}
     } 
     return targ;
 }

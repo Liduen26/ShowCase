@@ -19,6 +19,10 @@
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- zone texte -->
+    <link rel="stylesheet" href="./Css/style_insert.css">
+
+
 </head>
 <body>
     <div id="outil">
@@ -46,10 +50,10 @@
                         <i class='bx bx-grid-alt elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Elements</h4>
-                            <li class="sous_li"><a href="#"><i class='bx bx-text'></i><br>Texte</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-image' ></i><br>Image</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-checkbox'></i><br>Bouton</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-clipboard'></i><br>Formulaire</a></li>
+                            <li class="sous_li"><div class="btn1" id="btn_a"><i class='bx bx-text'></i><br>Texte</div></li>
+                            <li class="sous_li"><div class="btn2" id="btn_b"><i class='bx bx-image'></i><br>Image</div></li>
+                            <li class="sous_li"><div class="btn3" id="btn_c"><i class='bx bx-checkbox'></i><br>Bouton</div></li>
+                            <li class="sous_li"><div class="btn4" id="btn_d"><i class='bx bx-clipboard'></i><br>Formulaire</div></li>
                         </ul>
                     </li>
 
@@ -142,7 +146,7 @@
                 <div class="page">
                     
                     <div class="section" id="s0" style="height: 1400px;">
-                        <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 999;'> texte au milieu et images sur les côtés</div>
+                        <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 1000;'> texte au milieu et images sur les côtés</div>
                     
                         <div id="1" class="movable seashell" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px;'></div>
                         
@@ -236,6 +240,7 @@
 
         </div>
     </div>
+    <script src="./Scripts/script_insert.js"></script>
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
