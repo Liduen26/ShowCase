@@ -42,10 +42,21 @@
                         <i class='bx bx-grid-alt elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Elements</h4>
-                            <li class="sous_li"><a href="#"><i class='bx bx-text'></i><br>Texte</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-image' ></i><br>Image</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-checkbox'></i><br>Bouton</a></li>
-                            <li class="sous_li"><a href="#"><i class='bx bx-clipboard'></i><br>Formulaire</a></li>
+
+                            <li class="sous_li"><div class="btn1" id="btn_a"><i class='bx bx-text'></i><br>Texte</div></li>
+                            <li class="sous_li"><input type="file" id="btn_b_2" accept="image/*" onchange="loadFile(event)">
+                                <img classe="img" id="image" name="img" />
+                                <script>
+                                var loadFile = function(event) {
+                                    var output = document.getElementById('image');
+                                    console.log(output);
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                };
+                                </script>
+                                <i class='bx bx-image'></i><br>Image</div></li>
+                            <li class="sous_li"><div class="btn3" id="btn_c"><i class='bx bx-checkbox'></i><br>Bouton</div></li>
+                            <li class="sous_li"><div class="btn4" id="btn_d"><i class='bx bx-clipboard'></i><br>Formulaire</div></li>
+
                         </ul>
                     </li>
 
