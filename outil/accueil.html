@@ -24,13 +24,17 @@
     <!-- <div id="outil"> -->
         <header>
             <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
-            <div id="div_account_menu">
-                <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
-                <ul class="top_menu">
-                    <li class="sous_li"><a href="#">Compte</a></li>
-                    <li class="sous_li"><a href="#">Sites</a></li>
-                    <li class="sous_li"><a href="#">log out</a></li>
-                </ul>
+            <div id="header_droite">
+                <button id="btn_save" class="bouton style_bouton1">sauvegarder</button>
+                <button id="btn_style" class="bouton style_bouton1">bouton</button>
+                <div id="div_account_menu">
+                    <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
+                    <ul class="top_menu">
+                        <li class="sous_li"><a href="#">Compte</a></li>
+                        <li class="sous_li"><a href="#">Sites</a></li>
+                        <li class="sous_li"><a href="#">log out</a></li>
+                    </ul>
+                </div>
             </div>
         </header>
 
@@ -66,7 +70,13 @@
                             <h4 class="titre_side_menu">Style</h4>
                             <li class="sous_li"><a href="#">Couleurs</a></li>
                             <li class="sous_li"><a href="#">Photo</a></li>
-                            <li class="sous_li"><a href="#">Bouton</a></li>
+                            <li class="sous_li" id="style_bouton"><a href="#">Bouton</a>
+                                <ul class="sous_ul">
+                                    <li class="li_3"><button class="style_bouton1" id="btn_style1">bouton</button></li>
+                                    <li class="li_3"><button class="style_bouton2" id="btn_style2">bouton</button></li>
+                                    <li class="li_3"><button class="style_bouton3" id="btn_style3">bouton</button></li>
+                                </ul>
+                            </li>
                             <li class="sous_li"><a href="#">Formulaire</a></li>
                         </ul>
                     </li>
@@ -234,5 +244,7 @@
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
+    <script type="text/javascript" src="./Scripts/script_recup.js"></script>
+    <script type="text/javascript" src="./Scripts/script_style_bouton.js"></script>
 </body>
 </html>

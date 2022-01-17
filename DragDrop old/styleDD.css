@@ -61,7 +61,7 @@
     overflow: hidden;
     /* height: 100%; */
     width: 100%;
-    visibility: hidden;
+    visibility: visible;
 }
 
 .grid {

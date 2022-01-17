@@ -1,5 +1,4 @@
-// pour qu'un bouton soit sensible a ce script, il doit avoir la classe "bouton".
-
+'use strict'
 const boutons = document.getElementsByClassName("bouton");
 const bouton_style1 = document.getElementById("btn_style1");
 const bouton_style2 = document.getElementById("btn_style2");
