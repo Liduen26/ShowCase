@@ -234,23 +234,4 @@ a {
 .seashell {
     background-color: seashell;
 }
-=======
 
-#couleur_bouton:hover ul {
-    display: initial;
-}
-
-.seashell {
-    background-color: seashell;
-}
-.sous_ul {
-    position: absolute;
-    padding: 0%;
-    margin-left: 14.2rem;
-    top: 0%;
-    display: none;
-    background-color: darkslategrey;
-    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-    z-index: 3;
-}
->>>>>>> Stashed changes
