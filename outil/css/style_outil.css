@@ -74,7 +74,7 @@ a {
     display: none;
     background-color: rgb(40, 59, 59);
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     margin-top: 0;
     z-index: 3000;
 }
