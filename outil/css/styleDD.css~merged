@@ -61,7 +61,11 @@
     overflow: hidden;
     /* height: 100%; */
     width: 100%;
+<<<<<<< HEAD
+    visibility: hidden;
+=======
     visibility: visible;
+>>>>>>> Raphael-IT2
 }
 
 .grid {

@@ -45,7 +45,7 @@ const btn = document.querySelector(".btn");
 const page = document.querySelector(".page");
 
 // const btn = document.querySelector(".btn");
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
 
 // Ecoute pour le déplacement --------------------------------------------------
 document.body.addEventListener("mousedown", (e) => {
@@ -330,7 +330,7 @@ page.addEventListener("click", (e) => {
 =======
     console.log(targP);
     if(targP.classList.contains("movable") && !targP.classList.contains("editable")) {
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
         if(!targP.classList.contains("selected")) {
             //on retire les autres sélections
             remClass("selected");
@@ -361,7 +361,7 @@ page.addEventListener("click", (e) => {
             // } 
 
         } 
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
     }
         
     function addSelectedBtns(parent) {
@@ -425,7 +425,7 @@ document.body.addEventListener("click", (e) => {
         //rien
 
     } else if(!targP.classList.contains("movable")) {
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
         //si la div contient déjà selected, on l'enlève
         remClass("selected");
         remClass("depl");
@@ -435,7 +435,7 @@ document.body.addEventListener("click", (e) => {
 <<<<<<< HEAD:IT2/ZT recup/scriptDD.js
 =======
         elemDisp("moreEdit");
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
     }
     
     if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
@@ -462,7 +462,7 @@ btn.addEventListener("click", (e) => {
 	}
 });
 
->>>>>>> main:DragDrop old/scriptDD.js
+>>>>>>> Raphael-IT2:DragDrop old/scriptDD.js
 
 //fonctions d'automatisation -----------------------------------------------
 function remSelectedBtns(parent) {
