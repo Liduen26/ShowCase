@@ -67,7 +67,6 @@ document.body.addEventListener('dblclick',(e) =>{
 
 // Suppr un element -----------------------------------------------------------
 deleteBtn.addEventListener("click", () => {
-	console.log("slt");
 	const divToRem = document.querySelector(".selected");
 
 	let confirm = window.confirm("Etes vous sûr de vouloir supprimmer cet élément ? Cet action est irréversible");
