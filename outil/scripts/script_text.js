@@ -17,7 +17,6 @@ Texte :
 const btn = document.querySelector(".btn");
 
 
-
 //boutons de la barre editTexte
 const selectFontSize = document.querySelector(".selectFontSize");
 const selectFont = document.querySelector(".selectPolice");
