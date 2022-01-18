@@ -19,15 +19,19 @@
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- zone texte -->
+    <link rel="stylesheet" href="./Css/style_insert.css">
+
+
 </head>
 <body>
+    <div id="outil">
     <!-- <div id="outil"> -->
         <header>
             <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
             <div id="header_droite">
                 <button id="btn_save" class="bouton style_bouton1">sauvegarder</button>
                 <button id="btn_style" class="bouton style_bouton1">bouton</button>
-                </div>
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
                 <ul class="top_menu">
@@ -39,28 +43,17 @@
         </header>
 
         <div id="sidebar_contenu">
-                <div id="sidebar">
+            <div id="sidebar">
                 <ul id="side_list">
 
                     <li class="side_li">
                         <i class='bx bx-grid-alt elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Elements</h4>
-
                             <li class="sous_li"><div class="btn1" id="btn_a"><i class='bx bx-text'></i><br>Texte</div></li>
-                            <li class="sous_li"><input type="file" id="btn_b_2" accept="image/*" onchange="loadFile(event)">
-                                <img classe="img" id="image" name="img" />
-                                <script>
-                                var loadFile = function(event) {
-                                    var output = document.getElementById('image');
-                                    console.log(output);
-                                    output.src = URL.createObjectURL(event.target.files[0]);
-                                };
-                                </script>
-                                <i class='bx bx-image'></i><br>Image</li>
+                            <li class="sous_li"><div class="btn2" id="btn_b"><i class='bx bx-image'></i><br>Image</div></li>
                             <li class="sous_li"><div class="btn3" id="btn_c"><i class='bx bx-checkbox'></i><br>Bouton</div></li>
                             <li class="sous_li"><div class="btn4" id="btn_d"><i class='bx bx-clipboard'></i><br>Formulaire</div></li>
-
                         </ul>
                     </li>
 
@@ -68,15 +61,23 @@
                         <i class='bx bx-paint elements-icon'></i>
                         <ul class="side_menu">
                             <h4 class="titre_side_menu">Style</h4>
+                            <li class="sous_li" id="couleur_bouton"><a href="#">Couleurs</a>
+                                <ul class="sous_ul">
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_1">bouton</button></li>
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_2">bouton</button></li>
+                                    <li class="li_3"><button class="bouton style_bouton1" id="palette_3">bouton</button></li>
+                                </ul>
+                            </li>
                             <li class="sous_li"><a href="#">Couleurs</a></li>
                             <li class="sous_li"><a href="#">Photo</a></li>
-                            <li class="sous_li"><a href="#">Bouton</a>
+                            <li class="sous_li" id="style_bouton"><a href="#">Bouton</a>
                                 <ul class="sous_ul">
                                     <li class="li_3"><button class="style_bouton1" id="btn_style1">bouton</button></li>
                                     <li class="li_3"><button class="style_bouton2" id="btn_style2">bouton</button></li>
                                     <li class="li_3"><button class="style_bouton3" id="btn_style3">bouton</button></li>
                                 </ul>
                             </li>
+                            <li class="sous_li"><a href="#">Bouton</a></li>
                             <li class="sous_li"><a href="#">Formulaire</a></li>
                         </ul>
                     </li>
@@ -147,8 +148,10 @@
                 <div class="page">
                     
                     <div class="section" id="s0" style="height: 1400px;">
+                        <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 1000;'> texte au milieu et images sur les côtés</div>
                         <div id="0" class="text movable" value="es1" style='font-size: 32px; font-family: "titre", sans-serif; color: rgb(140, 108, 145); text-transform: uppercase; height: 50px; left: 20%; top: 150px; width: 60%; text-align: center; z-index: 999;'> texte au milieu et images sur les côtés</div>
                     
+                        <div id="1" class="movable seashell" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px;'></div>
                         <div id="1" class="movable" value="es1" style='left: 0%; top: 50px; width: 100%; height: 250px; background-color: seashell; '></div>
                         
                         <div id="2" class="movable img" value="es1" style='background: crimson url("./Images/reoz.png") repeat scroll center center / cover; top: 400px; height: 950px; left: 0%; width: 20%;'></div>
@@ -240,10 +243,13 @@
             </div>
 
         </div>
+    </div>
+    <script src="./Scripts/script_insert.js"></script>
     <!-- </div> -->
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
+    <script type="text/javascript" src="./Scripts/script_recup.js"></script>
     <script type="text/javascript" src="./Scripts/script_style_bouton.js"></script>
 </body>
 </html>
