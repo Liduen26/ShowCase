@@ -52,7 +52,14 @@ btn2_5.addEventListener('click', () => {
   // }
 });
 
+function loadFile(event) {
 
+    var loadFile = function(event) {       
+      console.log(output);
+      output.src = URL.createObjectURL(event.target.files[0]);
+    };
+  
+}
 // zone formes //
 
 btn3.addEventListener('click', () => {
