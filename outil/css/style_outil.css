@@ -182,54 +182,8 @@ a {
     text-align: center;
     justify-content: center;
 }
-.style_bouton1{
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-.style_bouton2{
-    border-radius: 10px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-.style_bouton3{
-    border-radius: 30px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-#style_bouton:hover ul {
-    display: initial;
-}
-#couleur_bouton:hover ul {
-    display: initial;
-}
 
-.seashell {
-    background-color: seashell;
-}
+
 .style_bouton1{
     background-color: #4CAF50;
     border: none;
