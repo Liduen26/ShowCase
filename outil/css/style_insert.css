@@ -1,16 +1,4 @@
-.editable {
-    outline: 3px solid green;
-    cursor: text;
-}
-.editable:hover {
-    outline: 3px solid green;
-}
-.text {
-    overflow: hidden;
-    position: absolute;
-    top: 5em;
-  right: 35em;
-}
+
 
 .btn{
 
@@ -42,8 +30,8 @@
     border-radius : 25px; 
   }
 .carre {
-    width  : 50vw;
-    height : 50vw;
+    width  : 20vw;
+    height : 20vw;
     background : green;
   }
 
