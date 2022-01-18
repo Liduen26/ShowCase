@@ -119,7 +119,7 @@ a {
     transition: .3s ease;
     border-radius: 1rem;
     cursor: pointer;
-    z-index: 2000;
+    /* z-index: 2000; */
 }
 
 .side_li:hover .side_menu {

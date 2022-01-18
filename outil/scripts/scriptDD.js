@@ -15,7 +15,6 @@ Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head :
 Les deux fichiers doivent pour cela être dans votre dossier
 
 /!\ En cas de déplacement d'image, ajouter la classe "img" au HTML de la div et mettre l'image en background d'une div avec : style="background: url(VotreImg.png) center/cover;"
-/!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur une div contenant l'élément
 /!\ Fonctionne dans une div "page"
 
 Problèmes : 
@@ -23,9 +22,9 @@ Problèmes :
 => utiliser outline 
 
 
-A faire : Grille dynamique
+A faire : 
 ///////////////////////////////////////////////////////////////////////////*/
-const movable = document.querySelectorAll(".movable");
+let movable = document.querySelectorAll(".movable");
 let validSuppr = false;
 let currentResizer;
 let isResizing = false;
@@ -40,8 +39,6 @@ img.forEach(item => {
 });
 
 const page = document.querySelector(".page");
-
-// const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
 page.addEventListener("mousedown", (e) => {
@@ -415,6 +412,7 @@ document.body.addEventListener("click", (e) => {
             elemDisp("moreEdit");
         }
         
+        //pour enlever la zone de texte
         if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
             const texts = document.querySelectorAll('[contenteditable]');
 
@@ -424,6 +422,11 @@ document.body.addEventListener("click", (e) => {
             });
             elemDisp("textEdit");
 
+        }
+
+        // Fermeture de la popup section
+        if(e.target.classList.contains("closeListSection") || e.target.classList.contains("choiceSectionContainer")) {
+            popupSection.style.visibility = "collapse";
         }
     }
 });
@@ -518,4 +521,9 @@ function loading() {
             i++;
         } while(i < 9);
     });
-}
+
+    movable = page.querySelectorAll(".movable");
+    movable.forEach(item => {
+        item.idSection = item.parentNode.id;
+    });
+} 

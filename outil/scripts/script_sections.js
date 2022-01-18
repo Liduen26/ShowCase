@@ -5,6 +5,10 @@ const sectionDown = document.querySelectorAll(".sectionDown");
 const ajoutSection = document.querySelectorAll(".labelAddSection");
 const delSection = document.querySelectorAll(".delSection");
 
+const popupSection = document.querySelector(".choiceSectionContainer");
+const listSection = document.querySelectorAll(".sectionListing");
+
+let sectionToAdd;
 
 // Gestion des boutons de resize des sections ---------------------------------
 sectionUp.forEach(item => {
@@ -48,58 +52,80 @@ function addLine(arg) {
 page.addEventListener("click", (e) => {
     let targP = find("labelAddSection", e);
     if(targP.classList.contains("labelAddSection")) {
-        let sectionP = e.target;
-        do {
-            if(!sectionP.classList.contains("section")) {
-                sectionP = sectionP.parentNode;
-            }
-        } while(!sectionP.classList.contains("section"));
+        popupSection.style.visibility = "visible";
 
-        //créatin de la nouvelle section et implémentation en dessous de la section actuelle
-        let idAct = sectionP.id;
-        let height = 1400;
+        sectionToAdd = find("section", e);
+        console.log(sectionToAdd);
+    }
+});
+
+listSection.forEach(item => {
+    item.addEventListener("click", (e) => {
+        // Création de la nouvelle section et implémentation en dessous de la section actuelle
+        console.log("is ok");
+        let idAct = sectionToAdd.id;
+        targP = find("sectionListing", e);
+        
+        let sectionChoisie = targP.attributes[1].value;
+        let height = targP.attributes[2].value;
+        console.log(targP.attributes);
+
         const newSect = document.createElement("div");
         newSect.classList.add("section");
         newSect.style.height = height + "px";
-
-        page.insertBefore(newSect, sectionP.nextSibling);
-
+    
+        page.insertBefore(newSect, sectionToAdd.nextSibling);
+    
         //redéfinition des id de section
         sections = document.querySelectorAll(".section");
         let i = 0;
         sections.forEach(sects => {
             sects.id = "s" + i;
             i++;
-            console.log(sects.id);
+        });
+    
+        movable = page.querySelectorAll(".movable");
+        movable.forEach(item => {
+            item.idSection = item.parentNode.id;
         });
         
         //mise en place du contenu de la nouvelle section
         idAct = Number(idAct[1]) + 1;
         
         //en attente du choix de section à ajouter
-        let file = "./Templates/corps1.html";
+        let file = `./Templates/${sectionChoisie}.html`;
+        console.log(file);
         
         $(function() {
             $("#s" + idAct).load(file);
         });
-    }
+
+        popupSection.style.visibility = "collapse";
+    });
 });
 
 // Delete de Section ----------------------------------------------------------
 page.addEventListener("click", (e) => {
     let targP = find("delSection", e);
     if(targP.classList.contains("delSection")) {
-        let sectionP = find("section", e);
-        sectionP.remove();
 
-        //redéfinition des id de section
-        sections = document.querySelectorAll(".section");
-        let i = 0;
-        sections.forEach(sects => {
-            sects.id = "s" + i;
-            i++;
-            console.log(sects.id);
-        });
+        let confirm = window.confirm("Etes vous sûr de vouloir supprimer cette section ? Cette action est irréversible.");
+
+        if(confirm === true) {
+            let sectionP = find("section", e);
+            sectionP.remove();
+
+            //redéfinition des id de section
+            sections = document.querySelectorAll(".section");
+            let i = 0;
+            sections.forEach(sects => {
+                sects.id = "s" + i;
+                i++;
+                console.log(sects.id);
+            });
+        } else {
+            //bah non
+        }
     }
 });
 

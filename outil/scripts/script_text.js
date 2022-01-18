@@ -69,7 +69,7 @@ document.body.addEventListener('dblclick',(e) =>{
 deleteBtn.addEventListener("click", () => {
 	const divToRem = document.querySelector(".selected");
 
-	let confirm = window.confirm("Etes vous sûr de vouloir supprimmer cet élément ? Cet action est irréversible");
+	let confirm = window.confirm("Etes vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.");
 		
 	if(confirm === true) {
 		//on suppr l'élément
@@ -92,7 +92,7 @@ selectFontSize.addEventListener("change", () => {
 selectFont.addEventListener("change", () => {
 	const div = document.querySelector(".selected");
 
-	div.style.fontFamily = '"' + selectFont.value + '"';
+	div.style.fontFamily = selectFont.value;
 });
 
 iColor.addEventListener("change", () => {
@@ -148,8 +148,6 @@ function elemApp(elem) {
 
 	//font family
 	let family = divSelect.style.fontFamily;
-	family = family.split('"');
-	family = family[1];
 	selectFont.value = family;
 
 	//text-align

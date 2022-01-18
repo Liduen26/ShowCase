@@ -27,6 +27,7 @@
     min-height: 35px;
     width: 100%;
     background-color: white;
+    border-bottom: 1px solid black;
 }
 
 .textEdit {
