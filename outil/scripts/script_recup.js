@@ -1,4 +1,4 @@
-const btn_save = document.getElementById("btn_save");
+const btn_save = document.querySelector("#btn_save");
 // const div = document.querySelector(".tropClasse");
 
 
@@ -10,8 +10,8 @@ btn_save.addEventListener("click", (e) => {
     console.log(emp1);
 
     $.ajax({
-        url:"lireJson.php",
-        method: "post",
+        url:"./scripts/lireJson.php",
+        method: "POST",
         data: emp1,
         success: function(res) {
             console.log(res);
