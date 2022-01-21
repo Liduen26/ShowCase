@@ -1,6 +1,8 @@
 <?php
 header( 'content-type: text/html; charset=utf-8' );
 
+
+// ouvrir le bon site
 try
 {
 	$db = new PDO('mysql:host=localhost;dbname=showcase;charset=utf8', 'root', '');
@@ -10,12 +12,27 @@ catch (Exception $e)
 die('Erreur : ' . $e->getMessage());
 }
 
-$requete = 'SELECT contenu FROM  contenu WHERE ID = 0';
-$test = $db->prepare($requete);
-$test->execute();
-$interpret = $test->fetchAll();
-$contenu = $interpret[0][0];
+foreach($_POST as $key=>$value){
+    if( $key !== 'pseudo' || $key !== 'id'){
+        $nom_site = $key;
+    }
+    else{
+        $nom_site = 'default';
+    }
+}
+
+
+$recup_site = 'SELECT Contenu FROM Contenu WHERE id_page = (SELECT ID FROM page WHERE id_site = (SELECT id FROM site WHERE nom = :nom));';
+
+$prepare_site = $db->prepare($recup_site);
+$prepare_site->execute([
+    'nom' => $nom_site,
+]);
+$site = $prepare_site->fetchAll();
+$contenu = $site[0][0];
+
 ?>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -42,7 +59,15 @@ $contenu = $interpret[0][0];
     <header>
         <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
         <div id="header_droite">
-            <button id="btn_save" class="bouton style_bouton1">Sauvegarder</button>
+            <!--<form action = './scripts/lireJson.php' method = "post" >
+                <div>
+                    <label for="pseudo"></label>
+                    <input type = "hidden" id ="name" name ="name" value = <?php echo($_POST['pseudo'] );?> >
+                </div> -->
+                <div class = "button">
+                    <button type ="submit" id="btn_save" class="bouton style_bouton1">Sauvegarder</button>
+                </div>
+            <!--</form> -->
             <button id="btn_style" class="bouton style_bouton1">Bouton</button>
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
@@ -158,18 +183,21 @@ $contenu = $interpret[0][0];
                 </div>
             
             </div>
-                <div class= "page">
+                <div class= "page" id = "page">
                 <?php        
                 echo ($contenu);
+                var_dump($_POST);
                 ?>
+                
                 </div>
             </div>
-        <script src="./Scripts/script_insert.js"></script>
+    <script src="./Scripts/script_insert.js"></script>
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
-    <script src="./Scripts/script_recup.js"></script>
+    <script src="./Scripts/script_recuperation2.js"></script>
     <script src="./Scripts/script_style_bouton.js"></script>
+    
 </body>
 </html>
 

@@ -21,21 +21,37 @@ $prepare_site->execute([
 ]);
 
 $liste_site = $prepare_site->fetchAll();
-if(count($liste_site) !== 0){
-    foreach($liste_site as $site){
-        echo('<a href="creer_site.php">'.$site['nom'].'</a>'.'<br>');
-    }
-}
-else{
-    echo('<div> Commencez avec une template pré-faite </div>'.'<br>');
-    echo('<form action="creer_site.php" method="post">
+
+// recupération id 
+$recup_id = 'SELECT id FROM user WHERE pseudo = :pseudo';
+$prepare_id = $db->prepare($recup_id);
+$prepare_id->execute([
+    'pseudo' => $pseudo,
+]);
+
+$liste_id = $prepare_id->fetchAll();
+
+echo('<div> Commencez avec une template pré-faite </div>'.'<br>');
+echo('<form action="creer_site.php" method="post">
             <div>
             <label for="name"></label>
-            <input type="hidden" id="name" name="pseudo" value ='.($pseudo).'
-        </div>');
-    echo('<div class="button">
-        <button type="submit">Template 1</button>
+            <input type="hidden" id="name" name="pseudo" value ='.($pseudo).'>
         </div>
-        </form>');
+        <div>
+        <label for="id"></label>
+        <input type="hidden" id="id" name="id" value ='.($liste_id[0]['id']).'
+    </div>');
+if(count($liste_site) !== 0){
+    foreach($liste_site as $site){
+        echo('<div class="button">
+        <button type="submit" name ='.$site['nom'].'>'.$site['nom'].'</button>
+        </div>');
+    }
 }
+else{       
+    echo('<div class="button">
+        <button type="submit" name = Template >Template 1</button>
+        </div>');
+}
+echo('</form>');
 ?>
