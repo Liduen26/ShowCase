@@ -1,69 +1,63 @@
-const addTexte = document.querySelector('#btn_a');
-const addImg = document.querySelector('#btn_b_2');
-const addForme = document.querySelector('#btn_c');
-const addBtns = document.querySelector('#btn_d');
+const addTexte = document.querySelector('.addTexte');
+const addImg = document.querySelector('.addImage');
+const addForme = document.querySelector('.addFormes');
+const addBtns = document.querySelector('.addBtns');
 
 const text = document.querySelectorAll('.text');
-const div1_parent = document.querySelector('.page');
-
-let nbr_id = 0;
-console.log(nbr_id);
+const addElems = document.querySelectorAll(".addElems");
 
 // // zone texte //
 
 addTexte.addEventListener('click', () => {
 
-    const new_dt = document.createElement('div');
-    new_dt.setAttribute("class","text movable");
+    // const new_dt = document.createElement('div');
+    // new_dt.setAttribute("class","text movable");
 
-    const new_p= document.createElement('p');
-    var newContent = document.createTextNode('inserer text')
-    new_p.appendChild(newContent);
-    new_dt.appendChild(new_p);
-    div1_parent.appendChild(new_dt);
+    // const new_p= document.createElement('p');
+    // let newContent = document.createTextNode('inserer text')
+    // new_p.appendChild(newContent);
+    // new_dt.appendChild(new_p);
+    // page.appendChild(new_dt);
 
-    let maxId = findLastId();
-    for (let i = 0; i < 100; i++) {
-        new_dt.setAttribute("id", maxId); 
-        
-    }
+    // let maxId = findLastId();
+    // new_dt.setAttribute("id", maxId); 
 });
 
-// //zone image //
 
+// //zone image //
 
 addImg.addEventListener('click', () => {
   
     console.log("test btn2.5");
     
-    var new_di = document.getElementById("image");
+    let new_di = document.getElementById("image");
+
+    let loadFile = function(event) {
+        let output = document.getElementById('image');
+        console.log(output);
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
 
 
-  // new_di.setAttribute("style",'center/cover; position: absolute; left: -10vw; top: 10vh; width: 50vw; height: 50vh;');
-  // new_di.setAttribute("class","image movable");
+    // new_di.setAttribute("style",'center/cover; position: absolute; left: -10vw; top: 10vh; width: 50vw; height: 50vh;');
+    // new_di.setAttribute("class","image movable");
 
-  // nbr_id = nbr_id + 1;
-  // for (let i = 0; i < 100; i++) {
-  //   new_di.setAttribute("name", nbr_id); 
-    
-  // }
+    // nbr_id = nbr_id + 1;
+    // for (let i = 0; i < 100; i++) {
+    //   new_di.setAttribute("name", nbr_id); 
+    // }
 });
 
 
 // zone formes //
 
 addForme.addEventListener('click', () => {
-
     const new_df = document.createElement('div');
     new_df.setAttribute("class"," forme exemple movable");
-    div1_parent.appendChild(new_df);
+    page.appendChild(new_df);
 
     let maxId = findLastId();
-    
-    for (let i = 0; i < 100; i++) {
-        new_df.setAttribute("id", maxId); 
-        
-    }
+    new_df.setAttribute("id", maxId); 
 });
 
 
@@ -75,25 +69,65 @@ addBtns.addEventListener('click', () => {
     new_dd.setAttribute("class"," movable");
     
     const new_db = document.createElement('button');
-    new_db.setAttribute("class"," boutton movable"); 
+    new_db.setAttribute("class", "boutton movable");
     new_dd.appendChild(new_db);
-    div1_parent.appendChild(new_dd);
+    page.appendChild(new_dd);
 
     let maxId = findLastId();
-    for (let i = 0; i < 100; i++) {
-        new_db.setAttribute("id", maxId); 
-        
-    }
+    new_db.setAttribute("id", maxId);
 });
 
+//Ajout des éléments w/ section -----------------------------------------------
+addElems.forEach(item => {
+    item.addEventListener("mousedown", (e) => {
+        const newElem = item.cloneNode(true);
+        console.log(newElem);
+        newElem.style.position = "absolute";
+        newElem.style.top = "5px";
+        newElem.style.left = "5px";
+        newElem.style.zIndex = "2000";
+        newElem.style.color = "black";
 
-// Fonctions d'automatisation
+        page.appendChild(newElem);
+
+        window.addEventListener("mousemove", mousemove);
+        window.addEventListener("mouseup", mouseup);
+
+        let prevX = e.clientX;
+        let prevY = e.clientY;
+
+        function mousemove(e) {
+            
+            let newX = prevX - e.clientX;
+            let newY = prevY - e.clientY;
+            
+            const rect = getRect(newElem, page);
+            console.log("sep");
+            console.log(prevX);
+            console.log(e.clientX);
+            console.log(newX);
+
+            newElem.style.left = rect.left - newX + "px";
+            newElem.style.top = rect.top - newY + "px";
+
+            prevX = e.clientX;
+            prevY = e.clientY;
+        }
+
+        function mouseup(e) {
+
+        }
+    });
+});
+
+// Fonctions d'automatisation -------------------------------------------------
 function findLastId() {
+    let maxId;
     movable.forEach(item => {
-        console.log(item.id);
         if(Number(item.id) > maxId) {
             maxId = Number(item.id);
         }
     });
     return maxId + 1;
 }
+

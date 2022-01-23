@@ -74,9 +74,9 @@ a {
     display: none;
     background-color: rgb(40, 59, 59);
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-    /* margin-right: 20px; */
     margin-top: 0;
     z-index: 3000;
+    padding: 3px;
 }
 
 #div_account_menu:hover .top_menu{
@@ -130,23 +130,25 @@ a {
     background-color: gray;
 }
 
-
 .side_menu {
     position: absolute;
     padding: 0%;
-    margin-left: 2.1rem;
     top: 0%;
+    left: 47px;
+    padding: 3px;
+    padding-left: 15px;
     display: none;
     background-color: darkslategrey;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
     z-index: 3;
     
 }
+
 .sous_ul {
     position: absolute;
     padding: 0%;
-    margin-left: 14.2rem;
     top: 0%;
+    left: 106px;
     display: none;
     background-color: darkslategrey;
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -164,6 +166,7 @@ a {
 
 .sous_li {
     display: flex;
+    flex-direction: column;
     color: #fff;
     padding: 10px 10px;
     height: auto;

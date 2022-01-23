@@ -47,19 +47,23 @@
                     <ul class="side_menu">
                         <h4 class="titre_side_menu">Elements</h4>
 
-                        <li class="sous_li"><div class="btn1" id="btn_a"><i class='bx bx-text'></i><br>Texte</div></li>
-                        <li class="sous_li"><input type="file" id="btn_b_2" accept="image/*" onchange="loadFile(event)">
-                            <img classe="img" id="image" name="img" />
-                            <script>
-                            var loadFile = function(event) {
-                                var output = document.getElementById('image');
-                                console.log(output);
-                                output.src = URL.createObjectURL(event.target.files[0]);
-                            };
-                            </script>
-                            <i class='bx bx-image'></i><br>Image</li>
-                        <li class="sous_li"><div class="btn3" id="btn_c"><i class='bx bx-checkbox'></i><br>Formes</div></li>
-                        <li class="sous_li"><div class="btn4" id="btn_d"><i class='bx bx-clipboard'></i><br>Bouton</div></li> 
+                        <li class="sous_li addElems addTexte">
+                            <i class='bx bx-text'></i>Texte
+                        </li>
+
+                        <li class="sous_li addElems addImage">
+                            <label class="addImageContainer">
+                                <input type="file" class="hide" accept="image/*" onchange="loadFile(event)">
+                                <i class='bx bx-image'></i>Image
+                            </label>
+                        </li>
+
+                        <li class="sous_li addElems addFormes">
+                            <i class='bx bx-checkbox'></i>Formes
+                        </li>
+                        <li class="sous_li addElems addBtns">
+                            <i class='bx bx-clipboard'></i>Bouton
+                        </li> 
 
                     </ul>
                 </li>
@@ -233,6 +237,8 @@
                 <div class="endSection">
                     You are at the bottom of your website, this will not be visible
                 </div>
+                <img classe="img" id="image" name="img"/>
+
             </div>
         </div>
     </div>

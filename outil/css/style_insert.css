@@ -1,4 +1,13 @@
+.addImageContainer {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
 
+
+.hide {
+    display: none;
+}
 
 .btn{
 
