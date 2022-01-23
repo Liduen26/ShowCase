@@ -428,6 +428,55 @@ document.body.addEventListener("click", (e) => {
         if(e.target.classList.contains("closeListSection") || e.target.classList.contains("choiceSectionContainer")) {
             popupSection.style.visibility = "collapse";
         }
+
+        //choix de la div où ajouter un elem
+        if(e.target.classList.contains("chooseAdd")) {
+            let sectionP = find("section", e);
+            console.log(sectionP.id);
+            console.log("add " + toAdd);
+            console.log(fileToAdd);
+
+            const chooseAdd = document.querySelectorAll(".chooseAdd");
+
+            chooseAdd.forEach(item => {
+                item.classList.toggle("hide");
+            });
+
+            const newElement = document.createElement("div");
+
+            newElement.classList.add("movable");
+            newElement.style.position = "absolute";
+            newElement.style.left = "30%";
+            newElement.style.top = "200px";
+            newElement.style.width = "40%";
+            newElement.style.height = "200px";
+            newElement.style.zIndex = 1000;
+
+            switch(toAdd) {
+                case "text": 
+                    const newP = document.createElement("p");
+                    newP.innerHTML = "Insérez du texte ici";
+                    newElement.appendChild(newP);
+                    newElement.classList.add("text");
+                break;
+                case "image": 
+                    newElement.style.background = `url(${fileToAdd}) center/cover`;
+                    newElement.classList.add("img");
+                break;
+                case "forme":
+
+                break;
+                case "button": 
+
+                break;
+            }
+
+            let maxId = findLastId();
+            newElement.setAttribute("id", maxId);
+
+            sectionP.appendChild(newElement);
+            
+        }
     }
 });
 

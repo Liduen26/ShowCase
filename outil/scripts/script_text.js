@@ -76,6 +76,7 @@ deleteBtn.addEventListener("click", () => {
 		divToRem.remove();
 		elemDisp("moreEdit");
 		elemDisp("textEdit");
+		remDivDepl();
 	} else {
 		//rien, c'est le btn annuler
 		console.log("bah non");

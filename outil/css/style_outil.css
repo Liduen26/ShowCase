@@ -125,7 +125,7 @@ a {
 .side_li:hover .side_menu {
     display: initial;
 }
-#sidebar ul li:hover {
+#sidebar ul .sous_li:hover {
     /* background-color: #383838; */
     background-color: gray;
 }
