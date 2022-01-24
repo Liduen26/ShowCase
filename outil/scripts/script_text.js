@@ -27,6 +27,7 @@ const selectAlignText = document.querySelector(".selectAlignText");
 const forwardBtn = document.querySelector(".forward-btn");
 const backwardBtn = document.querySelector(".backward-btn");
 const deleteBtn = document.querySelector(".delete-btn");
+const paintBack = document.querySelector(".paintBack");
 
 // Detection du double clic pour le mode edit de texte ------------------------
 document.body.addEventListener('dblclick',(e) =>{
@@ -123,6 +124,18 @@ backwardBtn.addEventListener("click", (e) => {
 	const div = document.querySelector(".selected");
 	
 	div.style.zIndex --;
+});
+
+paintBack.addEventListener("change", (e) => {
+	const div = document.querySelector(".selected");
+	const colorBack = document.querySelector(".colorBack");
+
+	if(div.classList.contains("formeContainer")) {
+		div.firstChild.style.backgroundColor = colorBack.value;
+	} else {
+		div.style.backgroundColor = colorBack.value;
+	}
+
 });
 
 

@@ -437,12 +437,18 @@ document.body.addEventListener("click", (e) => {
             console.log(fileToAdd);
 
             const chooseAdd = document.querySelectorAll(".chooseAdd");
+            let newElement = "";
 
             chooseAdd.forEach(item => {
                 item.classList.toggle("hide");
             });
 
-            const newElement = document.createElement("div");
+
+            if(toAdd === "button") {
+                newElement = document.createElement("button");
+            } else {
+                newElement = document.createElement("div");
+            }
 
             newElement.classList.add("movable");
             newElement.style.position = "absolute";
@@ -464,10 +470,15 @@ document.body.addEventListener("click", (e) => {
                     newElement.classList.add("img");
                 break;
                 case "forme":
+                    const newChild = document.createElement("div");
+                    newChild.classList.add(fileToAdd);
 
+                    newElement.appendChild(newChild);
+                    newElement.classList.add("formeContainer");
                 break;
                 case "button": 
-
+                    newElement.classList.add("boutton");
+                    newElement.classList.add("style_bouton1");
                 break;
             }
 

@@ -121,13 +121,29 @@ addTexte.addEventListener('click', () => {
 
 addElems.forEach(item => {
     item.addEventListener("click", (e) => {
-        const chooseAdd = document.querySelectorAll(".chooseAdd");
+        if(!item.classList.contains("addFormes")) {
+            const chooseAdd = document.querySelectorAll(".chooseAdd");
+    
+            chooseAdd.forEach(item => {
+                item.classList.toggle("hide");
+            });
 
-        chooseAdd.forEach(item => {
-            item.classList.toggle("hide");
-        });
-        console.log(item.attributes[1].value);
-        toAdd = item.attributes[1].value;
+            toAdd = item.attributes[1].value;
+        } else {
+            targP = find("formesListed", e);
+            
+            if(targP.classList.contains("formesListed") && !targP.classList.contains("menu-triangle")) {
+                const chooseAdd = document.querySelectorAll(".chooseAdd");
+                
+                chooseAdd.forEach(item => {
+                    item.classList.toggle("hide");
+                });
+                
+                toAdd = item.attributes[1].value;
+                fileToAdd = targP.firstElementChild.classList[0];
+
+            }
+        }
     });
 });
 

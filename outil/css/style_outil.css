@@ -125,7 +125,7 @@ a {
 .side_li:hover .side_menu {
     display: initial;
 }
-#sidebar ul .sous_li:hover {
+#sidebar ul .sous_li:hover, .side_li:hover, .formesListed:hover {
     /* background-color: #383838; */
     background-color: gray;
 }
@@ -174,7 +174,34 @@ a {
     border-radius: 0.5rem;
     text-align: center;
     justify-content: center;
+    cursor: pointer;
 }
+
+.formesChoice {
+    position: absolute;
+    left: 95%;
+    top: 0%;
+    background-color: darkslategrey;
+    padding: 3px;
+    border-radius: 0.5rem;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addFormes:hover #menuFormes, .menu-triangle:hover #menuTriangle {
+    display: initial;
+}
+
+.formesListed {
+    padding: 10px;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
 .li_3 {
     display: flex;
     color: #fff;

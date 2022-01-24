@@ -58,6 +58,39 @@
 
                         <li class="sous_li addElems addFormes" value="forme">
                             <i class='bx bx-checkbox'></i>Formes
+                            <div class="formesChoice hide" id="menuFormes">
+
+                                <div class="formesListed">
+                                    <div class="ligne"></div>
+                                </div>
+                                <div class="formesListed" style="height: 50px;">
+                                    <div class="rectangle"></div>
+                                </div>
+                                <div class="formesListed">
+                                    <div class="trapeze"></div>
+                                </div>
+
+                                <div class="formesListed menu-triangle">
+                                    <div class="triangle-haut"></div>
+
+                                    <div class="formesChoice hide" id="menuTriangle">
+                                        <div class="formesListed">
+                                            <div class="triangle-haut triangles"></div>
+                                        </div>
+                                        <div class="formesListed">
+                                            <div class="triangle-bas triangles"></div>
+                                        </div>
+                                        <div class="formesListed">
+                                            <div class="triangle-gauche triangles"></div>
+                                        </div>
+                                        <div class="formesListed">
+                                            <div class="triangle-droit triangles"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                         </li>
                         <li class="sous_li addElems addBtns" value="button">
                             <i class='bx bx-clipboard'></i>Bouton
@@ -136,6 +169,10 @@
 
                 <div class="moreEdit"> 
                     <div class="separate"></div>
+                    <label class="icones paintBack">
+                        <i class='bx bxs-brush' title="Couleur de fond"></i>
+                        <input type="color" class="hide colorBack">
+                    </label>
                     <img title="Avancer" src="./srcs/fleche-haut-gauche.png" class="icones forward-btn">
                     <img title="Reculer" src="./srcs/fleche-bas-droite.png" class="icones backward-btn">
                     <img title="Supprimer" src="./srcs/poubelle.png" class="icones delete-btn">
