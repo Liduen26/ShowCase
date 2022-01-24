@@ -49,8 +49,6 @@ header {
     width: 100%;
 }
 
-
-
 a {
     color: #fff;
 }
@@ -185,7 +183,6 @@ a {
 
 
 .style_bouton1{
-    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -198,7 +195,6 @@ a {
 }
 .style_bouton2{
     border-radius: 10px;
-    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -211,7 +207,6 @@ a {
 }
 .style_bouton3{
     border-radius: 30px;
-    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -224,4 +219,43 @@ a {
 }
 #style_bouton:hover ul {
     display: initial;
+}
+#couleur:hover ul {
+    display: initial;
+}
+
+.seashell{
+    background-color: seashell;
+}
+.marron{
+    background-color: #655643;
+}
+.vert{
+    background-color: #80BCA3;
+}
+.noir{
+    background-color: rgb(34, 30, 30);
+}
+
+.bleu_clair{
+    background-color: #B9D7D9;
+}
+.bleu_fonce{
+    background-color: #668284;
+}
+.marron_fonce{
+    background-color: #493736;
+}
+
+.rouge{
+    background-color: #6C5B7B;
+}
+.orange{
+    background-color: #C06C84;
+}
+.vert_pastelle{
+    background-color: #b5d2a1;
+}
+.vert_bouton{
+    background-color: #4CAF50;
 }
