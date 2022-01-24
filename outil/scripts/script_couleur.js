@@ -1,5 +1,6 @@
 // const boutons = document.getElementsByClassName("boutton");
 const bandeaux = document.getElementsByClassName("bandeau");
+console.log(bandeaux);
 const pied = document.getElementById("pied");
 
 const bouton1 = document.getElementById("couleur1");
