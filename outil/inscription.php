@@ -5,10 +5,8 @@ $pseudo = $_POST["pseudo"];
 $password = $_POST["mdp_user"];
 
 
-
-
-
-// se connecte à la base de donnée
+if($pseudo != " " && !empty($pseudo) && $password != " " && !empty($password)){
+    // se connecte à la base de donnée
 try
 {
 	$db = new PDO('mysql:host=localhost;dbname=showcase;charset=utf8', 'root', '');
@@ -39,3 +37,13 @@ $insertmydb->execute([
         </form>
 
 </html>
+<?php
+}
+else{
+?>
+    <html>
+<meta http-equiv="refresh" content="0; url= bienvenue.html">
+</html>
+<?php
+}
+?>
