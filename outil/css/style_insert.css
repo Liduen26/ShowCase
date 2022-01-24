@@ -1,4 +1,30 @@
+.addImageContainer {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
 
+.chooseAdd {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.chooseAdd:hover {
+    background-color: rgb(53, 125, 249, 0.6);
+    color: white;
+}
+    
+
+
+.hide {
+    display: none;
+}
 
 .btn{
 
@@ -18,63 +44,60 @@
     border-radius : 25px; 
   }
 .carre {
-    width  : 20vw;
-    height : 20vw;
+    width  : 50px;
+    height : 50px;
     background : green;
   }
 
   .ligne {
     width  : 100%;
-    height : 0.5vw;
+    height : 2px;
     background : green;
   }
-
-
 
   .rectangle {
-    width  : 50vw;
-    height : 25vh;
+    width  : 100%;
+    height : 100%;
     background : green;
   }
 
-
-
   .trapeze{
-    border-bottom: 40vh solid green;
-    border-left  : 15vw solid transparent; 
-    border-right : 15vw solid transparent;
+    border-bottom: 50px solid green;
+    border-left  : 15px solid transparent; 
+    border-right : 15px solid transparent;
     height : 0;
-    width  : 40vw;
+    width  : 60%;
   }
+
   .triangle-haut{
     display : inline-block;
     height : 0;
     width : 0;
-    border-right : 19vw solid transparent;
-    border-bottom : 26vh solid red;
-    border-left : 19vw solid transparent;
+    border-bottom : 50px solid green;
+    border-right : 35px solid transparent;
+    border-left : 35px solid transparent;
    }
    .triangle-bas{
     display : inline-block;
     height : 0;
     width : 0;
-    border-top : 26vh solid red;
-    border-right : 19vw solid transparent;
-    border-left : 19vw solid transparent;
+    border-top : 50px solid green;
+    border-right : 35px solid transparent;
+    border-left : 35px solid transparent;
    }
    .triangle-droit{
     display : inline-block;
     height : 0;
     width : 0;
-    border-top : 15vh solid transparent;
-    border-bottom : 20vw solid transparent;
-    border-left : 32vw solid red;
+    border-top : 30px solid transparent;
+    border-bottom : 30px solid transparent;
+    border-left : 60px solid green;
    }
    .triangle-gauche{
     display : inline-block;
     height : 0;
     width : 0;
-    border-top : 15vh solid transparent;
-    border-right : 33vw solid red;
-    border-bottom : 15vh solid transparent;
+    border-top : 30px solid transparent;
+    border-right : 60px solid green;
+    border-bottom : 30px solid transparent;
    }

@@ -27,6 +27,7 @@
     min-height: 35px;
     width: 100%;
     background-color: white;
+    border-bottom: 1px solid black;
 }
 
 .textEdit {
@@ -117,5 +118,9 @@
 
 .backward-btn {
     width: 15px;
+    padding: 8px;
+}
+
+.paintBack {
     padding: 8px;
 }

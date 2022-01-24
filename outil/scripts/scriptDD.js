@@ -15,7 +15,6 @@ Il faudra également ajouter le fichier styleDD.css avec ce lien dans le head :
 Les deux fichiers doivent pour cela être dans votre dossier
 
 /!\ En cas de déplacement d'image, ajouter la classe "img" au HTML de la div et mettre l'image en background d'une div avec : style="background: url(VotreImg.png) center/cover;"
-/!\ Ne fonctionne pas sur un élément directement, la classe doit être mise sur une div contenant l'élément
 /!\ Fonctionne dans une div "page"
 
 Problèmes : 
@@ -23,9 +22,9 @@ Problèmes :
 => utiliser outline 
 
 
-A faire : Grille dynamique
+A faire : 
 ///////////////////////////////////////////////////////////////////////////*/
-const movable = document.querySelectorAll(".movable");
+let movable = document.querySelectorAll(".movable");
 let validSuppr = false;
 let currentResizer;
 let isResizing = false;
@@ -40,8 +39,6 @@ img.forEach(item => {
 });
 
 const page = document.querySelector(".page");
-
-// const btn = document.querySelector(".btn");
 
 // Ecoute pour le déplacement --------------------------------------------------
 page.addEventListener("mousedown", (e) => {
@@ -415,6 +412,7 @@ document.body.addEventListener("click", (e) => {
             elemDisp("moreEdit");
         }
         
+        //pour enlever la zone de texte
         if(!targP.classList.contains("editable") && !targP.classList.contains("toolbar")){
             const texts = document.querySelectorAll('[contenteditable]');
 
@@ -424,6 +422,71 @@ document.body.addEventListener("click", (e) => {
             });
             elemDisp("textEdit");
 
+        }
+
+        // Fermeture de la popup section
+        if(e.target.classList.contains("closeListSection") || e.target.classList.contains("choiceSectionContainer")) {
+            popupSection.style.visibility = "collapse";
+        }
+
+        //choix de la div où ajouter un elem
+        if(e.target.classList.contains("chooseAdd")) {
+            let sectionP = find("section", e);
+            console.log(sectionP.id);
+            console.log("add " + toAdd);
+            console.log(fileToAdd);
+
+            const chooseAdd = document.querySelectorAll(".chooseAdd");
+            let newElement = "";
+
+            chooseAdd.forEach(item => {
+                item.classList.toggle("hide");
+            });
+
+
+            if(toAdd === "button") {
+                newElement = document.createElement("button");
+            } else {
+                newElement = document.createElement("div");
+            }
+
+            newElement.classList.add("movable");
+            newElement.style.position = "absolute";
+            newElement.style.left = "30%";
+            newElement.style.top = "200px";
+            newElement.style.width = "40%";
+            newElement.style.height = "200px";
+            newElement.style.zIndex = 1000;
+
+            switch(toAdd) {
+                case "text": 
+                    const newP = document.createElement("p");
+                    newP.innerHTML = "Insérez du texte ici";
+                    newElement.appendChild(newP);
+                    newElement.classList.add("text");
+                break;
+                case "image": 
+                    newElement.style.background = `url(${fileToAdd}) center/cover`;
+                    newElement.classList.add("img");
+                break;
+                case "forme":
+                    const newChild = document.createElement("div");
+                    newChild.classList.add(fileToAdd);
+
+                    newElement.appendChild(newChild);
+                    newElement.classList.add("formeContainer");
+                break;
+                case "button": 
+                    newElement.classList.add("boutton");
+                    newElement.classList.add("style_bouton1");
+                break;
+            }
+
+            let maxId = findLastId();
+            newElement.setAttribute("id", maxId);
+
+            sectionP.appendChild(newElement);
+            
         }
     }
 });
@@ -518,4 +581,9 @@ function loading() {
             i++;
         } while(i < 9);
     });
-}
+
+    movable = page.querySelectorAll(".movable");
+    movable.forEach(item => {
+        item.idSection = item.parentNode.id;
+    });
+} 

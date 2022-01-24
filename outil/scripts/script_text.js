@@ -27,6 +27,7 @@ const selectAlignText = document.querySelector(".selectAlignText");
 const forwardBtn = document.querySelector(".forward-btn");
 const backwardBtn = document.querySelector(".backward-btn");
 const deleteBtn = document.querySelector(".delete-btn");
+const paintBack = document.querySelector(".paintBack");
 
 // Detection du double clic pour le mode edit de texte ------------------------
 document.body.addEventListener('dblclick',(e) =>{
@@ -69,13 +70,14 @@ document.body.addEventListener('dblclick',(e) =>{
 deleteBtn.addEventListener("click", () => {
 	const divToRem = document.querySelector(".selected");
 
-	let confirm = window.confirm("Etes vous sûr de vouloir supprimmer cet élément ? Cet action est irréversible");
+	let confirm = window.confirm("Etes vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.");
 		
 	if(confirm === true) {
 		//on suppr l'élément
 		divToRem.remove();
 		elemDisp("moreEdit");
 		elemDisp("textEdit");
+		remDivDepl();
 	} else {
 		//rien, c'est le btn annuler
 		console.log("bah non");
@@ -92,7 +94,7 @@ selectFontSize.addEventListener("change", () => {
 selectFont.addEventListener("change", () => {
 	const div = document.querySelector(".selected");
 
-	div.style.fontFamily = '"' + selectFont.value + '"';
+	div.style.fontFamily = selectFont.value;
 });
 
 iColor.addEventListener("change", () => {
@@ -124,6 +126,18 @@ backwardBtn.addEventListener("click", (e) => {
 	div.style.zIndex --;
 });
 
+paintBack.addEventListener("change", (e) => {
+	const div = document.querySelector(".selected");
+	const colorBack = document.querySelector(".colorBack");
+
+	if(div.classList.contains("formeContainer")) {
+		div.firstChild.style.backgroundColor = colorBack.value;
+	} else {
+		div.style.backgroundColor = colorBack.value;
+	}
+
+});
+
 
 
 //fonctions d'automatisation -----------------------------------------------
@@ -148,8 +162,6 @@ function elemApp(elem) {
 
 	//font family
 	let family = divSelect.style.fontFamily;
-	family = family.split('"');
-	family = family[1];
 	selectFont.value = family;
 
 	//text-align

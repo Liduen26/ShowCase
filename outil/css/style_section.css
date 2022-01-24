@@ -51,6 +51,7 @@
     border-radius: 10px;
 
     transition: background-color .3s ease;
+    cursor: pointer;
 }
 
 .arrowSection:hover, .labelAddSection:hover, .delSection:hover {
@@ -71,7 +72,6 @@
 
     display: flex;
     align-items: center;
-
 }    
 
 .labelAddSection {
@@ -86,11 +86,100 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    cursor: pointer;
 }
 
 .delSection {
     height: 60%;
     padding: 9px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.choiceSectionContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    visibility: collapse;
+}
+
+.choiceSection {
+    background-color: white;
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.labelCoiceSect {
+    text-align: center;
+    padding: 20px;
+    font-size: large;
+    font-family: Roboto;
+    border-bottom: 2px solid black;
+}
+
+.listSection {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    justify-content: space-evenly;
+}
+
+.sectionListing {
+    cursor: pointer;
+    width: 200px;
+    height: 170px;
+
+    padding: 8px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 2px 2px 4px rgba(53, 53, 53, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: all .4s ease;
+}
+
+.sectionListing:hover {
+    border-color: rgb(168, 168, 168);
+    box-shadow: 3px 3px 4px rgba(53, 53, 53, 0.8);
+}
+
+.imgListSection {
+    width: 100%;
+    /* height: 85%; */
+}
+
+.titreListSection {
+    font-family: Roboto;
+    margin: 4px;
+}
+
+.closeListSection {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    background: rgba(128, 128, 128, 0.4);
+    cursor: pointer;
 }
