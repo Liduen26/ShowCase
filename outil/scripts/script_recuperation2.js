@@ -13,6 +13,7 @@ function recup() {
 
     $.ajax({
         url: "./scripts/lireJson.php",
+
         method: "POST",
         data: page,
         // datatype: "html",

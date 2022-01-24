@@ -70,16 +70,7 @@ else{
     <header>
         <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
         <div id="header_droite">
-            <!--<form action = './scripts/lireJson.php' method = "post" >
-                <div>
-                    <label for="pseudo"></label>
-                    <input type = "hidden" id ="name" name ="name" value = <?php echo($_POST['pseudo'] );?> >
-                </div> -->
-                <div class = "button">
-                    <button type ="submit" id="btn_save" class="bouton style_bouton1">Sauvegarder</button>
-                </div>
-            <!--</form> -->
-            <button id="btn_style" class="bouton style_bouton1">Bouton</button>
+            <button id="btn_save" class="bouton style_bouton1">Sauvegarder</button>
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
                 <ul class="top_menu">
