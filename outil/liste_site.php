@@ -8,6 +8,8 @@ catch (Exception $e)
         die('Erreur : ' . $e->getMessage());
 }
 
+var_dump($_POST);
+
 $pseudo = $_POST['pseudo'];
 $mdp = $_POST['mdp_user'];
 

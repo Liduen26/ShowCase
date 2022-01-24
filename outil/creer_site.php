@@ -20,16 +20,28 @@ foreach($_POST as $key=>$value){
         $nom_site = 'default';
     }
 }
+echo($nom_site);
 
 
-$recup_site = 'SELECT Contenu FROM Contenu WHERE id_page = (SELECT ID FROM page WHERE id_site = (SELECT id FROM site WHERE nom = :nom));';
+if($nom_site != 'Template')
+{
+    $recup_site = 'SELECT Contenu FROM Contenu WHERE id_page = (SELECT ID FROM page WHERE id_site = (SELECT id FROM site WHERE nom = :nom));';
 
-$prepare_site = $db->prepare($recup_site);
-$prepare_site->execute([
-    'nom' => $nom_site,
-]);
-$site = $prepare_site->fetchAll();
-$contenu = $site[0][0];
+    $prepare_site = $db->prepare($recup_site);
+    $prepare_site->execute([
+        'nom' => $nom_site,
+    ]);
+    $site = $prepare_site->fetchAll();
+    $contenu = $site[0][0];
+}
+else{
+    $recup_site = 'SELECT contenu FROM contenu WHERE ID = 0';
+    $prepare_site = $db->prepare($recup_site);
+    $prepare_site->execute();
+    $site = $prepare_site->fetchAll();
+    var_dump($site);
+    $contenu =$site[0][0];
+}
 
 ?>
 
@@ -186,7 +198,7 @@ $contenu = $site[0][0];
                 <div class= "page" id = "page">
                 <?php        
                 echo ($contenu);
-                var_dump($_POST);
+                /*var_dump($_POST);*/
                 ?>
                 
                 </div>

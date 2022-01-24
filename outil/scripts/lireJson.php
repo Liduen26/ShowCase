@@ -1,4 +1,8 @@
 <?php 
-    print_r($_POST);
-    echo "je suis la";
+    $test = $_POST;
+    var_dump ($test);
+
+    echo "page sauvegardée";
+    
+
 ?>
