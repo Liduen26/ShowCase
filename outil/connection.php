@@ -43,7 +43,13 @@ $_POST[0]['ID'] = $ID;
 if($identifiant == $pseudo && $mdp == $password ){
 ?>
 <html>
-    <p> Vous êtes connectez </p>
+<head>
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css"  href="./css/connection.css">
+</head>
+<body>
+    <section class="connecter">
+    <div class ="sous-titre"> vous êtes connecté </div>
     <form action = "liste_site.php" method="post">
             <div>
                 <label for="name"></label>
@@ -61,8 +67,9 @@ if($identifiant == $pseudo && $mdp == $password ){
                 <button type="submit">liste de mes sites</button>
             </div>
     </form>
-
-    <p> MOdifier mon profil </p>
+    </section>
+    <section class="modifier">
+    <div class="sous-titre"> Modifier mon profil </div>
     <form action="modifier.php" method="post">
             <div>
                 <label for="name"></label>
@@ -76,11 +83,11 @@ if($identifiant == $pseudo && $mdp == $password ){
                 <label for="ID"></label>
                 <input type="hidden" id="ID" name="ID" value = <?php echo($ID) ?>>
             </div>
-            <div>
+            <div class="nom">
                 <label for="new_name">nom :</label>
                 <input type="text" id="new_name" name="new_pseudo">
             </div>
-            <div>
+            <div class="mdp">
                 <label for="new_password">mot de passe :</label>
                 <input type="text" id="new_password" name="new_mdp_user">
             </div>
@@ -88,6 +95,8 @@ if($identifiant == $pseudo && $mdp == $password ){
                 <button type="submit">modifier</button>
             </div>
         </form>
+    </section>
+</body>
 </html>
 <?php
 }
