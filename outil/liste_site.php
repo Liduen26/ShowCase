@@ -1,3 +1,12 @@
+<html>
+<head>
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css"  href="./css/liste_site.css">
+</head>
+</html>
+
+
+
 <?php
 try
 {
@@ -8,7 +17,7 @@ catch (Exception $e)
         die('Erreur : ' . $e->getMessage());
 }
 
-var_dump($_POST);
+
 
 $pseudo = $_POST['pseudo'];
 $mdp = $_POST['mdp_user'];
@@ -33,8 +42,8 @@ $prepare_id->execute([
 
 $liste_id = $prepare_id->fetchAll();
 
-echo('<div> Commencez avec une template pré-faite </div>'.'<br>');
-echo('<form action="creer_site.php" method="post">
+echo('<body>');
+echo('<form class ="selection" action="creer_site.php" method="post">
             <div>
             <label for="name"></label>
             <input type="hidden" id="name" name="pseudo" value ='.($pseudo).'>
@@ -44,6 +53,7 @@ echo('<form action="creer_site.php" method="post">
         <input type="hidden" id="id" name="id" value ='.($liste_id[0]['id']).'
     </div>');
 if(count($liste_site) !== 0){
+    echo ('<div class = sous-titre> vos site </div>');
     foreach($liste_site as $site){
         echo('<div class="button">
         <button type="submit" name ='.$site['nom'].'>'.$site['nom'].'</button>
@@ -51,9 +61,11 @@ if(count($liste_site) !== 0){
     }
 }
 else{       
+    echo('<div class ="sous-titre_2"> Commencez avec une template pré-faite </div>'.'<br>');
     echo('<div class="button">
         <button type="submit" name = Template >Template 1</button>
         </div>');
 }
 echo('</form>');
+echo('</body>');
 ?>
