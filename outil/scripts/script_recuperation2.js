@@ -2,7 +2,7 @@ const btn_save = document.querySelector("#btn_save");
 btn_save.addEventListener("click", recup);
 
 function recup() {
-    elements = document.querySelectorAll('.page .movable');
+    elements = document.querySelectorAll('.page .element');
     let page = {};
     console.log(elements.length);
 
