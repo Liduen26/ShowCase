@@ -468,6 +468,7 @@ document.body.addEventListener("click", (e) => {
                 case "image": 
                     newElement.style.background = `url(${fileToAdd}) center/cover`;
                     newElement.classList.add("img");
+                    newElement.setAttribute("alt", "Image importée");
                 break;
                 case "forme":
                     const newChild = document.createElement("div");
