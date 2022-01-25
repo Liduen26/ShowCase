@@ -37,7 +37,7 @@ addElems.forEach(item => {
 });
 
 let loadFile = function(event) {
-    fileToAdd = URL.createObjectURL(event.target.files[0]);
+    // fileToAdd = URL.createObjectURL(event.target.files[0]);
     
     const chooseAdd = document.querySelectorAll(".chooseAdd");
 
