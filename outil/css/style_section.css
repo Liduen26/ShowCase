@@ -110,6 +110,7 @@
     align-items: center;
 
     visibility: collapse;
+    z-index: 3000;
 }
 
 .choiceSection {
