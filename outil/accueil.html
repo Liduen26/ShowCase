@@ -52,7 +52,9 @@
                         </li>
 
                         <label class="sous_li addElems addImage" value="image">
-                            <input type="file" class="hide" accept="image/*" onchange="loadFile(event)">
+                            <form class="hide" id="formAddImg">
+                                <input name="fileI" type="file" accept="image/*" onchange="loadFile(event)">
+                            </form>
                             <i class='bx bx-image'></i>Image
                         </label>
 
@@ -305,17 +307,17 @@
                     <label class="titreListSection">Foot 1</label>
                 </div>
             </div>
-            <img class="closeListSection" src="./srcs/annuler.png">
         </div>
     </div>
 
-    <script src="./Scripts/script_insert.js"></script>
     <script src="./Scripts/scriptDD.js"></script>
     <script src="./Scripts/script_text.js"></script>
     <script src="./Scripts/script_sections.js"></script>
+    <script src="./Scripts/script_insert.js"></script>
     <script src="./Scripts/script_recuperation2.js"></script>
     <script src="./Scripts/script_style_bouton.js"></script>
     <script src="./Scripts/script_couleur.js"></script>
+    <script src="./scripts/script_upload.js"></script>
     
 
 </body>
