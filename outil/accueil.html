@@ -26,7 +26,7 @@
     <header>
         <img class="logo" src="./srcs/logo_showcase.png" alt="logo" draggable="false">
         <div id="header_droite">
-            <button id="btn_save" class="bouton style_bouton1 vert_bouton">sauvegarder</button>
+            <button id="btn_save" class="bouton style_bouton1 vert_bouton">Sauvegarder</button>
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
                 <ul class="top_menu">
@@ -251,6 +251,7 @@
                             <img src="./srcs/arrow_up_white.png" class="arrowSection sectionUp" alt="up">
                             <img src="./srcs/arrow_down_white.png" class="arrowSection sectionDown" alt="down">
                         </div>
+                        <div class="chooseAdd hide"></div>
                     </div> 
     
                     
@@ -294,6 +295,10 @@
         <div class="choiceSection">
             <label class="labelCoiceSect">Choisissez la section que vous souhaitez ajouter</label>
             <div class="listSection">
+                <div class="sectionListing" value="vide" height="800">
+                    <img class="imgListSection">
+                    <label class="titreListSection">Section vide</label>
+                </div>
                 <div class="sectionListing" value="corps1" height="1400">
                     <img class="imgListSection" src="./Templates/capture_corps1.png" alt="capt_corps1">
                     <label class="titreListSection">Corps 1</label>
@@ -307,6 +312,7 @@
                     <label class="titreListSection">Foot 1</label>
                 </div>
             </div>
+            <img class="closeListSection" src="./srcs/annuler.png">
         </div>
     </div>
 

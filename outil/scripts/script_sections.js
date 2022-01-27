@@ -92,6 +92,7 @@ listSection.forEach(item => {
         //mise en place du contenu de la nouvelle section
         idAct = Number(idAct[1]) + 1;
         
+        console.log(sectionChoisie);
         //en attente du choix de section à ajouter
         let file = `./Templates/${sectionChoisie}.html`;
         console.log(file);
