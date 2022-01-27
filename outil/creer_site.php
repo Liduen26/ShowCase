@@ -10,6 +10,8 @@ catch (Exception $e)
 die('Erreur : ' . $e->getMessage());
 }
 
+$pseudo =$_POST['pseudo'];
+$mdp_user = $_POST['mdp_user'];
 $requete = 'SELECT contenu FROM  contenu WHERE ID = 0';
 $test = $db->prepare($requete);
 $test->execute();
@@ -47,9 +49,48 @@ $contenu = $interpret[0][0];
             <div id="div_account_menu">
                 <i id="account_icon" class='bx bxs-user-account' class="icon"></i>
                 <ul class="top_menu">
-                    <li class="sous_li"><a href="#">Compte</a></li>
+                    <form action ='liste_site.php' method ='post'>
+                        <div> 
+                            <label for="name"></label>
+                            <input type="hidden" id="name" name="pseudo" value = <?php echo( $pseudo) ?>>
+                        </div>
+                        <div> 
+                            <label for="password"></label>
+                            <input type="hidden" id="mdp_user" name="mdp_user" value = <?php echo($mdp_user) ?>>
+                        </div>
+                        <div classe ="sous_li">
+                            <button type ="submit" name = "compte"> Sites </button>
+                        </div>
+                    </form>
+                    <form action ='Connection.php' method ='post'>
+                        <div> 
+                            <label for="name"></label>
+                            <input type="hidden" id="name" name="pseudo" value = <?php echo($pseudo) ?>>
+                        </div>
+                        <div> 
+                            <label for="password"></label>
+                            <input type="hidden" id="mdp_user" name="mdp_user" value = <?php echo($mdp_user) ?>>
+                        </div>
+                        <div classe ="sous_li">
+                            <button type ="submit" name = "compte"> Compte </button>
+                        </div>
+                    </form>
+                    <form action ='bienvenue.html' method ='post'>
+                        <div> 
+                            <label for="name"></label>
+                            <input type="hidden" id="name" name="pseudo" value = <?php echo($pseudo) ?>>
+                        </div>
+                        <div> 
+                            <label for="password"></label>
+                            <input type="hidden" id="mdp_user" name="mdp_user" value = <?php echo($mdp_user) ?>>
+                        </div>
+                        <div classe ="sous_li">
+                            <button type ="submit" name = "compte"> Déconnexion </button>
+                        </div>
+                    </form>
+                    <!--<li class="sous_li"><a href="#">Compte</a></li>
                     <li class="sous_li"><a href="#">Sites</a></li>
-                    <li class="sous_li"><a href="#">Déconnexion</a></li>
+                    <li class="sous_li"><a href="#">Déconnexion</a></li> -->
                 </ul>
             </div>
         </div>

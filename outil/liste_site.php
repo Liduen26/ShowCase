@@ -51,7 +51,11 @@ echo('<form class ="selection" action="creer_site.php" method="post">
         <div>
         <label for="id"></label>
         <input type="hidden" id="id" name="id" value ='.($liste_id[0]['id']).'
-    </div>');
+    </div>
+    <div>
+    <label for="mdp-user"></label>
+    <input type="hidden" id="mdp_user" name="mdp_user" value ='.($mdp).'
+</div>');
 if(count($liste_site) !== 0){
     echo ('<div class = sous-titre> vos site </div>');
     foreach($liste_site as $site){
